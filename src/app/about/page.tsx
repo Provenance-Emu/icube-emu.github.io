@@ -1,3 +1,5 @@
+import ButtonLink, { GitHubIcon, ItchIcon } from '@/components/ButtonLink';
+
 export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-blue-900">
@@ -81,15 +83,11 @@ export default function About() {
           </div>
 
           <div className="bg-blue-600 text-white rounded-lg p-6 text-center">
-            <h2 className="text-xl font-semibold mb-2">Ready to Start Gaming?</h2>
-            <p className="mb-4">Download iCube from the App Store and start playing your favorite games today!</p>
+            <h2 className="text-xl font-semibold mb-2">Download</h2>
+            <p className="mb-4">iCube isn’t on the App Store. You can sideload it from the sources below:</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <div className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs">Download on the</span>
-                </div>
-                <div className="text-lg font-semibold">App Store</div>
-              </div>
+              <ButtonLink href="https://github.com/Provenance-Emu/iCube" leftIcon={<GitHubIcon className="w-5 h-5" />}>Sideload via GitHub</ButtonLink>
+              <ButtonLink href="https://provenance.itch.io/icube" leftIcon={<ItchIcon className="w-5 h-5" />}>Sideload via itch.io</ButtonLink>
             </div>
           </div>
         </div>

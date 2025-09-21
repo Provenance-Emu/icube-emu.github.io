@@ -4,6 +4,7 @@ import iphone2 from '@/images/screenshots/ios/iphone2-search.jpg';
 import iphone3 from '@/images/screenshots/ios/iphone3-emu.png';
 import ipad1 from '@/images/screenshots/ipad/ipad1-library.jpg';
 import ipad2 from '@/images/screenshots/ipad/ipad2-search.jpg';
+import ButtonLink, { GitHubIcon, ItchIcon } from '@/components/ButtonLink';
 
 export default function Home() {
   return (
@@ -41,24 +42,30 @@ export default function Home() {
             </div>
           */}
 
-          {/* Sideloading Links */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <a
+          {/* Sideloading links moved to Download section below */}
+        </div>
+      </section>
+
+      {/* Download Section */}
+      <section className="container mx-auto px-4 pb-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Download</h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
+            iCube isn’t on the App Store. You can sideload it from the sources below:
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <ButtonLink
               href="https://github.com/Provenance-Emu/iCube"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors"
+              leftIcon={<GitHubIcon className="w-5 h-5" />}
             >
-              <span className="text-lg font-semibold">Sideload via GitHub</span>
-            </a>
-            <a
+              Sideload via GitHub
+            </ButtonLink>
+            <ButtonLink
               href="https://provenance.itch.io/icube"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors"
+              leftIcon={<ItchIcon className="w-5 h-5" />}
             >
-              <span className="text-lg font-semibold">Sideload via itch.io</span>
-            </a>
+              Sideload via itch.io
+            </ButtonLink>
           </div>
         </div>
       </section>
