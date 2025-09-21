@@ -23,19 +23,42 @@ export default function Home() {
           </p>
 
           {/* App Store Button Placeholder */}
+          {/*
+            Temporarily disabled until App Store availability.
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+              <div className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs">Download on the</span>
+                </div>
+                <div className="text-lg font-semibold">App Store</div>
+              </div>
+              <div className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs">Available on</span>
+                </div>
+                <div className="text-lg font-semibold">Apple TV</div>
+              </div>
+            </div>
+          */}
+
+          {/* Sideloading Links */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <div className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer">
-              <div className="flex items-center gap-2">
-                <span className="text-xs">Download on the</span>
-              </div>
-              <div className="text-lg font-semibold">App Store</div>
-            </div>
-            <div className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer">
-              <div className="flex items-center gap-2">
-                <span className="text-xs">Available on</span>
-              </div>
-              <div className="text-lg font-semibold">Apple TV</div>
-            </div>
+            <a
+              href="https://github.com/Provenance-Emu/iCube"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors"
+            >
+              <span className="text-lg font-semibold">Sideload via GitHub</span>
+            </a>
+            <a
+              href="https://provenance.itch.io/icube"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors"
+            >
+              <span className="text-lg font-semibold">Sideload via itch.io</span>
+            </a>
           </div>
         </div>
       </section>
