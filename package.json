@@ -4,24 +4,38 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:port": "next dev --turbopack --port",
+    "dev:debug": "NODE_OPTIONS='--inspect' next dev --turbopack",
     "build": "next build --turbopack",
+    "build:analyze": "ANALYZE=true next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "start:port": "next start --port",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf .next .turbo node_modules/.cache",
+    "clean:all": "rm -rf .next .turbo node_modules package-lock.json && npm install",
+    "deps:check": "npm outdated",
+    "deps:update": "npm update",
+    "info": "next info",
+    "warp:dev": "echo '🚀 Starting Next.js dev server with Turbopack...' && npm run dev",
+    "warp:build": "echo '🔨 Building for production...' && npm run build && echo '✅ Build complete!'",
+    "warp:clean-dev": "npm run clean && echo '🧹 Cache cleared!' && npm run dev"
   },
   "dependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "next": "15.5.3"
+    "next": "^15.5.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.5.3",
-    "@eslint/eslintrc": "^3"
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }

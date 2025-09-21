@@ -1,3 +1,10 @@
+import Image from 'next/image';
+import iphone1 from '@/images/screenshots/ios/iphone1-library.jpg';
+import iphone2 from '@/images/screenshots/ios/iphone2-search.jpg';
+import iphone3 from '@/images/screenshots/ios/iphone3-emu.png';
+import ipad1 from '@/images/screenshots/ipad/ipad1-library.jpg';
+import ipad2 from '@/images/screenshots/ipad/ipad2-search.jpg';
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-blue-900">
@@ -11,10 +18,10 @@ export default function Home() {
             GameCube & Wii Emulator
           </p>
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-            Experience classic Nintendo GameCube and Wii games on your iOS devices and Apple TV. 
+            Experience classic Nintendo GameCube and Wii games on your iOS devices and Apple TV.
             Built on the proven Dolphin emulator foundation.
           </p>
-          
+
           {/* App Store Button Placeholder */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
             <div className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer">
@@ -38,21 +45,23 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
           Screenshots
         </h2>
-        
+
         {/* iPhone Screenshots */}
         <div className="mb-16">
           <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6 text-center">
             iPhone
           </h3>
           <div className="flex flex-wrap justify-center gap-6">
-            {[1, 2, 3].map((i) => (
-              <div key={`iphone-${i}`} className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 shadow-lg">
-                <div className="w-64 h-96 bg-gray-300 dark:bg-gray-600 rounded-lg flex items-center justify-center">
-                  <div className="text-center text-gray-600 dark:text-gray-400">
-                    <div className="text-4xl mb-2">📱</div>
-                    <div>iPhone Screenshot {i}</div>
-                    <div className="text-sm mt-2">Placeholder</div>
-                  </div>
+            {[iphone1, iphone2, iphone3].map((img, idx) => (
+              <div key={`iphone-${idx}`} className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 shadow-lg">
+                <div className="rounded-lg overflow-hidden w-64 h-96">
+                  <Image
+                    src={img}
+                    alt={`iPhone screenshot ${idx + 1}`}
+                    className="h-full w-full object-cover"
+                    sizes="(max-width: 768px) 256px, 256px"
+                    priority={idx === 0}
+                  />
                 </div>
               </div>
             ))}
@@ -65,14 +74,15 @@ export default function Home() {
             iPad
           </h3>
           <div className="flex flex-wrap justify-center gap-6">
-            {[1, 2].map((i) => (
-              <div key={`ipad-${i}`} className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 shadow-lg">
-                <div className="w-80 h-60 bg-gray-300 dark:bg-gray-600 rounded-lg flex items-center justify-center">
-                  <div className="text-center text-gray-600 dark:text-gray-400">
-                    <div className="text-4xl mb-2">📋</div>
-                    <div>iPad Screenshot {i}</div>
-                    <div className="text-sm mt-2">Placeholder</div>
-                  </div>
+            {[ipad1, ipad2].map((img, idx) => (
+              <div key={`ipad-${idx}`} className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 shadow-lg">
+                <div className="rounded-lg overflow-hidden w-80 h-60">
+                  <Image
+                    src={img}
+                    alt={`iPad screenshot ${idx + 1}`}
+                    className="h-full w-full object-cover"
+                    sizes="(max-width: 768px) 320px, 320px"
+                  />
                 </div>
               </div>
             ))}

@@ -1,0 +1,42 @@
+name: "Next.js Development"
+description: "Common Next.js development workflows for iCube website"
+workflows:
+  - name: "Start Development Server"
+    description: "Start the Next.js development server with Turbopack"
+    command: "npm run dev"
+    
+  - name: "Build for Production"
+    description: "Build the Next.js application for production"
+    command: "npm run build"
+    
+  - name: "Start Production Server"
+    description: "Start the production server"
+    command: "npm run start"
+    
+  - name: "Lint Code"
+    description: "Run ESLint on the codebase"
+    command: "npm run lint"
+    
+  - name: "Install Dependencies"
+    description: "Install all npm dependencies"
+    command: "npm install"
+    
+  - name: "Clean Build"
+    description: "Clean and rebuild the application"
+    command: "rm -rf .next && npm run build"
+    
+  - name: "Check Dependencies"
+    description: "Check for outdated dependencies"
+    command: "npm outdated"
+    
+  - name: "Update Dependencies"
+    description: "Update all dependencies to latest versions"
+    command: "npm update"
+    
+  - name: "Type Check"
+    description: "Run TypeScript type checking"
+    command: "npx tsc --noEmit"
+    
+  - name: "Dev with Custom Port"
+    description: "Start development server on custom port"
+    command: "npm run dev -- --port 3001"
