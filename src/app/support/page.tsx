@@ -27,6 +27,18 @@ export default function Support() {
 
               <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  How do I install iCube (sideload)?
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  iCube is distributed via sideloading for iOS and tvOS. <br> </br>We recommend using{' '}
+                  <a href="https://sideloadly.io" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Sideloadly</a>{' '}
+                  to install the app on your device. For enabling JIT on Apple TV, we recommend{' '}
+                  <a href="https://apps.apple.com/us/app/stikdebug/id6744045754" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">StikDebug</a>.
+                </p>
+              </div>
+
+              <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                   Which controllers are supported?
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
@@ -97,22 +109,22 @@ export default function Support() {
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   Send us your questions or bug reports
                 </p>
-                <a href="mailto:support@icube-app.com"
+                <a href="mailto:icube@provenance-emu.com"
                    className="text-blue-600 dark:text-blue-400 hover:underline">
-                  support@icube-app.com
+                  icube@provenance-emu.com
                 </a>
               </div>
 
               <div className="text-center p-6 bg-gray-50 dark:bg-gray-700 rounded-lg">
                 <div className="text-3xl mb-4">💬</div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  Community Forum
+                  Discord
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  Connect with other users and get help
+                  Connect with other users and get help in our Discord server
                 </p>
-                <a href="#" className="text-blue-600 dark:text-blue-400 hover:underline">
-                  Visit Forum
+                <a href="https://discord.com/invite/4TK7PU5" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
+                  Join Discord
                 </a>
               </div>
             </div>
@@ -140,7 +152,7 @@ export default function Support() {
                 <div>
                   <h4 className="font-semibold text-gray-900 dark:text-white">Check available storage</h4>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Ensure you have enough free space on your device for games and save files.
+                    Ensure you have at least 1GB of free space on your device for games and save files.
                   </p>
                 </div>
               </div>
@@ -150,7 +162,27 @@ export default function Support() {
                 <div>
                   <h4 className="font-semibold text-gray-900 dark:text-white">Update to latest version</h4>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Make sure you&apos;re running the latest version of iCube from the App Store.
+                    Make sure you&apos;re running the latest available build of iCube.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-3">
+                <div className="text-green-500 text-xl">✓</div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">Disable Low Power Mode</h4>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    For best performance, ensure your device is not in Low Power Mode and has sufficient battery.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-3">
+                <div className="text-green-500 text-xl">✓</div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">Use VBI/CPU tuning</h4>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Use the VBI/CPU over/underclock quick sheet in the emulation window to fine-tune smoothness at the cost of frame rate.
                   </p>
                 </div>
               </div>

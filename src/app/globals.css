@@ -24,3 +24,11 @@ body {
   color: var(--foreground);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
+
+/* Site-wide background gradient image (1px-high wide banner repeated vertically) */
+body {
+  background-image: url("../images/banners/blue wide banner graident 1px.png");
+  background-repeat: repeat-y;
+  background-size: 100% auto; /* stretch to full width, keep image height */
+  background-attachment: fixed; /* parallax-like, reduces repaints */
+}

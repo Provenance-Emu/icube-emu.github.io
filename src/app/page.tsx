@@ -4,7 +4,8 @@ import iphone2 from '@/images/screenshots/ios/iphone2-search.jpg';
 import iphone3 from '@/images/screenshots/ios/iphone3-emu.png';
 import ipad1 from '@/images/screenshots/ipad/ipad1-library.jpg';
 import ipad2 from '@/images/screenshots/ipad/ipad2-search.jpg';
-import ButtonLink, { GitHubIcon, ItchIcon } from '@/components/ButtonLink';
+import DownloadSection from '@/components/DownloadSection';
+import SocialButton, { DiscordIcon, XIcon } from '@/components/SocialButton';
 
 export default function Home() {
   return (
@@ -47,25 +48,18 @@ export default function Home() {
       </section>
 
       {/* Download Section */}
-      <section className="container mx-auto px-4 pb-4">
+      <DownloadSection className="pb-4" showEmbed />
+
+      {/* Community Section */}
+      <section className="container mx-auto px-4 pb-8">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Download</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Community</h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            iCube isn’t on the App Store. You can sideload it from the sources below:
+            Join our community for updates, tips, and support.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <ButtonLink
-              href="https://github.com/Provenance-Emu/iCube/releases"
-              leftIcon={<GitHubIcon className="w-5 h-5" />}
-            >
-              Sideload via GitHub
-            </ButtonLink>
-            <ButtonLink
-              href="https://provenance.itch.io/icube"
-              leftIcon={<ItchIcon className="w-5 h-5" />}
-            >
-              Sideload via itch.io
-            </ButtonLink>
+            <SocialButton href="https://discord.com/invite/4TK7PU5" label="Join our Discord" leftIcon={<DiscordIcon className="w-5 h-5" />} variant="discord" />
+            <SocialButton href="https://x.com/ProvenanceApp" label="Follow on X/Twitter" leftIcon={<XIcon className="w-5 h-5" />} variant="x" />
           </div>
         </div>
       </section>
