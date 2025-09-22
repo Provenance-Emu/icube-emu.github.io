@@ -55,7 +55,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <ButtonLink
-              href="https://github.com/Provenance-Emu/iCube"
+              href="https://github.com/Provenance-Emu/iCube/releases"
               leftIcon={<GitHubIcon className="w-5 h-5" />}
             >
               Sideload via GitHub
