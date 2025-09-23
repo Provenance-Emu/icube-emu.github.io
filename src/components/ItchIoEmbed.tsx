@@ -9,7 +9,6 @@ export type ItchIoEmbedProps = {
 
 const ItchIoEmbed: React.FC<ItchIoEmbedProps> = ({ itchId, linkColor = '#5b96fa', title, className }) => {
   const src = `https://itch.io/embed/${itchId}?link_color=${encodeURIComponent(linkColor.replace('#', ''))}`;
-  const anchorHref = 'https://provenance.itch.io/icube';
   const anchorTitle = title ?? 'iCube for iOS and tvOS by Provenance EMU';
 
   return (
@@ -20,9 +19,8 @@ const ItchIoEmbed: React.FC<ItchIoEmbedProps> = ({ itchId, linkColor = '#5b96fa'
       height={167}
       frameBorder={0}
       className={className}
-    >
-      <a href={anchorHref}>{anchorTitle}</a>
-    </iframe>
+      loading="lazy"
+    />
   );
 };
 

@@ -30,7 +30,7 @@ export default function Support() {
                   How do I install iCube (sideload)?
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  iCube is distributed via sideloading for iOS and tvOS. <br> </br>We recommend using{' '}
+                  iCube is distributed via sideloading for iOS and tvOS. <br /> We recommend using{' '}
                   <a href="https://sideloadly.io" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Sideloadly</a>{' '}
                   to install the app on your device. For enabling JIT on Apple TV, we recommend{' '}
                   <a href="https://apps.apple.com/us/app/stikdebug/id6744045754" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">StikDebug</a>.
@@ -109,9 +109,9 @@ export default function Support() {
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   Send us your questions or bug reports
                 </p>
-                <a href="mailto:icube@provenance-emu.com"
+                <a href="mailto:support@provenance-emu.com?subject=iCube%20Support"
                    className="text-blue-600 dark:text-blue-400 hover:underline">
-                  icube@provenance-emu.com
+                  support@provenance-emu.com
                 </a>
               </div>
 
