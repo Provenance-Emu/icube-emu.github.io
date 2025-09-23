@@ -40,7 +40,7 @@ export default function Links() {
                 </div>
               </a>
 
-              <a href="https://github.com/dolphin-emu/dolphin"
+              <a href="https://dolphinios.oatmealdome.me"
                  target="_blank"
                  rel="noopener noreferrer"
                  className="flex items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
@@ -135,7 +135,7 @@ export default function Links() {
                 </div>
               </a>
 
-              <a href="https://github.com/dolphin-emu/dolphin"
+              <a href="https://dolphinios.oatmealdome.me"
                  target="_blank"
                  rel="noopener noreferrer"
                  className="flex items-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors">
