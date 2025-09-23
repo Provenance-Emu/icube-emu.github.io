@@ -6,6 +6,7 @@ import ipad1 from '@/images/screenshots/ipad/ipad1-library.jpg';
 import ipad2 from '@/images/screenshots/ipad/ipad2-search.jpg';
 import DownloadSection from '@/components/DownloadSection';
 import SocialButton, { DiscordIcon, XIcon } from '@/components/SocialButton';
+import Features from '@/components/Features';
 
 export default function Home() {
   return (
@@ -140,28 +141,9 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
             Features
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="text-4xl mb-4">🎮</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">GameCube & Wii Support</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Play your favorite GameCube and Wii games with high compatibility and performance.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl mb-4">📱</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">iOS Native</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Optimized for iPhone, iPad, and Apple TV with touch controls and gamepad support.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl mb-4">⚡</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Dolphin Based</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Built on the proven Dolphin emulator for accurate emulation and great performance.
-              </p>
-            </div>
+          <Features compact />
+          <div className="text-center mt-8">
+            <a href="/features" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold">See all features →</a>
           </div>
         </div>
       </section>
