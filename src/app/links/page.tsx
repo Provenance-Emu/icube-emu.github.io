@@ -1,6 +1,6 @@
 // (no direct button imports needed here since we use DownloadSection)
 import DownloadSection from '@/components/DownloadSection';
-import SocialButton, { DiscordIcon, XIcon } from '@/components/SocialButton';
+import SocialButton, { DiscordIcon, XIcon, BmcIcon, PatreonIcon } from '@/components/SocialButton';
 
 export default function Links() {
   return (
@@ -95,12 +95,12 @@ export default function Links() {
                 </div>
               </a>
 
-              <a href="#"
+              <a href="https://reddit.com/r/EmulationOniOS"
                   className="flex items-center p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-900/30 transition-colors">
                 <div className="text-2xl mr-4">📱</div>
                 <div>
                   <h3 className="font-semibold text-indigo-900 dark:text-indigo-300">Reddit</h3>
-                  <p className="text-sm text-indigo-700 dark:text-indigo-400">r/iCubeApp</p>
+                  <p className="text-sm text-indigo-700 dark:text-indigo-400">r/EmulationOniOS</p>
                 </div>
               </a>
 
@@ -112,6 +112,16 @@ export default function Links() {
                   <p className="text-sm text-gray-600 dark:text-gray-400">Join our server</p>
                 </div>
               </a>
+            </div>
+          </div>
+
+          {/* Donate Section (compact) */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Support Development</h2>
+            <p className="text-gray-600 dark:text-gray-300 mb-6">If you find iCube helpful, consider supporting the project.</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <SocialButton href="https://buymeacoffee.com/joemattiello" label="Buy Me a Coffee" leftIcon={<BmcIcon className="w-5 h-5" />} variant="bmc" />
+              <SocialButton href="https://www.patreon.com/provenance" label="Support on Patreon" leftIcon={<PatreonIcon className="w-5 h-5" />} variant="patreon" />
             </div>
           </div>
 

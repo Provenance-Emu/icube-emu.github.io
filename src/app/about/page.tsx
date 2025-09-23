@@ -1,5 +1,5 @@
 import DownloadSection from '@/components/DownloadSection';
-import SocialButton, { DiscordIcon, XIcon } from '@/components/SocialButton';
+import SocialButton, { DiscordIcon, XIcon, BmcIcon, PatreonIcon } from '@/components/SocialButton';
 
 export default function About() {
   return (
@@ -95,6 +95,18 @@ export default function About() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <SocialButton href="https://discord.com/invite/4TK7PU5" label="Join our Discord" leftIcon={<DiscordIcon className="w-5 h-5" />} variant="discord" />
                 <SocialButton href="https://x.com/ProvenanceApp" label="Follow on X/Twitter" leftIcon={<XIcon className="w-5 h-5" />} variant="x" />
+              </div>
+            </div>
+          </section>
+
+          {/* Donate Section (compact) */}
+          <section className="container mx-auto px-4 py-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Support Development</h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">If you find iCube helpful, consider supporting the project.</p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <SocialButton href="https://buymeacoffee.com/joemattiello" label="Buy Me a Coffee" leftIcon={<BmcIcon className="w-5 h-5" />} variant="bmc" />
+                <SocialButton href="https://www.patreon.com/provenance" label="Support on Patreon" leftIcon={<PatreonIcon className="w-5 h-5" />} variant="patreon" />
               </div>
             </div>
           </section>

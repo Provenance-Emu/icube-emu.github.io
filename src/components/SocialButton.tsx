@@ -5,7 +5,7 @@ export type SocialButtonProps = {
   label: string;
   leftIcon?: React.ReactNode;
   className?: string;
-  variant?: 'default' | 'discord' | 'x';
+  variant?: 'default' | 'discord' | 'x' | 'bmc' | 'patreon' | 'venmo' | 'zelle' | 'opencollective';
 };
 
 const baseClasses =
@@ -15,6 +15,11 @@ const variantClasses = {
   default: 'bg-gray-900 text-white hover:bg-gray-800',
   discord: 'bg-indigo-600 text-white hover:bg-indigo-500',
   x: 'bg-black text-white hover:bg-neutral-800',
+  bmc: 'bg-yellow-400 text-black hover:bg-yellow-300',
+  patreon: 'bg-orange-600 text-white hover:bg-orange-500',
+  venmo: 'bg-sky-500 text-white hover:bg-sky-400',
+  zelle: 'bg-purple-700 text-white hover:bg-purple-600',
+  opencollective: 'bg-blue-600 text-white hover:bg-blue-500',
 } as const;
 
 export const DiscordIcon: React.FC<{ className?: string }> = ({ className }) => (
@@ -38,6 +43,36 @@ export const XIcon: React.FC<{ className?: string }> = ({ className }) => (
     aria-hidden="true"
   >
     <path d="M3 3h4.6l5.12 7.52L16.98 3H21l-7.36 10.7L21.5 21h-4.6l-5.5-8.08L7.02 21H3l7.8-11.35L3 3Z" />
+  </svg>
+);
+
+export const BmcIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className ?? 'w-5 h-5'} aria-hidden="true">
+    <path d="M3 7a2 2 0 0 1 2-2h8.5a4.5 4.5 0 0 1 0 9H12l-.6 3.1a2 2 0 0 1-2 1.9H6.5a2 2 0 0 1-1.94-1.5L3 7Zm13.5 5a2.5 2.5 0 1 0 0-5H5l1.9 9.5a.5.5 0 0 0 .49.4H9.4l.6-3.1a2 2 0 0 1 2-1.9h4.5Z"/>
+  </svg>
+);
+
+export const PatreonIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className ?? 'w-5 h-5'} aria-hidden="true">
+    <path d="M3 3h3v18H3V3Zm9 0a9 9 0 1 1 0 18 9 9 0 0 1 0-18Z"/>
+  </svg>
+);
+
+export const VenmoIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className ?? 'w-5 h-5'} aria-hidden="true">
+    <path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H9l3.5-8.5c.3-.8.5-1.5.5-2.2 0-1.4-.8-2.3-2.2-2.3-1.5 0-2.7 1.1-3.1 2.4L6.6 19H4V4a1 1 0 0 1 1-1Z"/>
+  </svg>
+);
+
+export const ZelleIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className ?? 'w-5 h-5'} aria-hidden="true">
+    <path d="M7 3h10l-6 7h6l-10 11v-7H7l6-7H7V3Z"/>
+  </svg>
+);
+
+export const OpenCollectiveIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className ?? 'w-5 h-5'} aria-hidden="true">
+    <path d="M12 2a10 10 0 1 0 7.1 17.1l-2.1-2.1A7 7 0 1 1 12 5a7 7 0 0 1 4.9 2.1L19 5A10 10 0 0 0 12 2Z"/>
   </svg>
 );
 
