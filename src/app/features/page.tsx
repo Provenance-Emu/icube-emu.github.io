@@ -1,4 +1,5 @@
 import Features from '@/components/Features';
+import Link from 'next/link';
 import SocialButton, { DiscordIcon, XIcon } from '@/components/SocialButton';
 
 export default function FeaturesPage() {
@@ -18,12 +19,12 @@ export default function FeaturesPage() {
           <Features />
 
           <div className="text-center mt-12">
-            <a
+            <Link
               href="/"
               className="inline-block text-blue-600 dark:text-blue-400 hover:underline font-semibold"
             >
               Back to Home →
-            </a>
+            </Link>
           </div>
 
           {/* Community CTA */}

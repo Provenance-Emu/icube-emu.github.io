@@ -1,3 +1,5 @@
+import SocialButton, { BmcIcon, PatreonIcon } from '@/components/SocialButton';
+
 export default function Support() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-blue-900">
@@ -127,6 +129,16 @@ export default function Support() {
                   Join Discord
                 </a>
               </div>
+            </div>
+          </div>
+
+          {/* Donate Section (compact) */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Support Development</h2>
+            <p className="text-gray-600 dark:text-gray-300 mb-6">If you find iCube helpful, consider supporting the project.</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <SocialButton href="https://buymeacoffee.com/joemattiello" label="Buy Me a Coffee" leftIcon={<BmcIcon className="w-5 h-5" />} variant="bmc" />
+              <SocialButton href="https://www.patreon.com/provenance" label="Support on Patreon" leftIcon={<PatreonIcon className="w-5 h-5" />} variant="patreon" />
             </div>
           </div>
 
