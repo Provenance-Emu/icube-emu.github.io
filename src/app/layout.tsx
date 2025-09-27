@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "iCube - GameCube & Wii Emulator",
@@ -46,6 +47,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning className="antialiased">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-R9V4MJ0BR2"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-R9V4MJ0BR2');
+          `}
+        </Script>
         <Navigation />
         <main className="min-h-screen">
           {children}
