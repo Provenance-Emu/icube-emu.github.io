@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import SocialButton, { BmcIcon, PatreonIcon, VenmoIcon, ZelleIcon, OpenCollectiveIcon } from "@/components/SocialButton";
 
 const TESTFLIGHT_URL = "https://testflight.apple.com/join/9ZEfnyMP";
 const TWITTER_URL = "https://x.com/provenanceapp";
@@ -109,6 +110,45 @@ export default function TestFlightGate() {
           <p>
             Note: Following is optional and not required for access. Your choice is stored locally in your browser.
           </p>
+        </section>
+
+        <section className="rounded-lg border p-6 shadow-sm bg-background/60 backdrop-blur">
+          <h2 className="text-xl font-medium mb-2">Support Development</h2>
+          <p className="text-sm text-muted-foreground mb-4">
+            If you find iCube helpful, consider supporting ongoing development. Thank you!
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 justify-items-start">
+            <SocialButton
+              href="https://buymeacoffee.com/joemattiello"
+              label="Buy Me a Coffee"
+              leftIcon={<BmcIcon className="w-5 h-5" />}
+              variant="bmc"
+            />
+            <SocialButton
+              href="https://www.patreon.com/provenance"
+              label="Support on Patreon"
+              leftIcon={<PatreonIcon className="w-5 h-5" />}
+              variant="patreon"
+            />
+            <SocialButton
+              href="https://account.venmo.com/u/Joe-Mattiello"
+              label="Venmo: @Joe-Mattiello"
+              leftIcon={<VenmoIcon className="w-5 h-5" />}
+              variant="venmo"
+            />
+            <SocialButton
+              href="mailto:mail@joemattiello.com?subject=Zelle%20Donation%20for%20iCube"
+              label="Zelle: mail@joemattiello.com"
+              leftIcon={<ZelleIcon className="w-5 h-5" />}
+              variant="zelle"
+            />
+            <SocialButton
+              href="https://opencollective.com/provenanceemu"
+              label="Open Collective"
+              leftIcon={<OpenCollectiveIcon className="w-5 h-5" />}
+              variant="opencollective"
+            />
+          </div>
         </section>
       </div>
     </main>
