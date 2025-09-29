@@ -7,6 +7,9 @@ import ipad2 from '@/images/screenshots/ipad/ipad2-search.jpg';
 import DownloadSection from '@/components/DownloadSection';
 import SocialButton, { DiscordIcon, XIcon, BmcIcon, PatreonIcon } from '@/components/SocialButton';
 import Features from '@/components/Features';
+import tvos1 from '@/images/screenshots/tvos/tvos-pause.png';
+import tvos2 from '@/images/screenshots/tvos/tvos-settings.png';
+import tvos3 from '@/images/screenshots/tvos/tvos-sources.png';
 
 export default function Home() {
   return (
@@ -132,14 +135,15 @@ export default function Home() {
             Apple TV
           </h3>
           <div className="flex flex-wrap justify-center gap-6">
-            {[1, 2].map((i) => (
-              <div key={`appletv-${i}`} className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 shadow-lg">
-                <div className="w-96 h-54 bg-gray-300 dark:bg-gray-600 rounded-lg flex items-center justify-center">
-                  <div className="text-center text-gray-600 dark:text-gray-400">
-                    <div className="text-4xl mb-2">📺</div>
-                    <div>Apple TV Screenshot {i}</div>
-                    <div className="text-sm mt-2">Placeholder</div>
-                  </div>
+            {[tvos1, tvos2, tvos3].map((img, idx) => (
+              <div key={`appletv-${idx}`} className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 shadow-lg">
+                <div className="rounded-lg overflow-hidden w-[384px] aspect-video">
+                  <Image
+                    src={img}
+                    alt={`Apple TV screenshot ${idx + 1}`}
+                    className="h-full w-full object-cover"
+                    sizes="(max-width: 768px) 384px, 384px"
+                  />
                 </div>
               </div>
             ))}
