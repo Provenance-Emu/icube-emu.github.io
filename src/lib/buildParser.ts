@@ -207,7 +207,9 @@ iCube is a fork of DolphiniOS, optimized for iOS and tvOS devices.`,
       `${baseURL}/screenshots/iphone8-pause.jpg`,
     ],
     versions: versions.map(v => ({
-      version: v.version,
+      // Make beta versions unique by appending beta number to version string
+      // This prevents duplicate version errors when multiple betas share the same bundle version
+      version: v.isBeta && v.betaNumber ? `${v.version}-beta${v.betaNumber}` : v.version,
       buildVersion: v.buildVersion,
       date: v.date,
       localizedDescription: v.localizedDescription,
