@@ -175,8 +175,8 @@ export default function DownloadsPage() {
                 </h3>
                 <ol className="list-decimal list-inside space-y-2 ml-4">
                   <li>Install <a href="https://altstore.io" className="text-blue-600 dark:text-blue-400 hover:underline">AltStore</a> or <a href="https://sidestore.io" className="text-blue-600 dark:text-blue-400 hover:underline">SideStore</a> on your device</li>
-                  <li>Tap the "Add to AltStore" or "Add to SideStore" button above</li>
-                  <li>Browse to iCube in the app and tap "Install"</li>
+                  <li>Tap the &quot;Add to AltStore&quot; or &quot;Add to SideStore&quot; button above</li>
+                  <li>Browse to iCube in the app and tap &quot;Install&quot;</li>
                   <li>Enjoy automatic updates!</li>
                 </ol>
               </div>
