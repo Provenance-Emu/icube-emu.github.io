@@ -74,7 +74,8 @@ export async function GET(
     infoPlist.CFBundleVersion = customVersion;
 
     // Convert back to plist format
-    const modifiedPlistData = plist.build(infoPlist);
+    // Cast to PlistObject to satisfy TypeScript (the plist library accepts this)
+    const modifiedPlistData = plist.build(infoPlist as plist.PlistObject);
 
     // Update the entry in the zip
     zip.updateFile(infoPlistEntry.entryName, Buffer.from(modifiedPlistData, 'utf8'));
