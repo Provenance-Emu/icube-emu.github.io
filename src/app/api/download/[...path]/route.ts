@@ -4,8 +4,6 @@ import fs from 'fs';
 import AdmZip from 'adm-zip';
 import plist from 'plist';
 
-export const dynamic = 'force-dynamic';
-
 /**
  * Dynamic IPA download endpoint that modifies version numbers on-the-fly
  * This allows serving multiple builds with unique version strings even if they
