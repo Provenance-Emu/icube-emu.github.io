@@ -196,7 +196,7 @@ Features:
 • And much more!
 
 iCube is a fork of DolphiniOS, optimized for iOS and tvOS devices.`,
-    iconURL: `${baseURL}/icon-512.png`,
+    iconURL: `${baseURL}/icon-1024.png`,
     tintColor: '#3B82F6',
     category: 'games',
     screenshots: [
