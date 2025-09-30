@@ -84,7 +84,8 @@ export async function GET(
     const modifiedIpaBuffer = zip.toBuffer();
 
     // Return the modified IPA
-    return new NextResponse(modifiedIpaBuffer, {
+    // Convert Buffer to Uint8Array for NextResponse compatibility
+    return new NextResponse(new Uint8Array(modifiedIpaBuffer), {
       headers: {
         'Content-Type': 'application/octet-stream',
         'Content-Disposition': `attachment; filename="${path.basename(filePath)}"`,
