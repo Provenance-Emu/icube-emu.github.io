@@ -23,6 +23,7 @@
     "warp:clean-dev": "npm run clean && echo '🧹 Cache cleared!' && npm run dev"
   },
   "dependencies": {
+    "adm-zip": "^0.5.16",
     "next": "^15.5.3",
     "plist": "^3.1.0",
     "react": "^19.1.0",

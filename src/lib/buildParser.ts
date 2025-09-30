@@ -103,7 +103,8 @@ export function parseBuilds(buildsDir: string, baseURL: string): BuildVersion[] 
       // Get file modification time as release date
       const releaseDate = ipaStats.mtime.toISOString().split('T')[0];
 
-      // Construct download URL
+      // Construct download URL using dynamic API endpoint
+      // This will be modified later to include the custom version parameter
       const downloadURL = `${baseURL}/builds/${versionDir}/${platformDir}/${ipaFile}`;
 
       // Create version description
@@ -206,19 +207,37 @@ iCube is a fork of DolphiniOS, optimized for iOS and tvOS devices.`,
       `${baseURL}/screenshots/iphone7-touchcontrols.jpg`,
       `${baseURL}/screenshots/iphone8-pause.jpg`,
     ],
-    versions: versions.map(v => ({
-      // Make beta versions unique by appending beta number to version string
-      // This prevents duplicate version errors when multiple betas share the same bundle version
-      version: v.isBeta && v.betaNumber ? `${v.version}-beta${v.betaNumber}` : v.version,
-      buildVersion: v.buildVersion,
-      date: v.date,
-      localizedDescription: v.localizedDescription,
-      downloadURL: v.downloadURL,
-      size: v.size,
-      minOSVersion: v.minOSVersion,
-      platform: v.platform,
-      isBeta: v.isBeta,
-      betaNumber: v.betaNumber,
-    })),
+    versions: versions.map(v => {
+      // Make version strings unique to prevent duplicate version errors
+      // Include platform suffix (iOS/tvOS) and beta number if applicable
+      let versionString = v.version;
+      
+      // Add beta suffix for beta builds
+      if (v.isBeta && v.betaNumber) {
+        versionString += `-beta${v.betaNumber}`;
+      }
+      
+      // Add platform suffix to differentiate iOS and tvOS builds
+      versionString += `-${v.platform.toLowerCase()}`;
+      
+      // Use dynamic API endpoint that modifies IPA on-the-fly with custom version
+      const dynamicDownloadURL = v.downloadURL.replace(
+        `${baseURL}/builds/`,
+        `${baseURL}/api/download/builds/`
+      ) + `?version=${encodeURIComponent(versionString)}`;
+      
+      return {
+        version: versionString,
+        buildVersion: v.buildVersion,
+        date: v.date,
+        localizedDescription: v.localizedDescription,
+        downloadURL: dynamicDownloadURL,
+        size: v.size,
+        minOSVersion: v.minOSVersion,
+        platform: v.platform,
+        isBeta: v.isBeta,
+        betaNumber: v.betaNumber,
+      };
+    }),
   };
 }
