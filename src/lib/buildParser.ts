@@ -24,6 +24,7 @@ export interface AppMetadata {
   iconURL: string;
   tintColor: string;
   category: string;
+  screenshots?: string[];
   versions: BuildVersion[];
 }
 
