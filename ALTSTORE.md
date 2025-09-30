@@ -23,10 +23,10 @@ https://icube-emu.com/api/sidestore
 
 ## Build Structure
 
-The `builds` directory contains IPA files organized by version and platform:
+The `public/builds` directory contains IPA files organized by version and platform:
 
 ```
-builds/
+public/builds/
 └── x.y.z/                    # Version number (e.g., 1.0.0)
     ├── iOS/                  # Stable iOS build
     ├── iOS-BetaN/            # Beta iOS build (e.g., iOS-Beta7)
@@ -66,7 +66,7 @@ NEXT_PUBLIC_BASE_URL=https://icube-emu.com
 ## Features
 
 The source feed automatically:
-- Scans the `builds` directory for available versions
+- Scans the `public/builds` directory for available versions
 - Extracts metadata from plist files
 - Sorts versions (latest first, stable before beta)
 - Generates download URLs
@@ -94,10 +94,12 @@ The feed is statically generated at build time and revalidated every hour. When 
 
 ## Adding New Builds
 
-1. Create a version directory: `builds/x.y.z/`
+1. Create a version directory: `public/builds/x.y.z/`
 2. Create platform directories: `iOS/`, `tvOS/`, `iOS-BetaN/`, etc.
 3. Add the IPA file and metadata files to each directory
 4. The feed will automatically pick up the new builds on next deployment
+
+**Note:** Files in `public/` are automatically served as static assets by Next.js, so no build script is needed!
 
 ## License
 

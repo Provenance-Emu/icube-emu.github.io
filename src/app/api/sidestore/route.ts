@@ -12,7 +12,7 @@ export const revalidate = 3600; // Revalidate every hour
 export async function GET() {
   try {
     const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://icube-emu.com';
-    const buildsDir = path.join(process.cwd(), 'builds');
+    const buildsDir = path.join(process.cwd(), 'public', 'builds');
 
     const app = generateAltStoreApp(baseURL, buildsDir);
     
