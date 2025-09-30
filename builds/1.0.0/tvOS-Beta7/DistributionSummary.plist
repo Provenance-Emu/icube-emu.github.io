@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>iCube.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>buildNumber</key>
+			<string>1</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>F1AF7E6B974B9D4007B21AA09EB61BAD60E22BBE</string>
+				<key>dateExpires</key>
+				<string>11/1/25</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>F1AF7E6B974B9D4007B21AA09EB61BAD60E22BBE</string>
+						<key>dateExpires</key>
+						<string>11/1/25</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>FirebaseAnalytics.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>S32Z3HMYVQ</string>
+						<key>name</key>
+						<string>Joseph Mattiello</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>12.3.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>F1AF7E6B974B9D4007B21AA09EB61BAD60E22BBE</string>
+						<key>dateExpires</key>
+						<string>11/1/25</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>GoogleAppMeasurement.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>S32Z3HMYVQ</string>
+						<key>name</key>
+						<string>Joseph Mattiello</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>12.3.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>F1AF7E6B974B9D4007B21AA09EB61BAD60E22BBE</string>
+						<key>dateExpires</key>
+						<string>11/1/25</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>GoogleAppMeasurementIdentitySupport.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>S32Z3HMYVQ</string>
+						<key>name</key>
+						<string>Joseph Mattiello</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>12.3.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>F1AF7E6B974B9D4007B21AA09EB61BAD60E22BBE</string>
+						<key>dateExpires</key>
+						<string>11/1/25</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>PVlibDolphin-tvos.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>S32Z3HMYVQ</string>
+						<key>name</key>
+						<string>Joseph Mattiello</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>S32Z3HMYVQ.com.joemattiello.iCube</string>
+				<key>com.apple.developer.kernel.extended-virtual-addressing</key>
+				<true/>
+				<key>com.apple.developer.team-identifier</key>
+				<string>S32Z3HMYVQ</string>
+				<key>get-task-allow</key>
+				<true/>
+			</dict>
+			<key>name</key>
+			<string>iCube.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>66debd02-3a7d-460d-a605-e0761ee15038</string>
+				<key>dateExpires</key>
+				<string>9/14/26</string>
+				<key>name</key>
+				<string>tvOS Team Provisioning Profile: com.joemattiello.iCube</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>S32Z3HMYVQ</string>
+				<key>name</key>
+				<string>Joseph Mattiello</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>1.0.0</string>
+		</dict>
+	</array>
+</dict>
+</plist>

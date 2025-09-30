@@ -52,7 +52,7 @@ export function parseBuilds(buildsDir: string, baseURL: string): BuildVersion[] 
 
   for (const versionDir of versionDirs) {
     const versionPath = path.join(buildsDir, versionDir);
-    
+
     // Read platform/beta directories (e.g., iOS-Beta7, tvOS, iOS, etc.)
     const platformDirs = fs.readdirSync(versionPath).filter(file => {
       const fullPath = path.join(versionPath, file);
@@ -61,7 +61,7 @@ export function parseBuilds(buildsDir: string, baseURL: string): BuildVersion[] 
 
     for (const platformDir of platformDirs) {
       const platformPath = path.join(versionPath, platformDir);
-      
+
       // Parse platform and beta info from directory name
       const platformMatch = platformDir.match(/^(iOS|tvOS)(?:-Beta(\d+))?$/i);
       if (!platformMatch) continue;
@@ -87,7 +87,7 @@ export function parseBuilds(buildsDir: string, baseURL: string): BuildVersion[] 
         try {
           const distSummaryContent = fs.readFileSync(distSummaryPath, 'utf8');
           const distSummary = plist.parse(distSummaryContent) as DistributionSummary;
-          
+
           // Get the first app entry (should be iCube.ipa)
           const appKey = Object.keys(distSummary).find(key => key.endsWith('.ipa'));
           if (appKey && distSummary[appKey] && distSummary[appKey][0]) {
@@ -119,7 +119,7 @@ export function parseBuilds(buildsDir: string, baseURL: string): BuildVersion[] 
         localizedDescription: description,
         downloadURL,
         size: ipaStats.size,
-        minOSVersion: platform === 'tvOS' ? '15.0' : '15.6',
+        minOSVersion: platform === 'tvOS' ? '16.6' : '15.6',
         platform,
         isBeta,
         betaNumber,
