@@ -198,6 +198,13 @@ iCube is a fork of DolphiniOS, optimized for iOS and tvOS devices.`,
     iconURL: `${baseURL}/icon-512.png`,
     tintColor: '#3B82F6',
     category: 'games',
+    screenshots: [
+      `${baseURL}/screenshots/iphone1-library.jpg`,
+      `${baseURL}/screenshots/iphone2-search.jpg`,
+      `${baseURL}/screenshots/iphone3-emu.png`,
+      `${baseURL}/screenshots/iphone7-touchcontrols.jpg`,
+      `${baseURL}/screenshots/iphone8-pause.jpg`,
+    ],
     versions: versions.map(v => ({
       version: v.version,
       buildVersion: v.buildVersion,
