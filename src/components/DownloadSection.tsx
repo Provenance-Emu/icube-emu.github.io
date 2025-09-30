@@ -11,7 +11,16 @@ export type DownloadSectionProps = {
 
 const DefaultDescription = () => (
   <p className="text-gray-600 dark:text-gray-300 mb-6">
-    iCube isn’t on the App Store. You can sideload it from the sources below. We recommend
+    iCube isn’t on the App Store. You can sideload it from the sources below. We recommend using
+    <a
+      href="https://sidestore.io"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-blue-600 dark:text-blue-400 hover:underline ml-1"
+    >
+      SideStore
+    </a>
+    to install on iOS/iPadOS, using
     <a
       href="https://sideloadly.io"
       target="_blank"
@@ -20,7 +29,7 @@ const DefaultDescription = () => (
     >
       Sideloadly
     </a>
-    for installing on iOS/tvOS, and for Apple TV JIT we recommend
+    to install on tvOS, and using
     <a
       href="https://apps.apple.com/us/app/stikdebug/id6744045754"
       target="_blank"
@@ -29,7 +38,7 @@ const DefaultDescription = () => (
     >
       StikDebug
     </a>
-    .
+    to enable JIT on iOS/iPadOS.
   </p>
 );
 
