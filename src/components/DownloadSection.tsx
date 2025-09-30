@@ -20,7 +20,7 @@ const DefaultDescription = () => (
     >
       SideStore
     </a>
-    to install on iOS/iPadOS, using
+     for installing on iOS/iPadOS, using
     <a
       href="https://sideloadly.io"
       target="_blank"
@@ -29,7 +29,7 @@ const DefaultDescription = () => (
     >
       Sideloadly
     </a>
-    to install on tvOS, and using
+     for installing on tvOS, and using
     <a
       href="https://apps.apple.com/us/app/stikdebug/id6744045754"
       target="_blank"
@@ -38,7 +38,7 @@ const DefaultDescription = () => (
     >
       StikDebug
     </a>
-    to enable JIT on iOS/iPadOS.
+     to enable JIT on iOS/iPadOS.
   </p>
 );
 
