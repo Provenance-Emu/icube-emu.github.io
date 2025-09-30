@@ -15,10 +15,11 @@ export const dynamic = 'force-dynamic';
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { path: string[] } }
+  { params }: { params: Promise<{ path: string[] }> }
 ) {
   try {
-    const { path: pathSegments } = params;
+    // Await params in Next.js 15+
+    const { path: pathSegments } = await params;
     const searchParams = request.nextUrl.searchParams;
     const customVersion = searchParams.get('version');
 
