@@ -15,6 +15,10 @@ export async function GET() {
     const buildsDir = path.join(process.cwd(), 'builds');
 
     const app = generateAltStoreApp(baseURL, buildsDir);
+    
+    // Filter to iOS only to avoid duplicate version errors
+    // AltStore/SideStore don't support multiple platforms per app
+    app.versions = app.versions.filter(v => v.platform === 'iOS');
 
     const source = {
       name: 'iCube',
