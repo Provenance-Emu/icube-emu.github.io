@@ -89,8 +89,8 @@ Key information in the feed:
 - **Developer**: Provenance Emu
 - **Category**: games
 - **Tint Color**: #3B82F6 (blue)
-- **Min iOS**: 15.6
-- **Min tvOS**: 16.6
+- **Min iOS**: 15.0
+- **Min tvOS**: 16.0
 
 ## Usage
 
@@ -110,11 +110,11 @@ Key information in the feed:
    ```bash
    # Create version directory
    mkdir -p builds/1.0.1/iOS
-   
+
    # Copy IPA and metadata
    cp iCube.ipa builds/1.0.1/iOS/
    cp DistributionSummary.plist builds/1.0.1/iOS/
-   
+
    # Deploy
    npm run build
    ```

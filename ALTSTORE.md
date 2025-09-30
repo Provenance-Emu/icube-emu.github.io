@@ -60,8 +60,8 @@ NEXT_PUBLIC_BASE_URL=https://icube-emu.com
 
 ## Requirements
 
-- **iOS**: Minimum version 15.6
-- **tvOS**: Minimum version 16.6
+- **iOS**: Minimum version 15.0
+- **tvOS**: Minimum version 16.0
 
 ## Features
 

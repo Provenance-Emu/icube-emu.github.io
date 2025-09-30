@@ -120,7 +120,7 @@ export function parseBuilds(buildsDir: string, baseURL: string): BuildVersion[] 
         localizedDescription: description,
         downloadURL,
         size: ipaStats.size,
-        minOSVersion: platform === 'tvOS' ? '16.6' : '15.6',
+        minOSVersion: platform === 'tvOS' ? '16.0' : '15.0',
         platform,
         isBeta,
         betaNumber,
