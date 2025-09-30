@@ -62,7 +62,11 @@ export async function GET(
 
     // Parse the Info.plist
     const infoPlistData = infoPlistEntry.getData();
-    const infoPlist = plist.parse(infoPlistData.toString('utf8')) as Record<string, any>;
+    const infoPlist = plist.parse(infoPlistData.toString('utf8')) as {
+      CFBundleShortVersionString?: string;
+      CFBundleVersion?: string;
+      [key: string]: unknown;
+    };
 
     // Modify version strings
     infoPlist.CFBundleShortVersionString = customVersion;
