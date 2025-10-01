@@ -25,7 +25,7 @@ export async function GET() {
       identifier: 'com.joemattiello.icube.source',
       subtitle: 'GameCube & Wii Emulator',
       description: 'Official source for iCube - GameCube and Wii emulator for iOS and tvOS.',
-      iconURL: `${baseURL}/icon-512.png`,
+      iconURL: `${baseURL}/icon-1024.png`,
       headerURL: `${baseURL}/header.png`,
       website: 'https://icube-emu.com',
       tintColor: '#3B82F6',
