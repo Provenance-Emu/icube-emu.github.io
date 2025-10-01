@@ -57,7 +57,7 @@ The generated feed follows the official AltStore/SideStore specification:
   "identifier": "com.joemattiello.icube.source",
   "subtitle": "GameCube & Wii Emulator",
   "description": "Official source for iCube...",
-  "iconURL": "https://icube-emu.com/icon-512.png",
+  "iconURL": "https://icube-emu.com/icon-1024.png",
   "website": "https://icube-emu.com",
   "tintColor": "#3B82F6",
   "apps": [
@@ -154,7 +154,7 @@ Key information in the feed:
 3. `src/app/api/sidestore/route.ts` - SideStore API endpoint
 4. `src/app/downloads/page.tsx` - Downloads UI page
 5. `ALTSTORE.md` - Documentation
-6. `public/icon-512.png` - App icon for feed
+6. `public/icon-1024.png` - App icon for feed
 7. `public/header.png` - Header image (placeholder)
 8. `public/news-welcome.png` - News image (placeholder)
 
@@ -165,7 +165,7 @@ Key information in the feed:
 ## Next Steps
 
 1. Replace placeholder images:
-   - `public/icon-512.png` - Use actual 512x512 app icon
+   - `public/icon-1024.png` - Use actual 1024x1024 app icon
    - `public/header.png` - Use banner image for source
    - `public/news-welcome.png` - Use news/announcement image
 
