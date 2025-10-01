@@ -32,12 +32,12 @@ export default function Support() {
                   How do I install iCube (sideloaded)?
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  iCube is distributed via sideloading for iOS and tvOS. <br /> We recommend using{' '}
+                  iCube is distributed via sideloading for iOS/iPadOS and tvOS. <br /> We recommend using{' '}
                   <a href="https://sidestore.io" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">SideStore</a>{' '}
                   to install the app on your iOS/iPadOS device. To install on your tvOS device, use{' '}
                   <a href="https://sideloadly.io" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Sideloadly</a>{' '}
                   . To enable JIT on iOS/iPadOS, we recommend using{' '}
-                  <a href="https://apps.apple.com/us/app/stikdebug/id6744045754" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">StikDebug</a>{' '}.
+                  <a href="https://apps.apple.com/us/app/stikdebug/id6744045754" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">StikDebug</a>.
                 </p>
               </div>
 
@@ -57,7 +57,7 @@ export default function Support() {
                   What devices are compatible?
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  iCube requires iOS 16.0 or later for iPhone and iPad, and tvOS 17.0 or later for Apple TV.
+                  iCube requires iOS/iPadOS 16.0 or later for iPhone and iPad, and tvOS 17.0 or later for Apple TV.
                   For optimal JIT-less performance, we recommend newer devices like iPhone 16 or later,
                   iPad (7th generation) or later, and Apple TV 4K (4th generation).
                 </p>
