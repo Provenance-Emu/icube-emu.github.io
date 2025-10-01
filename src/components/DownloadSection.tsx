@@ -18,27 +18,27 @@ const DefaultDescription = () => (
       rel="noopener noreferrer"
       className="text-blue-600 dark:text-blue-400 hover:underline ml-1"
     >
-      SideStore 
+      SideStore
     </a>
-    to install on iOS/iPadOS, using
+    {' '}to install on iOS/iPadOS, using
     <a
       href="https://sideloadly.io"
       target="_blank"
       rel="noopener noreferrer"
       className="text-blue-600 dark:text-blue-400 hover:underline ml-1"
     >
-      Sideloadly 
+      Sideloadly
     </a>
-    to install on tvOS, and using
+    {' '}to install on tvOS, and using
     <a
       href="https://apps.apple.com/us/app/stikdebug/id6744045754"
       target="_blank"
       rel="noopener noreferrer"
       className="text-blue-600 dark:text-blue-400 hover:underline ml-1"
     >
-      StikDebug 
+      StikDebug
     </a>
-    to enable JIT on iOS/iPadOS.
+    {' '}to enable JIT on iOS/iPadOS.
   </p>
 );
 
