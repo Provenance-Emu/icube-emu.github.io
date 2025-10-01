@@ -41,18 +41,22 @@ interface DistributionSummary {
 export function parseBuilds(buildsDir: string, baseURL: string): BuildVersion[] {
   const versions: BuildVersion[] = [];
 
-  if (!fs.existsSync(buildsDir)) {
+  // Use pre-generated versioned builds directory
+  const versionedBuildsDir = buildsDir.replace('/builds', '/builds-versioned');
+  const sourceDir = fs.existsSync(versionedBuildsDir) ? versionedBuildsDir : buildsDir;
+
+  if (!fs.existsSync(sourceDir)) {
     return versions;
   }
 
   // Read all version directories (e.g., 1.0.0, 1.0.1, etc.)
-  const versionDirs = fs.readdirSync(buildsDir).filter(file => {
-    const fullPath = path.join(buildsDir, file);
+  const versionDirs = fs.readdirSync(sourceDir).filter(file => {
+    const fullPath = path.join(sourceDir, file);
     return fs.statSync(fullPath).isDirectory() && /^\d+\.\d+\.\d+$/.test(file);
   });
 
   for (const versionDir of versionDirs) {
-    const versionPath = path.join(buildsDir, versionDir);
+    const versionPath = path.join(sourceDir, versionDir);
 
     // Read platform/beta directories (e.g., iOS-Beta7, tvOS, iOS, etc.)
     const platformDirs = fs.readdirSync(versionPath).filter(file => {
@@ -103,9 +107,8 @@ export function parseBuilds(buildsDir: string, baseURL: string): BuildVersion[] 
       // Get file modification time as release date
       const releaseDate = ipaStats.mtime.toISOString().split('T')[0];
 
-      // Construct download URL using dynamic API endpoint
-      // This will be modified later to include the custom version parameter
-      const downloadURL = `${baseURL}/builds/${versionDir}/${platformDir}/${ipaFile}`;
+      // Construct download URL using pre-generated versioned IPA
+      const downloadURL = `${baseURL}/builds-versioned/${versionDir}/${platformDir}/${ipaFile}`;
 
       // Create version description
       let description = `iCube ${versionNumber}`;
@@ -220,18 +223,12 @@ iCube is a fork of DolphiniOS, optimized for iOS and tvOS devices.`,
       // Add platform suffix to differentiate iOS and tvOS builds
       versionString += `-${v.platform.toLowerCase()}`;
       
-      // Use dynamic API endpoint that modifies IPA on-the-fly with custom version
-      const dynamicDownloadURL = v.downloadURL.replace(
-        `${baseURL}/builds/`,
-        `${baseURL}/api/download/builds/`
-      ) + `?version=${encodeURIComponent(versionString)}`;
-      
       return {
         version: versionString,
         buildVersion: v.buildVersion,
         date: v.date,
         localizedDescription: v.localizedDescription,
-        downloadURL: dynamicDownloadURL,
+        downloadURL: v.downloadURL,
         size: v.size,
         minOSVersion: v.minOSVersion,
         platform: v.platform,

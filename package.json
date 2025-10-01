@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "dev:port": "next dev --turbopack --port",
     "dev:debug": "NODE_OPTIONS='--inspect' next dev --turbopack",
+    "prebuild": "node scripts/generate-versioned-ipas.js",
     "build": "next build --turbopack",
     "build:analyze": "ANALYZE=true next build --turbopack",
     "start": "next start",
@@ -24,6 +25,8 @@
   },
   "dependencies": {
     "adm-zip": "^0.5.16",
+    "bplist-creator": "^0.1.1",
+    "bplist-parser": "^0.3.2",
     "next": "^15.5.3",
     "plist": "^3.1.0",
     "react": "^19.1.0",
