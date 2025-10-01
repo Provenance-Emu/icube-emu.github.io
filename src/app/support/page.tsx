@@ -29,13 +29,15 @@ export default function Support() {
 
               <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  How do I install iCube (sideload)?
+                  How do I install iCube (sideloaded)?
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
                   iCube is distributed via sideloading for iOS and tvOS. <br /> We recommend using{' '}
+                  <a href="https://sidestore.io" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">SideStore</a>{' '}
+                  to install the app on your iOS/iPadOS device. To install on your tvOS device, use{' '}
                   <a href="https://sideloadly.io" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Sideloadly</a>{' '}
-                  to install the app on your device. For enabling JIT on Apple TV, we recommend{' '}
-                  <a href="https://apps.apple.com/us/app/stikdebug/id6744045754" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">StikDebug</a>.
+                  . To enable JIT on iOS/iPadOS, we recommend using{' '}
+                  <a href="https://apps.apple.com/us/app/stikdebug/id6744045754" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">StikDebug</a>{' '}.
                 </p>
               </div>
 
@@ -56,7 +58,7 @@ export default function Support() {
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
                   iCube requires iOS 16.0 or later for iPhone and iPad, and tvOS 17.0 or later for Apple TV.
-                  For optimal performance, we recommend newer devices like iPhone 16 or later,
+                  For optimal JIT-less performance, we recommend newer devices like iPhone 16 or later,
                   iPad (7th generation) or later, and Apple TV 4K (4th generation).
                 </p>
               </div>

@@ -151,7 +151,7 @@ export default function Links() {
                  className="flex items-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors">
                 <div className="text-2xl mr-4">🐬</div>
                 <div>
-                  <h3 className="font-semibold text-blue-900 dark:text-blue-300">DolphinIOS</h3>
+                  <h3 className="font-semibold text-blue-900 dark:text-blue-300">DolphiniOS</h3>
                   <p className="text-sm text-blue-700 dark:text-blue-400">
                     iOS port of Dolphin emulator that inspired iCube
                   </p>
