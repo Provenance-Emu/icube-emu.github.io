@@ -225,7 +225,7 @@ iCube is a fork of DolphiniOS, optimized for iOS and tvOS devices.`,
       
       return {
         version: versionString,
-        buildVersion: v.buildVersion,
+        buildVersion: versionString, // Must match the version in the modified IPA
         date: v.date,
         localizedDescription: v.localizedDescription,
         downloadURL: v.downloadURL,
