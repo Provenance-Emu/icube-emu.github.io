@@ -1,5 +1,11 @@
-// (no direct button imports needed here since we use DownloadSection)
+import type { Metadata } from 'next';
 import DownloadSection from '@/components/DownloadSection';
+
+export const metadata: Metadata = {
+  title: 'Links & Resources',
+  description: 'Useful links for iCube: downloads, Dolphin emulator resources, community channels, and related projects.',
+  alternates: { canonical: 'https://icube-app.com/links/' },
+};
 import SocialButton, { DiscordIcon, XIcon, BmcIcon, PatreonIcon } from '@/components/SocialButton';
 
 export default function Links() {
@@ -40,7 +46,7 @@ export default function Links() {
                 </div>
               </a>
 
-              <a href="https://dolphinios.oatmealdome.me"
+              <a href="https://github.com/dolphin-emu/dolphin"
                  target="_blank"
                  rel="noopener noreferrer"
                  className="flex items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
