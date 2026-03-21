@@ -1,9 +1,9 @@
 {
-  "last_updated": null,
-  "run_url": "",
+  "last_updated": "2026-03-21T04:44:31Z",
+  "run_url": "https://github.com/Provenance-Emu/icube-emu.github.io/actions/runs/23372080895",
   "html_check": {
-    "passed": null,
-    "error_count": 0
+    "passed": false,
+    "error_count": 4
   },
   "lighthouse": {
     "performance": null,
@@ -13,10 +13,10 @@
     "report_url": ""
   },
   "observatory": {
-    "grade": null,
+    "grade": "N/A",
     "score": null
   },
   "ssl": {
-    "grade": null
+    "grade": "N/A"
   }
 }
