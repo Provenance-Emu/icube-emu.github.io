@@ -31,7 +31,7 @@ const DefaultDescription = () => (
     </a>
     {' '}to install on tvOS, and using
     <a
-      href="https://apps.apple.com/us/app/stikdebug/id6744045754"
+      href="https://github.com/StephenDev0/StikDebug"
       target="_blank"
       rel="noopener noreferrer"
       className="text-blue-600 dark:text-blue-400 hover:underline ml-1"
