@@ -11,7 +11,7 @@ export const revalidate = 3600; // Revalidate every hour
  */
 export async function GET() {
   try {
-    const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://icube-app.com';
+    const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://icube-emu.com';
     const buildsDir = path.join(process.cwd(), 'public', 'builds');
 
     const app = generateAltStoreApp(baseURL, buildsDir);
@@ -27,7 +27,7 @@ export async function GET() {
       description: 'Official source for iCube - GameCube and Wii emulator for iOS and tvOS.',
       iconURL: `${baseURL}/icon-1024.png`,
       headerURL: `${baseURL}/header.png`,
-      website: 'https://icube-app.com',
+      website: 'https://icube-emu.com',
       tintColor: '#3B82F6',
       featuredApps: [app.bundleIdentifier],
       apps: [app],
@@ -40,7 +40,7 @@ export async function GET() {
           tintColor: '#3B82F6',
           imageURL: `${baseURL}/news-welcome.png`,
           notify: false,
-          url: 'https://icube-app.com',
+          url: 'https://icube-emu.com',
         },
       ],
     };

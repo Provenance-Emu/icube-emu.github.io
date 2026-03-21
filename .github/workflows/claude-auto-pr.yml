@@ -48,7 +48,7 @@ jobs:
 
             ## Test plan
             - [ ] `npm run build` succeeds (static export)
-            - [ ] Site renders correctly at https://icube-app.com
+            - [ ] Site renders correctly at https://icube-emu.com
 
             🤖 Auto-created by the Claude Auto PR workflow
         run: |

@@ -4,7 +4,7 @@ import SocialButton, { BmcIcon, PatreonIcon, VenmoIcon, ZelleIcon, OpenCollectiv
 export const metadata: Metadata = {
   title: 'Support Development',
   description: 'Support iCube development via Buy Me a Coffee, Patreon, Venmo, Zelle, or Open Collective. Every contribution helps keep iCube going.',
-  alternates: { canonical: 'https://icube-app.com/donate/' },
+  alternates: { canonical: 'https://icube-emu.com/donate/' },
 };
 
 export default function DonatePage() {

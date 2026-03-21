@@ -4,7 +4,7 @@ import SocialButton, { BmcIcon, PatreonIcon } from '@/components/SocialButton';
 export const metadata: Metadata = {
   title: 'Support',
   description: 'Get help with iCube: FAQs, JIT setup, controller pairing, game compatibility, and how to report bugs.',
-  alternates: { canonical: 'https://icube-app.com/support/' },
+  alternates: { canonical: 'https://icube-emu.com/support/' },
 };
 
 export default function Support() {

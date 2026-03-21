@@ -3,7 +3,7 @@ import { MetadataRoute } from 'next'
 export const dynamic = 'force-static'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://icube-app.com'
+  const base = 'https://icube-emu.com'
   const now = new Date()
   return [
     { url: `${base}/`,            lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },

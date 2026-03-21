@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       { userAgent: '*', allow: '/', disallow: '/api/' },
     ],
-    sitemap: 'https://icube-app.com/sitemap.xml',
+    sitemap: 'https://icube-emu.com/sitemap.xml',
   }
 }

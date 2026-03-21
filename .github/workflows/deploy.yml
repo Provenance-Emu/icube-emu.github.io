@@ -41,7 +41,7 @@ jobs:
       - name: Build with Next.js
         run: npm run build
         env:
-          NEXT_PUBLIC_BASE_URL: https://icube-app.com
+          NEXT_PUBLIC_BASE_URL: https://icube-emu.com
 
       - name: Write build SHA
         run: echo "${{ github.sha }}" > ./out/build-sha.txt

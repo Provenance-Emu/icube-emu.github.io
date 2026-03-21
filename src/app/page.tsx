@@ -9,7 +9,7 @@ import ipad2 from '@/images/screenshots/ipad/ipad2-search.jpg';
 export const metadata: Metadata = {
   title: { absolute: 'iCube – GameCube & Wii Emulator for iOS & tvOS' },
   description: 'Download iCube and play classic Nintendo GameCube and Wii games on your iPhone, iPad, and Apple TV. Fast, accurate emulation based on Dolphin.',
-  alternates: { canonical: 'https://icube-app.com/' },
+  alternates: { canonical: 'https://icube-emu.com/' },
 };
 import DownloadSection from '@/components/DownloadSection';
 import SocialButton, { DiscordIcon, XIcon, BmcIcon, PatreonIcon } from '@/components/SocialButton';

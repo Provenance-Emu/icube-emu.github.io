@@ -4,7 +4,7 @@ import Features from '@/components/Features';
 export const metadata: Metadata = {
   title: 'Features',
   description: 'Explore iCube features: Dolphin-based emulation, MFi controller support, save states, tvOS big-screen gaming, and iOS-specific performance enhancements.',
-  alternates: { canonical: 'https://icube-app.com/features/' },
+  alternates: { canonical: 'https://icube-emu.com/features/' },
 };
 import Link from 'next/link';
 import SocialButton, { DiscordIcon, XIcon } from '@/components/SocialButton';

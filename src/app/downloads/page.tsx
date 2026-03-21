@@ -4,7 +4,7 @@ import { parseBuilds } from '@/lib/buildParser';
 export const metadata: Metadata = {
   title: 'Downloads',
   description: 'Download the latest iCube IPA for iOS and tvOS. Add the AltStore or SideStore source for easy installation and automatic updates.',
-  alternates: { canonical: 'https://icube-app.com/downloads/' },
+  alternates: { canonical: 'https://icube-emu.com/downloads/' },
 };
 import path from 'path';
 import Link from 'next/link';
@@ -13,7 +13,7 @@ export const dynamic = 'force-static';
 export const revalidate = 3600;
 
 export default function DownloadsPage() {
-  const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://icube-app.com';
+  const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://icube-emu.com';
   const buildsDir = path.join(process.cwd(), 'public', 'builds');
   const versions = parseBuilds(buildsDir, baseURL);
 

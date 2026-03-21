@@ -4,7 +4,7 @@ import DownloadSection from '@/components/DownloadSection';
 export const metadata: Metadata = {
   title: 'Links & Resources',
   description: 'Useful links for iCube: downloads, Dolphin emulator resources, community channels, and related projects.',
-  alternates: { canonical: 'https://icube-app.com/links/' },
+  alternates: { canonical: 'https://icube-emu.com/links/' },
 };
 import SocialButton, { DiscordIcon, XIcon, BmcIcon, PatreonIcon } from '@/components/SocialButton';
 

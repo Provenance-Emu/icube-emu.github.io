@@ -7,7 +7,7 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 const GA_ID = "G-R9V4MJ0BR2";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://icube-app.com"),
+  metadataBase: new URL("https://icube-emu.com"),
   title: {
     default: "iCube – GameCube & Wii Emulator for iOS & tvOS",
     template: "%s | iCube",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: "iCube – GameCube & Wii Emulator for iOS & tvOS",
     description:
       "Play classic Nintendo GameCube and Wii games on your iPhone, iPad, and Apple TV. Fast, accurate emulation based on Dolphin with controller support and save states.",
-    url: "https://icube-app.com",
+    url: "https://icube-emu.com",
     images: [
       {
         url: "/header.png",
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
 
 // CSP — sets the policy via <meta> since GitHub Pages doesn't support custom HTTP headers.
 // HSTS and X-Frame-Options still require HTTP headers and must be set at the CDN layer
-// (e.g. Cloudflare). See: https://observatory.mozilla.org/analyze/icube-app.com
+// (e.g. Cloudflare). See: https://observatory.mozilla.org/analyze/icube-emu.com
 //
 // 'unsafe-inline' is required for script-src because Next.js App Router embeds inline
 // <script> tags for React Server Component hydration (self.__next_f.push). Without it,
@@ -108,8 +108,8 @@ const jsonLd = {
   operatingSystem: "iOS 16+, tvOS 16+",
   description:
     "A GameCube and Wii emulator for iOS and tvOS based on Dolphin. Play classic Nintendo games on your iPhone, iPad, and Apple TV.",
-  url: "https://icube-app.com",
-  image: "https://icube-app.com/icon-1024.png",
+  url: "https://icube-emu.com",
+  image: "https://icube-emu.com/icon-1024.png",
   author: {
     "@type": "Organization",
     name: "Provenance Emu",

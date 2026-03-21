@@ -146,9 +146,9 @@ jobs:
         if: github.event_name == 'push'
         run: |
           EXPECTED="${{ github.sha }}"
-          echo "Polling https://icube-app.com/build-sha.txt for commit $EXPECTED"
+          echo "Polling https://icube-emu.com/build-sha.txt for commit $EXPECTED"
           for i in $(seq 1 30); do
-            LIVE=$(curl -sf https://icube-app.com/build-sha.txt 2>/dev/null | tr -d '[:space:]' || echo "")
+            LIVE=$(curl -sf https://icube-emu.com/build-sha.txt 2>/dev/null | tr -d '[:space:]' || echo "")
             if [ "$LIVE" = "$EXPECTED" ]; then
               echo "✅ CDN is serving commit $EXPECTED (attempt $i)"
               exit 0
@@ -164,9 +164,9 @@ jobs:
         uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
-            https://icube-app.com
-            https://icube-app.com/features/
-            https://icube-app.com/downloads/
+            https://icube-emu.com
+            https://icube-emu.com/features/
+            https://icube-emu.com/downloads/
           configPath: .lighthouserc.yml
           temporaryPublicStorage: true
 
@@ -181,7 +181,7 @@ jobs:
           REPORT=""
           for f in $(find "$SEARCH_DIR" -maxdepth 6 -name "lhr-*.json" 2>/dev/null); do
             URL_IN_LHR=$(jq -r '.requestedUrl // .finalUrl // ""' "$f" 2>/dev/null)
-            if [[ "$URL_IN_LHR" == "https://icube-app.com" || "$URL_IN_LHR" == "https://icube-app.com/" ]]; then
+            if [[ "$URL_IN_LHR" == "https://icube-emu.com" || "$URL_IN_LHR" == "https://icube-emu.com/" ]]; then
               REPORT="$f"
               break
             fi
@@ -213,7 +213,7 @@ jobs:
           try:
             d = json.loads(sys.stdin.read())
             for key in d:
-              if key.rstrip('/') == 'https://icube-app.com':
+              if key.rstrip('/') == 'https://icube-emu.com':
                 print(d[key]); sys.exit(0)
             print(list(d.values())[0] if d else '')
           except: print('')
@@ -254,7 +254,7 @@ jobs:
       - name: Mozilla Observatory
         id: observatory
         run: |
-          RESULT=$(curl -s -X POST "https://observatory-api.mdn.mozilla.net/api/v2/scan?host=icube-app.com")
+          RESULT=$(curl -s -X POST "https://observatory-api.mdn.mozilla.net/api/v2/scan?host=icube-emu.com")
           GRADE=$(echo "$RESULT" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('grade','N/A'))" 2>/dev/null || echo "N/A")
           SCORE=$(echo "$RESULT" | python3 -c "import json,sys; d=json.load(sys.stdin); print(int(d.get('score',0)))" 2>/dev/null || echo "0")
           echo "grade=$GRADE" >> $GITHUB_OUTPUT
@@ -264,11 +264,11 @@ jobs:
       - name: SSL Labs
         id: ssl
         run: |
-          curl -s "https://api.ssllabs.com/api/v3/analyze?host=icube-app.com&startNew=on&publish=off" > /dev/null
+          curl -s "https://api.ssllabs.com/api/v3/analyze?host=icube-emu.com&startNew=on&publish=off" > /dev/null
           GRADE="N/A"
           for i in {1..15}; do
             sleep 20
-            RESULT=$(curl -s "https://api.ssllabs.com/api/v3/analyze?host=icube-app.com&publish=off")
+            RESULT=$(curl -s "https://api.ssllabs.com/api/v3/analyze?host=icube-emu.com&publish=off")
             STATUS=$(echo "$RESULT" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('status',''))" 2>/dev/null || echo "")
             echo "SSL Labs status: $STATUS (attempt $i)"
             if [ "$STATUS" = "READY" ]; then
@@ -477,7 +477,7 @@ jobs:
                 body: [
                   '## SSL/TLS Grade Below A',
                   `Current SSL Labs grade: **${str('SSL_GRADE')}**`,
-                  '[View the full SSL Labs report](https://www.ssllabs.com/ssltest/analyze.html?d=icube-app.com)',
+                  '[View the full SSL Labs report](https://www.ssllabs.com/ssltest/analyze.html?d=icube-emu.com)',
                   '**Common fixes:**\n- Disable TLS 1.0 / 1.1\n- Add an HSTS header (`Strict-Transport-Security`)\n- Resolve certificate chain issues',
                   `_Auto-opened by [Site Audit](${runUrl})_`,
                 ].join('\n\n'),
@@ -491,12 +491,12 @@ jobs:
                 body: [
                   '## Mozilla Observatory Score Below Grade C',
                   `Current grade: **${str('OBS_GRADE')}** (${num('OBS_SCORE')}/100)`,
-                  '[View the full Observatory report](https://observatory.mozilla.org/analyze/icube-app.com)',
+                  '[View the full Observatory report](https://observatory.mozilla.org/analyze/icube-emu.com)',
                   '**Fixable via `<meta>` tag (implemented in `src/app/layout.tsx`):**\n- Content Security Policy\n- Referrer-Policy',
                   '**Requires HTTP headers (not possible on GitHub Pages without Cloudflare):**\n- `Strict-Transport-Security` (HSTS)\n- `X-Frame-Options`\n- `X-Content-Type-Options`',
                   `_Auto-opened by [Site Audit](${runUrl})_`,
                   '> **⚠️ GitHub Pages limitation:** HSTS (`Strict-Transport-Security`) and `X-Frame-Options` require HTTP response headers which GitHub Pages cannot set. The maximum achievable score on GitHub Pages is ~55/100 (grade C). To reach A/B, route traffic through Cloudflare (free plan) and add headers via a Cloudflare Transform Rule.',
-                  `@claude Please check the current Observatory score and investigate what can still be improved. Some headers can be set via \`<meta>\` tags (CSP, referrer-policy). Check \`src/app/layout.tsx\` for the existing CSP meta tag and update it if needed.\n\n**Steps:**\n1. Review [the report](https://observatory.mozilla.org/analyze/icube-app.com) — identify any remaining fixable issues\n2. Create a working branch: \`git checkout -b claude/fix-security-headers\`\n3. Update the CSP in \`src/app/layout.tsx\` if any issues are fixable via meta tag\n4. Push and create a PR: \`git push -u origin HEAD && gh pr create --title "fix: improve security headers" --base main\`\n5. Enable auto-merge: \`gh pr merge --auto --squash\``,
+                  `@claude Please check the current Observatory score and investigate what can still be improved. Some headers can be set via \`<meta>\` tags (CSP, referrer-policy). Check \`src/app/layout.tsx\` for the existing CSP meta tag and update it if needed.\n\n**Steps:**\n1. Review [the report](https://observatory.mozilla.org/analyze/icube-emu.com) — identify any remaining fixable issues\n2. Create a working branch: \`git checkout -b claude/fix-security-headers\`\n3. Update the CSP in \`src/app/layout.tsx\` if any issues are fixable via meta tag\n4. Push and create a PR: \`git push -u origin HEAD && gh pr create --title "fix: improve security headers" --base main\`\n5. Enable auto-merge: \`gh pr merge --auto --squash\``,
                 ].join('\n\n'),
               },
             ];
