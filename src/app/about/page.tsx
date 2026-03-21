@@ -1,5 +1,12 @@
+import type { Metadata } from 'next';
 import DownloadSection from '@/components/DownloadSection';
 import SocialButton, { DiscordIcon, XIcon, BmcIcon, PatreonIcon } from '@/components/SocialButton';
+
+export const metadata: Metadata = {
+  title: 'About',
+  description: 'Learn about iCube, a GameCube and Wii emulator for iOS and tvOS built on the Dolphin core. Supports iPhone, iPad, and Apple TV.',
+  alternates: { canonical: 'https://icube-app.com/about/' },
+};
 
 export default function About() {
   return (

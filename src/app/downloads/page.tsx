@@ -1,4 +1,11 @@
+import type { Metadata } from 'next';
 import { parseBuilds } from '@/lib/buildParser';
+
+export const metadata: Metadata = {
+  title: 'Downloads',
+  description: 'Download the latest iCube IPA for iOS and tvOS. Add the AltStore or SideStore source for easy installation and automatic updates.',
+  alternates: { canonical: 'https://icube-app.com/downloads/' },
+};
 import path from 'path';
 import Link from 'next/link';
 

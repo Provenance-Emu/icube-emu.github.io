@@ -1,4 +1,11 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
+
+export const metadata: Metadata = {
+  title: 'iCube – GameCube & Wii Emulator for iOS & tvOS',
+  description: 'Download iCube and play classic Nintendo GameCube and Wii games on your iPhone, iPad, and Apple TV. Fast, accurate emulation based on Dolphin.',
+  alternates: { canonical: 'https://icube-app.com/' },
+};
 import iphone1 from '@/images/screenshots/ios/iphone1-library.jpg';
 import iphone2 from '@/images/screenshots/ios/iphone2-search.jpg';
 import iphone3 from '@/images/screenshots/ios/iphone3-emu.png';
