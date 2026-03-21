@@ -1,16 +1,16 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import iphone1 from '@/images/screenshots/ios/iphone1-library.jpg';
+import iphone2 from '@/images/screenshots/ios/iphone2-search.jpg';
+import iphone3 from '@/images/screenshots/ios/iphone3-emu.png';
+import ipad1 from '@/images/screenshots/ipad/ipad1-library.jpg';
+import ipad2 from '@/images/screenshots/ipad/ipad2-search.jpg';
 
 export const metadata: Metadata = {
   title: { absolute: 'iCube – GameCube & Wii Emulator for iOS & tvOS' },
   description: 'Download iCube and play classic Nintendo GameCube and Wii games on your iPhone, iPad, and Apple TV. Fast, accurate emulation based on Dolphin.',
   alternates: { canonical: 'https://icube-app.com/' },
 };
-import iphone1 from '@/images/screenshots/ios/iphone1-library.jpg';
-import iphone2 from '@/images/screenshots/ios/iphone2-search.jpg';
-import iphone3 from '@/images/screenshots/ios/iphone3-emu.png';
-import ipad1 from '@/images/screenshots/ipad/ipad1-library.jpg';
-import ipad2 from '@/images/screenshots/ipad/ipad2-search.jpg';
 import DownloadSection from '@/components/DownloadSection';
 import SocialButton, { DiscordIcon, XIcon, BmcIcon, PatreonIcon } from '@/components/SocialButton';
 import Features from '@/components/Features';
@@ -99,12 +99,16 @@ export default function Home() {
             iPhone
           </h3>
           <div className="flex flex-wrap justify-center gap-6">
-            {[iphone1, iphone2, iphone3].map((img, idx) => (
+            {([
+              [iphone1, 'iCube game library on iPhone'],
+              [iphone2, 'iCube game search on iPhone'],
+              [iphone3, 'iCube running a GameCube game on iPhone'],
+            ] as const).map(([img, alt], idx) => (
               <div key={`iphone-${idx}`} className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 shadow-lg">
                 <div className="rounded-lg overflow-hidden w-64 h-96">
                   <Image
                     src={img}
-                    alt={`iPhone screenshot ${idx + 1}`}
+                    alt={alt}
                     className="h-full w-full object-cover"
                     sizes="(max-width: 768px) 256px, 256px"
                     priority={idx === 0}
@@ -121,12 +125,15 @@ export default function Home() {
             iPad
           </h3>
           <div className="flex flex-wrap justify-center gap-6">
-            {[ipad1, ipad2].map((img, idx) => (
+            {([
+              [ipad1, 'iCube game library on iPad'],
+              [ipad2, 'iCube game search on iPad'],
+            ] as const).map(([img, alt], idx) => (
               <div key={`ipad-${idx}`} className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 shadow-lg">
                 <div className="rounded-lg overflow-hidden w-80 h-60">
                   <Image
                     src={img}
-                    alt={`iPad screenshot ${idx + 1}`}
+                    alt={alt}
                     className="h-full w-full object-cover"
                     sizes="(max-width: 768px) 320px, 320px"
                   />
@@ -142,12 +149,16 @@ export default function Home() {
             Apple TV
           </h3>
           <div className="flex flex-wrap justify-center gap-6">
-            {[tvos1, tvos2, tvos3].map((img, idx) => (
+            {([
+              [tvos1, 'iCube pause menu on Apple TV'],
+              [tvos2, 'iCube settings on Apple TV'],
+              [tvos3, 'iCube game sources on Apple TV'],
+            ] as const).map(([img, alt], idx) => (
               <div key={`appletv-${idx}`} className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 shadow-lg">
                 <div className="rounded-lg overflow-hidden w-[384px] aspect-video">
                   <Image
                     src={img}
-                    alt={`Apple TV screenshot ${idx + 1}`}
+                    alt={alt}
                     className="h-full w-full object-cover"
                     sizes="(max-width: 768px) 384px, 384px"
                   />
