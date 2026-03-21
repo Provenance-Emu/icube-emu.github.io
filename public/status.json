@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-03-21T07:09:51Z",
-  "run_url": "https://github.com/Provenance-Emu/icube-emu.github.io/actions/runs/23374437338",
+  "last_updated": "2026-03-21T07:15:24Z",
+  "run_url": "https://github.com/Provenance-Emu/icube-emu.github.io/actions/runs/23374561288",
   "html_check": {
     "passed": true,
     "error_count": 0
   },
   "lighthouse": {
-    "performance": 52,
+    "performance": 48,
     "accessibility": 96,
     "best_practices": 96,
     "seo": 100,
