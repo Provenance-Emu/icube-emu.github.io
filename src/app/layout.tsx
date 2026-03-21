@@ -80,9 +80,13 @@ export const metadata: Metadata = {
 // CSP — sets the policy via <meta> since GitHub Pages doesn't support custom HTTP headers.
 // HSTS and X-Frame-Options still require HTTP headers and must be set at the CDN layer
 // (e.g. Cloudflare). See: https://observatory.mozilla.org/analyze/icube-app.com
+//
+// 'unsafe-inline' is required for script-src because Next.js App Router embeds inline
+// <script> tags for React Server Component hydration (self.__next_f.push). Without it,
+// the CSP blocks hydration and the page renders a blank background.
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https: blob:",
   "frame-src https://itch.io https://html.itch.zone https://v6p9d9t4.ssl.hwcdn.net",
