@@ -36,9 +36,9 @@ export const metadata: Metadata = {
     url: "https://icube-emu.com",
     images: [
       {
-        url: "/header.png",
-        width: 1200,
-        height: 630,
+        url: "/icon-1024.png",
+        width: 1024,
+        height: 1024,
         alt: "iCube – GameCube & Wii Emulator for iOS & tvOS",
       },
     ],
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     title: "iCube – GameCube & Wii Emulator for iOS & tvOS",
     description:
       "Play classic Nintendo GameCube and Wii games on your iPhone, iPad, and Apple TV.",
-    images: ["/header.png"],
+    images: ["/icon-1024.png"],
   },
   icons: {
     icon: [
@@ -109,7 +109,7 @@ const jsonLd = {
   description:
     "A GameCube and Wii emulator for iOS and tvOS based on Dolphin. Play classic Nintendo games on your iPhone, iPad, and Apple TV.",
   url: "https://icube-emu.com",
-  image: "https://icube-emu.com/icon-1024.png",
+  image: "https://icube-emu.com/icon-1024.webp",
   author: {
     "@type": "Organization",
     name: "Provenance Emu",

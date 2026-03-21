@@ -38,7 +38,7 @@ export async function GET() {
           caption: 'GameCube & Wii emulation on iOS and tvOS',
           date: new Date().toISOString().split('T')[0],
           tintColor: '#3B82F6',
-          imageURL: `${baseURL}/news-welcome.png`,
+          imageURL: `${baseURL}/icon-1024.png`,
           notify: false,
           url: 'https://icube-emu.com',
         },
