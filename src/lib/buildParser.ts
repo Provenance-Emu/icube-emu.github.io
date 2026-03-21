@@ -206,7 +206,7 @@ iCube is a fork of DolphiniOS, optimized for iOS and tvOS devices.`,
     screenshots: [
       `${baseURL}/screenshots/iphone1-library.jpg`,
       `${baseURL}/screenshots/iphone2-search.jpg`,
-      `${baseURL}/screenshots/iphone3-emu.png`,
+      `${baseURL}/screenshots/iphone3-emu.webp`,
       `${baseURL}/screenshots/iphone7-touchcontrols.jpg`,
       `${baseURL}/screenshots/iphone8-pause.jpg`,
     ],
