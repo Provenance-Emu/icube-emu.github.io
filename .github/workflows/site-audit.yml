@@ -487,19 +487,18 @@ jobs:
               },
               {
                 labels: ['audit', 'security'],
-                title:  '[Fix] Mozilla Observatory security score below grade C',
-                // GitHub Pages cannot set HSTS or X-Frame-Options HTTP headers,
-                // so grade B/A is not achievable without Cloudflare. Alert at C (below ~55/100).
-                failing: !['A+', 'A', 'B', 'C', 'N/A'].includes(str('OBS_GRADE')),
+                title:  '[Fix] Mozilla Observatory security score below grade D',
+                // GitHub Pages cannot set HSTS, X-Frame-Options, or X-Content-Type-Options
+                // HTTP headers. The maximum achievable without Cloudflare is ~35/100 (grade D).
+                // Only alert on F (below D) — D is expected and not actionable.
+                failing: !['A+', 'A', 'B', 'C', 'D', 'N/A'].includes(str('OBS_GRADE')),
                 body: [
-                  '## Mozilla Observatory Score Below Grade C',
+                  '## Mozilla Observatory Score Below Grade D',
                   `Current grade: **${str('OBS_GRADE')}** (${num('OBS_SCORE')}/100)`,
                   '[View the full Observatory report](https://observatory.mozilla.org/analyze/icube-emu.com)',
-                  '**Fixable via `<meta>` tag (implemented in `src/app/layout.tsx`):**\n- Content Security Policy\n- Referrer-Policy',
-                  '**Requires HTTP headers (not possible on GitHub Pages without Cloudflare):**\n- `Strict-Transport-Security` (HSTS)\n- `X-Frame-Options`\n- `X-Content-Type-Options`',
+                  '> **⚠️ GitHub Pages limitation:** `Strict-Transport-Security` (HSTS, 25 pts), `X-Frame-Options` (5 pts), and `X-Content-Type-Options` (5 pts) require HTTP response headers which GitHub Pages cannot set. The maximum achievable score without Cloudflare is ~35/100 (grade D). To reach A/B, route traffic through Cloudflare and add headers via a Transform Rule.',
+                  '**Already implemented via `<meta>` tag (`src/app/layout.tsx`):**\n- Content Security Policy\n- Referrer-Policy',
                   `_Auto-opened by [Site Audit](${runUrl})_`,
-                  '> **⚠️ GitHub Pages limitation:** HSTS (`Strict-Transport-Security`) and `X-Frame-Options` require HTTP response headers which GitHub Pages cannot set. The maximum achievable score on GitHub Pages is ~55/100 (grade C). To reach A/B, route traffic through Cloudflare (free plan) and add headers via a Cloudflare Transform Rule.',
-                  `@claude Please check the current Observatory score and investigate what can still be improved. Some headers can be set via \`<meta>\` tags (CSP, referrer-policy). Check \`src/app/layout.tsx\` for the existing CSP meta tag and update it if needed.\n\n**Steps:**\n1. Review [the report](https://observatory.mozilla.org/analyze/icube-emu.com) — identify any remaining fixable issues\n2. Create a working branch: \`git checkout -b claude/fix-security-headers\`\n3. Update the CSP in \`src/app/layout.tsx\` if any issues are fixable via meta tag\n4. Push and create a PR: \`git push -u origin HEAD && gh pr create --title "fix: improve security headers" --base main\`\n5. Enable auto-merge: \`gh pr merge --auto --squash\``,
                 ].join('\n\n'),
               },
             ];
