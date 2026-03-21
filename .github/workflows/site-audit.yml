@@ -62,7 +62,7 @@ jobs:
         run: |
           htmlproofer ./out \
             --checks Links,Images,Scripts,OpenGraph \
-            --ignore-urls "/localhost/,/twitter\.com/,/x\.com/,/fonts\.gstatic\.com/,/fonts\.googleapis\.com/,/discord\.gg/,/github\.com/,/icube-app\.com/,/testflight\.apple\.com/,/buymeacoffee\.com/,/patreon\.com/,/itch\.io/,/googletagmanager\.com/,/google-analytics\.com/,/schema\.org/,/apps\.apple\.com/" \
+            --ignore-urls "/localhost/,/twitter\.com/,/x\.com/,/fonts\.gstatic\.com/,/fonts\.googleapis\.com/,/discord\.gg/,/github\.com/,/icube-app\.com/,/icube-emu\.com/,/testflight\.apple\.com/,/buymeacoffee\.com/,/patreon\.com/,/itch\.io/,/googletagmanager\.com/,/google-analytics\.com/,/schema\.org/,/apps\.apple\.com/" \
             --ignore-status-codes "0,429,999,403" \
             --ignore-files "/404\.html/" \
             2>&1 | tee htmlproofer-output.txt
