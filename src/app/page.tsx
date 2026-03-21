@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import iphone1 from '@/images/screenshots/ios/iphone1-library.jpg';
 import iphone2 from '@/images/screenshots/ios/iphone2-search.jpg';
-import iphone3 from '@/images/screenshots/ios/iphone3-emu.png';
+import iphone3 from '@/images/screenshots/ios/iphone3-emu.webp';
 import ipad1 from '@/images/screenshots/ipad/ipad1-library.jpg';
 import ipad2 from '@/images/screenshots/ipad/ipad2-search.jpg';
 
@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 import DownloadSection from '@/components/DownloadSection';
 import SocialButton, { DiscordIcon, XIcon, BmcIcon, PatreonIcon } from '@/components/SocialButton';
 import Features from '@/components/Features';
-import tvos1 from '@/images/screenshots/tvos/tvos-pause.png';
-import tvos2 from '@/images/screenshots/tvos/tvos-settings.png';
-import tvos3 from '@/images/screenshots/tvos/tvos-sources.png';
+import tvos1 from '@/images/screenshots/tvos/tvos-pause.webp';
+import tvos2 from '@/images/screenshots/tvos/tvos-settings.webp';
+import tvos3 from '@/images/screenshots/tvos/tvos-sources.webp';
 
 export default function Home() {
   return (

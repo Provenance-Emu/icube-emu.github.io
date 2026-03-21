@@ -237,7 +237,10 @@ jobs:
           echo "| Best Practices | ${B:-–} | $(score_icon $B 80) |" >> $GITHUB_STEP_SUMMARY
           echo "| SEO            | ${S:-–} | $(score_icon $S 90) |" >> $GITHUB_STEP_SUMMARY
           URL="${{ steps.scores.outputs.report_url }}"
-          [ -n "$URL" ] && echo "" >> $GITHUB_STEP_SUMMARY && echo "[View full Lighthouse report]($URL)" >> $GITHUB_STEP_SUMMARY
+          if [ -n "$URL" ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "[View full Lighthouse report]($URL)" >> $GITHUB_STEP_SUMMARY
+          fi
 
   # ──────────────────────────────────────────────────────────
   # Security Scan — main / schedule / dispatch only
