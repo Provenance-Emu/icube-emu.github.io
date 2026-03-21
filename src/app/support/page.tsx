@@ -37,7 +37,7 @@ export default function Support() {
                   to install the app on your iOS/iPadOS device. To install on your tvOS device, use{' '}
                   <a href="https://sideloadly.io" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Sideloadly</a>{' '}
                   . To enable JIT on iOS/iPadOS, we recommend using{' '}
-                  <a href="https://apps.apple.com/us/app/stikdebug/id6744045754" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">StikDebug</a>.
+                  <a href="https://github.com/StephenDev0/StikDebug" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">StikDebug</a>.
                 </p>
               </div>
 
