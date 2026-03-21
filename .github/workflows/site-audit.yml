@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths-ignore:
-      - 'public/status.json'   # Prevent loop when this workflow commits audit results
+      - 'public/site-status.json'   # Prevent loop when this workflow commits audit results
   pull_request:
   schedule:
     - cron: '0 7 * * 1'       # Every Monday at 7am UTC
@@ -312,7 +312,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate public/status.json
+      - name: Generate public/site-status.json
         env:
           PERF:        ${{ needs.lighthouse.outputs.performance }}
           A11Y:        ${{ needs.lighthouse.outputs.accessibility }}
@@ -354,7 +354,7 @@ jobs:
                   "grade": os.environ.get("SSL_GRADE", "N/A") or "N/A"
               },
           }
-          with open("public/status.json", "w") as f:
+          with open("public/site-status.json", "w") as f:
               json.dump(data, f, indent=2)
           print(json.dumps(data, indent=2))
           PYEOF
@@ -363,11 +363,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          cp public/status.json /tmp/status_generated.json
+          cp public/site-status.json /tmp/status_generated.json
           git fetch origin main
           git reset --hard origin/main
-          cp /tmp/status_generated.json public/status.json
-          git add public/status.json
+          cp /tmp/status_generated.json public/site-status.json
+          git add public/site-status.json
           git diff --staged --quiet || git commit -m "chore: update site audit status"
           git push
 

@@ -52,7 +52,7 @@ export default function StatusDashboard() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch('/status.json')
+    fetch('/site-status.json')
       .then(r => r.json())
       .then(setData)
       .catch(() => setError(true));
