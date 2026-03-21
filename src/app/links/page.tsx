@@ -93,6 +93,7 @@ export default function Links() {
 
             <div className="grid md:grid-cols-3 gap-4">
               <a href="https://x.com/ProvenanceApp"
+                  target="_blank" rel="noopener noreferrer"
                   className="flex items-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors">
                 <div className="text-2xl mr-4">🐦</div>
                 <div>
@@ -102,6 +103,7 @@ export default function Links() {
               </a>
 
               <a href="https://reddit.com/r/EmulationOniOS"
+                  target="_blank" rel="noopener noreferrer"
                   className="flex items-center p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-900/30 transition-colors">
                 <div className="text-2xl mr-4">📱</div>
                 <div>
@@ -111,6 +113,7 @@ export default function Links() {
               </a>
 
               <a href="https://discord.com/invite/4TK7PU5"
+                  target="_blank" rel="noopener noreferrer"
                   className="flex items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
                 <div className="text-2xl mr-4">💬</div>
                 <div>
