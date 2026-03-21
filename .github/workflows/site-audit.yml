@@ -42,9 +42,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Generate versioned IPAs
-        run: node scripts/generate-versioned-ipas.js
-
       - name: Build site
         run: npm run build
 
