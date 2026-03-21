@@ -267,11 +267,14 @@ jobs:
       - name: SSL Labs
         id: ssl
         run: |
-          curl -s "https://api.ssllabs.com/api/v3/analyze?host=icube-emu.com&startNew=on&publish=off" > /dev/null
+          # Use fromCache=on so pushes return quickly from cache (avoids 5-min fresh scan).
+          # maxAge=24 means accept results up to 24 hours old. Fresh scans happen on the
+          # weekly schedule or when the cache is cold.
+          curl -s "https://api.ssllabs.com/api/v3/analyze?host=icube-emu.com&fromCache=on&maxAge=24&publish=off" > /dev/null
           GRADE="N/A"
-          for i in {1..15}; do
-            sleep 20
-            RESULT=$(curl -s "https://api.ssllabs.com/api/v3/analyze?host=icube-emu.com&publish=off")
+          for i in {1..24}; do
+            sleep 15
+            RESULT=$(curl -s "https://api.ssllabs.com/api/v3/analyze?host=icube-emu.com&fromCache=on&maxAge=24&publish=off")
             STATUS=$(echo "$RESULT" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('status',''))" 2>/dev/null || echo "")
             echo "SSL Labs status: $STATUS (attempt $i)"
             if [ "$STATUS" = "READY" ]; then
