@@ -38,7 +38,7 @@ export default function TestFlightGate() {
   if (checking) {
     return (
       <main className="min-h-screen container mx-auto px-4 py-12">
-        <div className="mx-auto max-w-2xl animate-pulse text-center text-muted-foreground">Loading…</div>
+        <div className="mx-auto max-w-2xl animate-pulse text-center text-gray-600 dark:text-gray-400">Loading…</div>
       </main>
     );
   }
@@ -47,16 +47,16 @@ export default function TestFlightGate() {
     <main className="min-h-screen container mx-auto px-4 py-12">
       <div className="mx-auto max-w-2xl space-y-6">
         <header className="space-y-2">
-          <h1 className="text-3xl font-semibold tracking-tight">Join the iCube TestFlight</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">Join the iCube TestFlight</h1>
+          <p className="text-gray-600 dark:text-gray-400">
             Get early access to iCube builds via Apple TestFlight. Seats may be limited.
           </p>
         </header>
 
         {!gatePassed ? (
-          <section className="rounded-lg border p-6 shadow-sm bg-background/60 backdrop-blur">
-            <h2 className="text-xl font-medium mb-2">Help support the project</h2>
-            <p className="text-sm text-muted-foreground mb-4">
+          <section className="rounded-lg border border-gray-200 dark:border-gray-700 p-6 shadow-sm bg-white dark:bg-gray-800">
+            <h2 className="text-xl font-medium mb-2 text-gray-900 dark:text-white">Help support the project</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
               Please follow <a href={TWITTER_URL} target="_blank" rel="noreferrer noopener" className="underline underline-offset-4">@provenanceapp</a> on X (Twitter) to stay updated on releases and development. Once followed, click “I followed” below. If you prefer not to follow, you can still proceed.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -71,23 +71,23 @@ export default function TestFlightGate() {
               <button
                 type="button"
                 onClick={() => markPassed("follow")}
-                className="inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent transition"
+                className="inline-flex items-center justify-center rounded-md border border-gray-300 dark:border-gray-600 px-4 py-2 text-sm font-medium text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition"
               >
                 I followed
               </button>
               <button
                 type="button"
                 onClick={() => markPassed("skip")}
-                className="inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent transition"
+                className="inline-flex items-center justify-center rounded-md border border-gray-300 dark:border-gray-600 px-4 py-2 text-sm font-medium text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition"
               >
                 Proceed without following
               </button>
             </div>
           </section>
         ) : (
-          <section className="rounded-lg border p-6 shadow-sm bg-background/60 backdrop-blur">
-            <h2 className="text-xl font-medium mb-2">You’re in</h2>
-            <p className="text-sm text-muted-foreground mb-4">
+          <section className="rounded-lg border border-gray-200 dark:border-gray-700 p-6 shadow-sm bg-white dark:bg-gray-800">
+            <h2 className="text-xl font-medium mb-2 text-gray-900 dark:text-white">You’re in</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
               Click below to open the TestFlight invite. If the build is full, try again later.
             </p>
             <div className="flex gap-3">
@@ -101,7 +101,7 @@ export default function TestFlightGate() {
               </a>
               <Link
                 href="/"
-                className="inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent transition"
+                className="inline-flex items-center justify-center rounded-md border border-gray-300 dark:border-gray-600 px-4 py-2 text-sm font-medium text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition"
               >
                 Go home
               </Link>
@@ -109,15 +109,15 @@ export default function TestFlightGate() {
           </section>
         )}
 
-        <section className="text-xs text-muted-foreground">
+        <section className="text-xs text-gray-600 dark:text-gray-400">
           <p>
             Note: Following is optional and not required for access. Your choice is stored locally in your browser.
           </p>
         </section>
 
-        <section className="rounded-lg border p-6 shadow-sm bg-background/60 backdrop-blur">
+        <section className="rounded-lg border border-gray-200 dark:border-gray-700 p-6 shadow-sm bg-white dark:bg-gray-800">
           <h2 className="text-xl font-medium mb-2">Support Development</h2>
-          <p className="text-sm text-muted-foreground mb-4">
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
             If you find iCube helpful, consider supporting ongoing development. Thank you!
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 justify-items-start">
