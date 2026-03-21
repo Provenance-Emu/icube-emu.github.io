@@ -177,7 +177,7 @@ export default function Home() {
           </h2>
           <Features compact />
           <div className="text-center mt-8">
-            <a href="/features" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold">See all features →</a>
+            <a href="/features/" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold">See all features →</a>
           </div>
         </div>
       </section>

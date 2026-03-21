@@ -23,7 +23,7 @@ export default function NotFound() {
             Go Home
           </Link>
           <Link
-            href="/downloads"
+            href="/downloads/"
             className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white px-6 py-3 rounded-lg font-semibold transition-colors"
           >
             Downloads
