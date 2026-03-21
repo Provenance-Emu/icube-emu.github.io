@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import path from 'path';
+import Link from 'next/link';
 import { parseBuilds } from '@/lib/buildParser';
 
 export const metadata: Metadata = {
@@ -6,8 +8,6 @@ export const metadata: Metadata = {
   description: 'Download the latest iCube IPA for iOS and tvOS. Add the AltStore or SideStore source for easy installation and automatic updates.',
   alternates: { canonical: 'https://icube-emu.com/downloads/' },
 };
-import path from 'path';
-import Link from 'next/link';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600;
