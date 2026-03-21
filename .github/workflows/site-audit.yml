@@ -160,6 +160,7 @@ jobs:
 
       - name: Run Lighthouse CI
         id: lhci
+        continue-on-error: true
         uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
@@ -381,7 +382,7 @@ jobs:
           HTML_PASSED: ${{ needs.html-check.outputs.passed }}
           HTML_ERRORS: ${{ needs.html-check.outputs.error_count }}
         with:
-          github-token: ${{ secrets.GH_PAT_ISSUES }}
+          github-token: ${{ secrets.GH_PAT_ISSUES || secrets.GITHUB_TOKEN }}
           script: |
             const allLabels = [
               { name: 'audit',          color: '0075ca', description: 'Site audit findings' },

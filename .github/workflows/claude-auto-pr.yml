@@ -24,7 +24,7 @@ jobs:
     steps:
       - name: Enable auto-merge in repo settings
         env:
-          GH_TOKEN: ${{ secrets.GH_PAT_ISSUES }}
+          GH_TOKEN: ${{ secrets.GH_PAT_ISSUES || secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         run: |
           gh api repos/$REPO -X PATCH -f allow_auto_merge=true 2>/dev/null || true
@@ -36,7 +36,7 @@ jobs:
 
       - name: Check for existing PR / create fallback
         env:
-          GH_TOKEN: ${{ secrets.GH_PAT_ISSUES }}
+          GH_TOKEN: ${{ secrets.GH_PAT_ISSUES || secrets.GITHUB_TOKEN }}
           BRANCH: ${{ github.ref_name }}
           REPO: ${{ github.repository }}
           PR_BODY: |
