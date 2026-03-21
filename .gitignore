@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# generated versioned IPAs (produced by prebuild script)
+/public/builds-versioned/
+
+# Claude Code internal files
+.claude/
