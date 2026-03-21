@@ -17,7 +17,7 @@ const ItchIoEmbed: React.FC<ItchIoEmbedProps> = ({ itchId, linkColor = '#5b96fa'
       src={src}
       width={552}
       height={167}
-      frameBorder={0}
+      style={{ border: 0 }}
       className={className}
       loading="lazy"
     />
