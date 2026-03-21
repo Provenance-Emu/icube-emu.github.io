@@ -1,0 +1,541 @@
+name: Site Audit
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'public/status.json'   # Prevent loop when this workflow commits audit results
+  pull_request:
+  schedule:
+    - cron: '0 7 * * 1'       # Every Monday at 7am UTC
+  workflow_dispatch:
+
+concurrency:
+  group: site-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+
+  # ──────────────────────────────────────────────────────────
+  # HTML & Link Check — runs on every trigger
+  # ──────────────────────────────────────────────────────────
+  html-check:
+    name: HTML & Link Check
+    runs-on: ubuntu-latest
+    outputs:
+      passed: ${{ steps.result.outputs.passed }}
+      error_count: ${{ steps.result.outputs.error_count }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate versioned IPAs
+        run: node scripts/generate-versioned-ipas.js
+
+      - name: Build site
+        run: npm run build
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+
+      - name: Install htmlproofer
+        run: gem install html-proofer
+
+      - name: Run htmlproofer
+        id: htmlproofer
+        continue-on-error: true
+        run: |
+          htmlproofer ./out \
+            --checks Links,Images,Scripts,OpenGraph \
+            --ignore-urls "/localhost/,/twitter\.com/,/x\.com/,/fonts\.gstatic\.com/,/fonts\.googleapis\.com/,/discord\.gg/,/api\.github\.com/,/github\.com\/login/,/icube-app\.com/,/testflight\.apple\.com/,/buymeacoffee\.com/,/patreon\.com/,/itch\.io/,/googletagmanager\.com/,/google-analytics\.com/,/schema\.org/" \
+            --ignore-status-codes "0,429,999,403" \
+            --ignore-files "/404\.html/" \
+            2>&1 | tee htmlproofer-output.txt
+          echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
+
+      - name: Parse results
+        id: result
+        if: always()
+        run: |
+          if [ "${{ steps.htmlproofer.outputs.exit_code }}" = "0" ]; then
+            echo "passed=true" >> $GITHUB_OUTPUT
+            echo "error_count=0" >> $GITHUB_OUTPUT
+          else
+            COUNT=$(grep -c "^\* At" htmlproofer-output.txt 2>/dev/null | tr -d '[:space:]' || echo "0")
+            COUNT=$(printf '%d' "${COUNT:-0}" 2>/dev/null || echo "0")
+            echo "passed=false" >> $GITHUB_OUTPUT
+            printf 'error_count=%d\n' "$COUNT" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Write job summary
+        if: always()
+        run: |
+          if [ "${{ steps.htmlproofer.outputs.exit_code }}" = "0" ]; then
+            echo "## ✅ HTML & Link Check Passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## ❌ HTML & Link Check Failed" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            grep "ERROR" htmlproofer-output.txt | head -30 >> $GITHUB_STEP_SUMMARY || true
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const passed = '${{ steps.htmlproofer.outputs.exit_code }}' === '0';
+            const icon = passed ? '✅' : '❌';
+            const fs = require('fs');
+            const output = fs.readFileSync('htmlproofer-output.txt', 'utf8');
+            const errors = output.split('\n')
+              .filter(l => l.includes('ERROR') || l.includes('  *'))
+              .slice(0, 25)
+              .join('\n');
+            const details = errors
+              ? `<details><summary>Errors</summary>\n\n\`\`\`\n${errors}\n\`\`\`\n</details>`
+              : 'No broken links or HTML errors found.';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## ${icon} HTML & Link Check ${passed ? 'Passed' : 'Failed'}\n\n${details}`
+            });
+
+      - name: Upload output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: htmlproofer-output
+          path: htmlproofer-output.txt
+          retention-days: 14
+
+  # ──────────────────────────────────────────────────────────
+  # Lighthouse Audit — main / schedule / dispatch only
+  # ──────────────────────────────────────────────────────────
+  lighthouse:
+    name: Lighthouse Audit
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+    outputs:
+      performance: ${{ steps.scores.outputs.performance }}
+      accessibility: ${{ steps.scores.outputs.accessibility }}
+      best_practices: ${{ steps.scores.outputs.best_practices }}
+      seo: ${{ steps.scores.outputs.seo }}
+      report_url: ${{ steps.scores.outputs.report_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Wait for CDN to serve this commit
+        if: github.event_name == 'push'
+        run: |
+          EXPECTED="${{ github.sha }}"
+          echo "Polling https://icube-app.com/build-sha.txt for commit $EXPECTED"
+          for i in $(seq 1 30); do
+            LIVE=$(curl -sf https://icube-app.com/build-sha.txt 2>/dev/null | tr -d '[:space:]' || echo "")
+            if [ "$LIVE" = "$EXPECTED" ]; then
+              echo "✅ CDN is serving commit $EXPECTED (attempt $i)"
+              exit 0
+            fi
+            echo "Attempt $i/30: live='$LIVE', want='$EXPECTED' — retrying in 20s"
+            sleep 20
+          done
+          echo "⚠️ Timed out after 10 min — proceeding with current live version"
+
+      - name: Run Lighthouse CI
+        id: lhci
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://icube-app.com
+            https://icube-app.com/features/
+            https://icube-app.com/downloads/
+          configPath: .lighthouserc.yml
+          temporaryPublicStorage: true
+
+      - name: Extract scores
+        id: scores
+        run: |
+          RESULTS_PATH="${{ steps.lhci.outputs.resultsPath }}"
+          SEARCH_DIR="${RESULTS_PATH:-.lighthouseci}"
+          if [ -z "$(find "$SEARCH_DIR" -name "lhr-*.json" 2>/dev/null | head -1)" ]; then
+            SEARCH_DIR="."
+          fi
+          REPORT=""
+          for f in $(find "$SEARCH_DIR" -maxdepth 6 -name "lhr-*.json" 2>/dev/null); do
+            URL_IN_LHR=$(jq -r '.requestedUrl // .finalUrl // ""' "$f" 2>/dev/null)
+            if [[ "$URL_IN_LHR" == "https://icube-app.com" || "$URL_IN_LHR" == "https://icube-app.com/" ]]; then
+              REPORT="$f"
+              break
+            fi
+          done
+          if [ -z "$REPORT" ]; then
+            REPORT=$(find "$SEARCH_DIR" -maxdepth 6 -name "lhr-*.json" 2>/dev/null | head -1)
+          fi
+          if [ -z "$REPORT" ]; then
+            echo "No LHR file found, using zeros"
+            echo "performance=0"    >> $GITHUB_OUTPUT
+            echo "accessibility=0"  >> $GITHUB_OUTPUT
+            echo "best_practices=0" >> $GITHUB_OUTPUT
+            echo "seo=0"            >> $GITHUB_OUTPUT
+            echo "report_url="      >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          echo "Using LHR: $REPORT ($(jq -r '.requestedUrl' "$REPORT" 2>/dev/null))"
+          PERF=$(jq '(.categories.performance.score    // 0) * 100 | round' < "$REPORT")
+          A11Y=$(jq '(.categories.accessibility.score  // 0) * 100 | round' < "$REPORT")
+          BP=$(jq '(."categories"."best-practices".score // 0) * 100 | round' < "$REPORT")
+          SEO=$(jq '(.categories.seo.score             // 0) * 100 | round' < "$REPORT")
+          echo "performance=$PERF"   >> $GITHUB_OUTPUT
+          echo "accessibility=$A11Y" >> $GITHUB_OUTPUT
+          echo "best_practices=$BP"  >> $GITHUB_OUTPUT
+          echo "seo=$SEO"            >> $GITHUB_OUTPUT
+          LINKS='${{ steps.lhci.outputs.links }}'
+          REPORT_URL=$(echo "$LINKS" | python3 -c "
+          import json, sys
+          try:
+            d = json.loads(sys.stdin.read())
+            for key in d:
+              if key.rstrip('/') == 'https://icube-app.com':
+                print(d[key]); sys.exit(0)
+            print(list(d.values())[0] if d else '')
+          except: print('')
+          " 2>/dev/null || echo "")
+          echo "report_url=$REPORT_URL" >> $GITHUB_OUTPUT
+
+      - name: Write job summary
+        if: always()
+        run: |
+          P="${{ steps.scores.outputs.performance }}"
+          A="${{ steps.scores.outputs.accessibility }}"
+          B="${{ steps.scores.outputs.best_practices }}"
+          S="${{ steps.scores.outputs.seo }}"
+          score_icon() { local s="${1:-0}"; [[ "$s" =~ ^[0-9]+$ ]] && [ "$s" -ge "$2" ] && echo "✅" || echo "❌"; }
+          echo "## 🔦 Lighthouse Scores (Homepage)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Category | Score | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|:---:|:---:|" >> $GITHUB_STEP_SUMMARY
+          echo "| Performance    | ${P:-–} | $(score_icon $P 70) |" >> $GITHUB_STEP_SUMMARY
+          echo "| Accessibility  | ${A:-–} | $(score_icon $A 80) |" >> $GITHUB_STEP_SUMMARY
+          echo "| Best Practices | ${B:-–} | $(score_icon $B 80) |" >> $GITHUB_STEP_SUMMARY
+          echo "| SEO            | ${S:-–} | $(score_icon $S 90) |" >> $GITHUB_STEP_SUMMARY
+          URL="${{ steps.scores.outputs.report_url }}"
+          [ -n "$URL" ] && echo "" >> $GITHUB_STEP_SUMMARY && echo "[View full Lighthouse report]($URL)" >> $GITHUB_STEP_SUMMARY
+
+  # ──────────────────────────────────────────────────────────
+  # Security Scan — main / schedule / dispatch only
+  # ──────────────────────────────────────────────────────────
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+    outputs:
+      observatory_grade: ${{ steps.observatory.outputs.grade }}
+      observatory_score: ${{ steps.observatory.outputs.score }}
+      ssl_grade: ${{ steps.ssl.outputs.grade }}
+    steps:
+      - name: Mozilla Observatory
+        id: observatory
+        run: |
+          RESULT=$(curl -s -X POST "https://observatory-api.mdn.mozilla.net/api/v2/scan?host=icube-app.com")
+          GRADE=$(echo "$RESULT" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('grade','N/A'))" 2>/dev/null || echo "N/A")
+          SCORE=$(echo "$RESULT" | python3 -c "import json,sys; d=json.load(sys.stdin); print(int(d.get('score',0)))" 2>/dev/null || echo "0")
+          echo "grade=$GRADE" >> $GITHUB_OUTPUT
+          echo "score=$SCORE" >> $GITHUB_OUTPUT
+          echo "Observatory: $GRADE ($SCORE/100)"
+
+      - name: SSL Labs
+        id: ssl
+        run: |
+          curl -s "https://api.ssllabs.com/api/v3/analyze?host=icube-app.com&startNew=on&publish=off" > /dev/null
+          GRADE="N/A"
+          for i in {1..15}; do
+            sleep 20
+            RESULT=$(curl -s "https://api.ssllabs.com/api/v3/analyze?host=icube-app.com&publish=off")
+            STATUS=$(echo "$RESULT" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('status',''))" 2>/dev/null || echo "")
+            echo "SSL Labs status: $STATUS (attempt $i)"
+            if [ "$STATUS" = "READY" ]; then
+              GRADE=$(echo "$RESULT" | python3 -c "
+          import json,sys
+          d=json.load(sys.stdin)
+          eps=d.get('endpoints',[])
+          print(eps[0].get('grade','N/A') if eps else 'N/A')
+              " 2>/dev/null || echo "N/A")
+              break
+            fi
+          done
+          echo "grade=$GRADE" >> $GITHUB_OUTPUT
+          echo "SSL Labs: $GRADE"
+
+      - name: Write job summary
+        if: always()
+        run: |
+          OBS="${{ steps.observatory.outputs.grade }}"
+          SSL="${{ steps.ssl.outputs.grade }}"
+          obs_icon() { [[ "$1" == "A+" || "$1" == "A" || "$1" == "B" ]] && echo "✅" || echo "❌"; }
+          ssl_icon() { [[ "$1" == "A+" || "$1" == "A" ]] && echo "✅" || [[ "$1" == "B" ]] && echo "⚠️" || echo "❌"; }
+          echo "## 🔒 Security Scan" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Result | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|:---:|:---:|" >> $GITHUB_STEP_SUMMARY
+          echo "| Mozilla Observatory | ${OBS:-N/A} (${{ steps.observatory.outputs.score }}/100) | $(obs_icon $OBS) |" >> $GITHUB_STEP_SUMMARY
+          echo "| SSL Labs | ${SSL:-N/A} | $(ssl_icon $SSL) |" >> $GITHUB_STEP_SUMMARY
+
+  # ──────────────────────────────────────────────────────────
+  # Update status.json + open/close issues on failures
+  # ──────────────────────────────────────────────────────────
+  update-status:
+    name: Update Status & Alert
+    runs-on: ubuntu-latest
+    needs: [html-check, lighthouse, security-scan]
+    if: github.event_name != 'pull_request' && always()
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate public/status.json
+        env:
+          PERF:        ${{ needs.lighthouse.outputs.performance }}
+          A11Y:        ${{ needs.lighthouse.outputs.accessibility }}
+          BP:          ${{ needs.lighthouse.outputs.best_practices }}
+          SEO:         ${{ needs.lighthouse.outputs.seo }}
+          REPORT_URL:  ${{ needs.lighthouse.outputs.report_url }}
+          OBS_GRADE:   ${{ needs.security-scan.outputs.observatory_grade }}
+          OBS_SCORE:   ${{ needs.security-scan.outputs.observatory_score }}
+          SSL_GRADE:   ${{ needs.security-scan.outputs.ssl_grade }}
+          HTML_PASSED: ${{ needs.html-check.outputs.passed }}
+          HTML_ERRORS: ${{ needs.html-check.outputs.error_count }}
+          RUN_URL:     ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          python3 - <<'PYEOF'
+          import json, os
+          def intval(key, default=0):
+              try: return int(os.environ.get(key, '') or default)
+              except: return default
+
+          data = {
+              "last_updated": __import__('datetime').datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
+              "run_url": os.environ.get("RUN_URL", ""),
+              "html_check": {
+                  "passed": os.environ.get("HTML_PASSED", "true") == "true",
+                  "error_count": intval("HTML_ERRORS")
+              },
+              "lighthouse": {
+                  "performance":    intval("PERF")    or None,
+                  "accessibility":  intval("A11Y")    or None,
+                  "best_practices": intval("BP")      or None,
+                  "seo":            intval("SEO")     or None,
+                  "report_url":     os.environ.get("REPORT_URL", "")
+              },
+              "observatory": {
+                  "grade": os.environ.get("OBS_GRADE", "N/A") or "N/A",
+                  "score": intval("OBS_SCORE") or None
+              },
+              "ssl": {
+                  "grade": os.environ.get("SSL_GRADE", "N/A") or "N/A"
+              },
+          }
+          with open("public/status.json", "w") as f:
+              json.dump(data, f, indent=2)
+          print(json.dumps(data, indent=2))
+          PYEOF
+
+      - name: Commit status update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          cp public/status.json /tmp/status_generated.json
+          git fetch origin main
+          git reset --hard origin/main
+          cp /tmp/status_generated.json public/status.json
+          git add public/status.json
+          git diff --staged --quiet || git commit -m "chore: update site audit status"
+          git push
+
+      - name: Open or close issues per audit check
+        uses: actions/github-script@v7
+        env:
+          PERF:        ${{ needs.lighthouse.outputs.performance }}
+          A11Y:        ${{ needs.lighthouse.outputs.accessibility }}
+          BP:          ${{ needs.lighthouse.outputs.best_practices }}
+          SEO:         ${{ needs.lighthouse.outputs.seo }}
+          REPORT_URL:  ${{ needs.lighthouse.outputs.report_url }}
+          OBS_GRADE:   ${{ needs.security-scan.outputs.observatory_grade }}
+          OBS_SCORE:   ${{ needs.security-scan.outputs.observatory_score }}
+          SSL_GRADE:   ${{ needs.security-scan.outputs.ssl_grade }}
+          HTML_PASSED: ${{ needs.html-check.outputs.passed }}
+          HTML_ERRORS: ${{ needs.html-check.outputs.error_count }}
+        with:
+          github-token: ${{ secrets.GH_PAT_ISSUES }}
+          script: |
+            const allLabels = [
+              { name: 'audit',          color: '0075ca', description: 'Site audit findings' },
+              { name: 'performance',    color: 'e4e669', description: 'Performance issue' },
+              { name: 'accessibility',  color: '7057ff', description: 'Accessibility issue' },
+              { name: 'seo',            color: '008672', description: 'SEO issue' },
+              { name: 'best-practices', color: 'ffa500', description: 'Best practices issue' },
+              { name: 'security',       color: 'd73a4a', description: 'Security issue' },
+              { name: 'html-check',     color: 'bfd4f2', description: 'HTML / link check issue' },
+            ];
+            for (const lbl of allLabels) {
+              try {
+                await github.rest.issues.createLabel({ owner: context.repo.owner, repo: context.repo.repo, ...lbl });
+              } catch (_) { /* already exists */ }
+            }
+
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const reportUrl = process.env.REPORT_URL || '';
+            const num = (k) => parseInt(process.env[k]) || 0;
+            const str = (k) => process.env[k] || 'N/A';
+            const lhLine = reportUrl ? `**[View Lighthouse Report](${reportUrl})**` : null;
+
+            const checks = [
+              {
+                labels: ['audit', 'performance'],
+                title:  '[Fix] Lighthouse performance score below threshold',
+                failing: num('PERF') > 0 && num('PERF') < 70,
+                body: [
+                  '## Lighthouse Performance Score Below Threshold',
+                  `Current score: **${num('PERF')}/100** (threshold: 70)`,
+                  lhLine,
+                  '**Common fixes:**\n- Defer or remove render-blocking JavaScript\n- Optimize and lazy-load images (use WebP, set explicit dimensions)\n- Reduce unused CSS/JS\n- Improve server response time (TTFB)\n- Use efficient cache policies',
+                  `_Auto-opened by [Site Audit](${runUrl})_`,
+                  `@claude Please fix the Lighthouse performance regression shown above.\n\n**Steps:**\n1. Review the Lighthouse report linked above\n2. Create a working branch: \`git checkout -b claude/fix-performance\`\n3. Apply the necessary code fixes\n4. Push and create a PR: \`git push -u origin HEAD && gh pr create --title "fix: improve Lighthouse performance score" --base main\`\n5. Enable auto-merge: \`gh pr merge --auto --squash\``,
+                ].filter(Boolean).join('\n\n'),
+              },
+              {
+                labels: ['audit', 'accessibility'],
+                title:  '[Fix] Lighthouse accessibility score below threshold',
+                failing: num('A11Y') > 0 && num('A11Y') < 80,
+                body: [
+                  '## Lighthouse Accessibility Score Below Threshold',
+                  `Current score: **${num('A11Y')}/100** (threshold: 80)`,
+                  lhLine,
+                  'Check the report for issues such as missing alt text, low colour contrast, or missing ARIA labels.',
+                  `_Auto-opened by [Site Audit](${runUrl})_`,
+                  `@claude Please fix the Lighthouse accessibility issues shown above.\n\n**Steps:**\n1. Review the Lighthouse report linked above\n2. Create a working branch: \`git checkout -b claude/fix-accessibility\`\n3. Apply the necessary code fixes\n4. Push and create a PR: \`git push -u origin HEAD && gh pr create --title "fix: improve Lighthouse accessibility score" --base main\`\n5. Enable auto-merge: \`gh pr merge --auto --squash\``,
+                ].filter(Boolean).join('\n\n'),
+              },
+              {
+                labels: ['audit', 'best-practices'],
+                title:  '[Fix] Lighthouse best-practices score below threshold',
+                failing: num('BP') > 0 && num('BP') < 80,
+                body: [
+                  '## Lighthouse Best Practices Score Below Threshold',
+                  `Current score: **${num('BP')}/100** (threshold: 80)`,
+                  lhLine,
+                  'Check the report for deprecated APIs, mixed-content requests, or missing HTTPS.',
+                  `_Auto-opened by [Site Audit](${runUrl})_`,
+                  `@claude Please fix the Lighthouse best-practices issues shown above.\n\n**Steps:**\n1. Review the Lighthouse report linked above\n2. Create a working branch: \`git checkout -b claude/fix-best-practices\`\n3. Apply the necessary code fixes\n4. Push and create a PR: \`git push -u origin HEAD && gh pr create --title "fix: improve Lighthouse best-practices score" --base main\`\n5. Enable auto-merge: \`gh pr merge --auto --squash\``,
+                ].filter(Boolean).join('\n\n'),
+              },
+              {
+                labels: ['audit', 'seo'],
+                title:  '[Fix] Lighthouse SEO score below threshold',
+                failing: num('SEO') > 0 && num('SEO') < 90,
+                body: [
+                  '## Lighthouse SEO Score Below Threshold',
+                  `Current score: **${num('SEO')}/100** (threshold: 90)`,
+                  lhLine,
+                  'Check the report for missing meta descriptions, invalid structured data, or crawlability issues.',
+                  `_Auto-opened by [Site Audit](${runUrl})_`,
+                  `@claude Please fix the Lighthouse SEO issues shown above.\n\n**Steps:**\n1. Review the Lighthouse report linked above\n2. Create a working branch: \`git checkout -b claude/fix-seo\`\n3. Apply the necessary code fixes\n4. Push and create a PR: \`git push -u origin HEAD && gh pr create --title "fix: improve Lighthouse SEO score" --base main\`\n5. Enable auto-merge: \`gh pr merge --auto --squash\``,
+                ].filter(Boolean).join('\n\n'),
+              },
+              {
+                labels: ['audit', 'html-check'],
+                title:  '[Fix] HTML / link check failures',
+                failing: process.env.HTML_PASSED === 'false' && num('HTML_ERRORS') > 0,
+                body: [
+                  '## HTML & Link Check Failures',
+                  `Found **${num('HTML_ERRORS')} error(s)**.`,
+                  `Download the \`htmlproofer-output\` artifact from the [audit run](${runUrl}) for the full list of broken links and HTML errors.`,
+                  `_Auto-opened by [Site Audit](${runUrl})_`,
+                  `@claude Please fix the HTML check failures shown above.\n\n**Steps:**\n1. Download the error list: \`gh run download ${context.runId} --name htmlproofer-output --repo ${context.repo.owner}/${context.repo.repo} --dir /tmp/htmlproofer\`\n2. Review the errors (common causes: broken internal links, missing alt attributes on images)\n3. Create a working branch: \`git checkout -b claude/fix-html-errors\`\n4. Apply the necessary code fixes\n5. Push and create a PR: \`git push -u origin HEAD && gh pr create --title "fix: resolve HTML and link check failures" --base main\`\n6. Enable auto-merge: \`gh pr merge --auto --squash\``,
+                ].join('\n\n'),
+              },
+              {
+                labels: ['audit', 'security'],
+                title:  '[Fix] SSL/TLS grade below A',
+                failing: !['A+', 'A', 'N/A'].includes(str('SSL_GRADE')),
+                body: [
+                  '## SSL/TLS Grade Below A',
+                  `Current SSL Labs grade: **${str('SSL_GRADE')}**`,
+                  '[View the full SSL Labs report](https://www.ssllabs.com/ssltest/analyze.html?d=icube-app.com)',
+                  '**Common fixes:**\n- Disable TLS 1.0 / 1.1\n- Add an HSTS header (`Strict-Transport-Security`)\n- Resolve certificate chain issues',
+                  `_Auto-opened by [Site Audit](${runUrl})_`,
+                ].join('\n\n'),
+              },
+              {
+                labels: ['audit', 'security'],
+                title:  '[Fix] Mozilla Observatory security score below grade C',
+                // GitHub Pages cannot set HSTS or X-Frame-Options HTTP headers,
+                // so grade B/A is not achievable without Cloudflare. Alert at C (below ~55/100).
+                failing: !['A+', 'A', 'B', 'C', 'N/A'].includes(str('OBS_GRADE')),
+                body: [
+                  '## Mozilla Observatory Score Below Grade C',
+                  `Current grade: **${str('OBS_GRADE')}** (${num('OBS_SCORE')}/100)`,
+                  '[View the full Observatory report](https://observatory.mozilla.org/analyze/icube-app.com)',
+                  '**Fixable via `<meta>` tag (implemented in `src/app/layout.tsx`):**\n- Content Security Policy\n- Referrer-Policy',
+                  '**Requires HTTP headers (not possible on GitHub Pages without Cloudflare):**\n- `Strict-Transport-Security` (HSTS)\n- `X-Frame-Options`\n- `X-Content-Type-Options`',
+                  `_Auto-opened by [Site Audit](${runUrl})_`,
+                  '> **⚠️ GitHub Pages limitation:** HSTS (`Strict-Transport-Security`) and `X-Frame-Options` require HTTP response headers which GitHub Pages cannot set. The maximum achievable score on GitHub Pages is ~55/100 (grade C). To reach A/B, route traffic through Cloudflare (free plan) and add headers via a Cloudflare Transform Rule.',
+                  `@claude Please check the current Observatory score and investigate what can still be improved. Some headers can be set via \`<meta>\` tags (CSP, referrer-policy). Check \`src/app/layout.tsx\` for the existing CSP meta tag and update it if needed.\n\n**Steps:**\n1. Review [the report](https://observatory.mozilla.org/analyze/icube-app.com) — identify any remaining fixable issues\n2. Create a working branch: \`git checkout -b claude/fix-security-headers\`\n3. Update the CSP in \`src/app/layout.tsx\` if any issues are fixable via meta tag\n4. Push and create a PR: \`git push -u origin HEAD && gh pr create --title "fix: improve security headers" --base main\`\n5. Enable auto-merge: \`gh pr merge --auto --squash\``,
+                ].join('\n\n'),
+              },
+            ];
+
+            const openIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'audit',
+              state: 'open',
+              per_page: 100,
+            });
+
+            for (const check of checks) {
+              const existing = openIssues.find(iss => iss.title === check.title);
+              if (check.failing) {
+                if (existing) {
+                  console.log(`Already open: ${check.title}`);
+                } else {
+                  console.log(`Opening: ${check.title}`);
+                  await github.rest.issues.create({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    title: check.title,
+                    body:  check.body,
+                    labels: check.labels,
+                  });
+                }
+              } else if (existing) {
+                console.log(`Auto-closing resolved: ${check.title}`);
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: existing.number,
+                  body: `✅ This check is now passing. Auto-closing.\n\n_Resolved by [Site Audit](${runUrl})_`,
+                });
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: existing.number,
+                  state: 'closed',
+                });
+              }
+            }
