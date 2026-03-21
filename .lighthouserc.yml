@@ -2,7 +2,7 @@ ci:
   collect:
     numberOfRuns: 1
     settings:
-      chromeFlags: '--no-sandbox --disable-dev-shm-usage'
+      chromeFlags: '--no-sandbox --disable-dev-shm-usage --disable-gpu --ignore-certificate-errors'
   assert:
     preset: lighthouse:no-pwa
     assertions:
