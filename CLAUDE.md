@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a **Next.js static website** for iCube, a GameCube/Wii emulator for iOS/tvOS. It serves as a marketing site and IPA distribution platform compatible with AltStore/SideStore.
 
+**Production domain: `https://icube-emu.com`** — this is the canonical domain for all absolute URLs, metadata, Open Graph, AltStore/SideStore feeds, and CI workflows. Never use `icube-app.com` — that domain does not exist.
+
 ## Commands
 
 ```bash
