@@ -1,16 +1,16 @@
 {
-  "last_updated": "2026-03-30T07:41:25Z",
-  "run_url": "https://github.com/Provenance-Emu/icube-emu.github.io/actions/runs/23733260636",
+  "last_updated": "2026-04-06T07:40:39Z",
+  "run_url": "https://github.com/Provenance-Emu/icube-emu.github.io/actions/runs/24023326984",
   "html_check": {
     "passed": true,
     "error_count": 0
   },
   "lighthouse": {
-    "performance": 99,
+    "performance": 91,
     "accessibility": 96,
     "best_practices": 96,
     "seo": 100,
-    "report_url": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1774856192012-13344.report.html"
+    "report_url": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1775460989054-64926.report.html"
   },
   "observatory": {
     "grade": "D",
