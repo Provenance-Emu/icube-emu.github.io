@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
-import Script from "next/script";
-import GoogleAnalytics from "@/components/GoogleAnalytics";
-
-const GA_ID = "G-R9V4MJ0BR2";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://icube-emu.com"),
@@ -25,8 +22,8 @@ export const metadata: Metadata = {
     "Apple TV emulator",
     "iPhone emulator",
   ],
-  authors: [{ name: "Provenance Emu" }],
-  creator: "Provenance Emu",
+  authors: [{ name: "Joseph Mattiello" }],
+  creator: "Joseph Mattiello",
   openGraph: {
     type: "website",
     siteName: "iCube",
@@ -86,11 +83,11 @@ export const metadata: Metadata = {
 // the CSP blocks hydration and the page renders a blank background.
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+  "script-src 'self' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https: blob:",
   "frame-src https://itch.io https://html.itch.zone https://v6p9d9t4.ssl.hwcdn.net",
-  "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://region1.analytics.google.com",
+  "connect-src 'self'",
   "font-src 'self'",
   "object-src 'none'",
   "worker-src 'none'",
@@ -111,9 +108,9 @@ const jsonLd = {
   url: "https://icube-emu.com",
   image: "https://icube-emu.com/icon-1024.webp",
   author: {
-    "@type": "Organization",
-    name: "Provenance Emu",
-    url: "https://provenance-emu.com",
+    "@type": "Person",
+    name: "Joseph Mattiello",
+    url: "https://joemattiello.dev",
   },
   offers: {
     "@type": "Offer",
@@ -133,26 +130,17 @@ export default function RootLayout({
       <head>
         <meta httpEquiv="Content-Security-Policy" content={CSP} />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://www.google-analytics.com" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body suppressHydrationWarning className="antialiased">
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script src="/gtag-init.js" strategy="afterInteractive" />
         <Navigation />
-        <GoogleAnalytics />
         <main className="min-h-screen">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );

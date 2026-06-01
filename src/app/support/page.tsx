@@ -120,9 +120,9 @@ export default function Support() {
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   Send us your questions or bug reports
                 </p>
-                <a href="mailto:support@provenance-emu.com?subject=iCube%20Support"
+                <a href="mailto:provenance.emu+icube-support@gmail.com?subject=iCube%20Support"
                    className="text-blue-600 dark:text-blue-400 hover:underline">
-                  support@provenance-emu.com
+                  provenance.emu+icube-support@gmail.com
                 </a>
               </div>
 

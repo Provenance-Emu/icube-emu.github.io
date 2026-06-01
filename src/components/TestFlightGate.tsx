@@ -4,12 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import SocialButton, { BmcIcon, PatreonIcon, VenmoIcon, ZelleIcon, OpenCollectiveIcon } from "@/components/SocialButton";
 
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-  }
-}
-
 const TESTFLIGHT_URL = "https://testflight.apple.com/join/9ZEfnyMP";
 const TWITTER_URL = "https://x.com/provenanceapp";
 const STORAGE_KEY = "icube_testflight_gate_passed";
@@ -26,12 +20,10 @@ export default function TestFlightGate() {
     setChecking(false);
   }, []);
 
-  function markPassed(method: "follow" | "skip") {
+  function markPassed(_method: "follow" | "skip") {
     try {
       window.localStorage.setItem(STORAGE_KEY, "true");
     } catch {}
-    const gtag = typeof window !== "undefined" ? window.gtag : undefined;
-    gtag?.("event", "testflight_access", { method });
     setGatePassed(true);
   }
 

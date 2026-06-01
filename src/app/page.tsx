@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import iphone1 from '@/images/screenshots/ios/iphone1-library.jpg';
 import iphone2 from '@/images/screenshots/ios/iphone2-search.jpg';
 import iphone3 from '@/images/screenshots/ios/iphone3-emu.webp';
@@ -14,6 +13,8 @@ export const metadata: Metadata = {
 import DownloadSection from '@/components/DownloadSection';
 import SocialButton, { DiscordIcon, XIcon, BmcIcon, PatreonIcon } from '@/components/SocialButton';
 import Features from '@/components/Features';
+import DeviceFrame from '@/components/DeviceFrame';
+import VideoShowcase from '@/components/VideoShowcase';
 import tvos1 from '@/images/screenshots/tvos/tvos-pause.webp';
 import tvos2 from '@/images/screenshots/tvos/tvos-settings.webp';
 import tvos3 from '@/images/screenshots/tvos/tvos-sources.webp';
@@ -25,36 +26,32 @@ export default function Home() {
       <section className="container mx-auto px-4 py-16 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-            iCube
+            i<span className="text-blue-500">Cube</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-4">
-            GameCube & Wii Emulator
+            GameCube &amp; Wii Emulator
           </p>
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
             Experience classic Nintendo GameCube and Wii games on your iOS devices and Apple TV.
             Built on the proven Dolphin emulator foundation.
           </p>
+        </div>
+      </section>
 
-          {/* App Store Button Placeholder */}
-          {/*
-            Temporarily disabled until App Store availability.
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-              <div className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs">Download on the</span>
-                </div>
-                <div className="text-lg font-semibold">App Store</div>
-              </div>
-              <div className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs">Available on</span>
-                </div>
-                <div className="text-lg font-semibold">Apple TV</div>
-              </div>
+      {/* Stats row */}
+      <section className="container mx-auto px-4 pb-12">
+        <div className="max-w-2xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {([
+            ['No JIT', 'Required'],
+            ['Dolphin', 'Foundation'],
+            ['3', 'Platforms'],
+            ['Free', 'Open Source'],
+          ] as const).map(([value, label]) => (
+            <div key={label} className="text-center py-4 px-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm">
+              <div className="text-xl font-black text-blue-600 dark:text-blue-400">{value}</div>
+              <div className="text-xs text-gray-600 dark:text-gray-500 mt-1 uppercase tracking-wide">{label}</div>
             </div>
-          */}
-
-          {/* Sideloading links moved to Download section below */}
+          ))}
         </div>
       </section>
 
@@ -87,6 +84,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Video Showcase — drop MP4 at public/video/gameplay.mp4 to activate */}
+      <VideoShowcase />
+
       {/* Screenshots Section */}
       <section className="container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
@@ -104,17 +104,7 @@ export default function Home() {
               [iphone2, 'iCube game search on iPhone'],
               [iphone3, 'iCube running a GameCube game on iPhone'],
             ] as const).map(([img, alt], idx) => (
-              <div key={`iphone-${idx}`} className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 shadow-lg">
-                <div className="rounded-lg overflow-hidden w-64 h-96">
-                  <Image
-                    src={img}
-                    alt={alt}
-                    className="h-full w-full object-cover"
-                    sizes="(max-width: 768px) 256px, 256px"
-                    priority={idx === 0}
-                  />
-                </div>
-              </div>
+              <DeviceFrame key={`iphone-${idx}`} type="iphone" src={img} alt={alt} priority={idx === 0} />
             ))}
           </div>
         </div>
@@ -129,16 +119,7 @@ export default function Home() {
               [ipad1, 'iCube game library on iPad'],
               [ipad2, 'iCube game search on iPad'],
             ] as const).map(([img, alt], idx) => (
-              <div key={`ipad-${idx}`} className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 shadow-lg">
-                <div className="rounded-lg overflow-hidden w-80 h-60">
-                  <Image
-                    src={img}
-                    alt={alt}
-                    className="h-full w-full object-cover"
-                    sizes="(max-width: 768px) 320px, 320px"
-                  />
-                </div>
-              </div>
+              <DeviceFrame key={`ipad-${idx}`} type="ipad" src={img} alt={alt} />
             ))}
           </div>
         </div>
@@ -154,16 +135,7 @@ export default function Home() {
               [tvos2, 'iCube settings on Apple TV'],
               [tvos3, 'iCube game sources on Apple TV'],
             ] as const).map(([img, alt], idx) => (
-              <div key={`appletv-${idx}`} className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 shadow-lg">
-                <div className="rounded-lg overflow-hidden w-[384px] aspect-video">
-                  <Image
-                    src={img}
-                    alt={alt}
-                    className="h-full w-full object-cover"
-                    sizes="(max-width: 768px) 384px, 384px"
-                  />
-                </div>
-              </div>
+              <DeviceFrame key={`appletv-${idx}`} type="appletv" src={img} alt={alt} />
             ))}
           </div>
         </div>
