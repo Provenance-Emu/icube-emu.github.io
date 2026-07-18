@@ -24,7 +24,7 @@
     "warp:clean-dev": "npm run clean && echo '🧹 Cache cleared!' && npm run dev"
   },
   "dependencies": {
-    "adm-zip": "^0.5.16",
+    "adm-zip": "^0.6.0",
     "bplist-creator": "^0.1.1",
     "bplist-parser": "^0.3.2",
     "next": "^15.5.18",
