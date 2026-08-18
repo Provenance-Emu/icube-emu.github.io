@@ -90,7 +90,7 @@ export default function DownloadsPage() {
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               <a
-                href="https://github.com/Provenance-Emu/iCube/releases"
+                href="https://github.com/Provenance-Emu/iCube/releases/latest"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start gap-4 p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
@@ -98,13 +98,32 @@ export default function DownloadsPage() {
                 <div className="text-3xl">📦</div>
                 <div className="flex-1">
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
-                    GitHub Releases
+                    Latest stable
                   </h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                    Download directly from GitHub with full release notes and changelogs.
+                    Tagged GitHub release with notes. Use this for daily play.
                   </p>
                   <span className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
-                    View Releases →
+                    View latest release →
+                  </span>
+                </div>
+              </a>
+              <a
+                href="https://github.com/Provenance-Emu/iCube/releases/tag/alpha"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-4 p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              >
+                <div className="text-3xl">🧪</div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                    Alpha (rolling CI)
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                    Unsigned IPA/deb from the latest successful default-branch or develop build. Replaced on every green CI run.
+                  </p>
+                  <span className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
+                    Download alpha →
                   </span>
                 </div>
               </a>

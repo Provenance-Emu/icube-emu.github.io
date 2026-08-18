@@ -176,11 +176,28 @@ function compareVersions(a: string, b: string): number {
 /**
  * Generate AltStore/SideStore compatible app metadata
  */
+/** Rolling CI IPA hosted on the iCube GitHub `alpha` prerelease. */
+export const GITHUB_ALPHA_IPA_URL =
+  'https://github.com/Provenance-Emu/iCube/releases/download/alpha/Non-Jailbroken.ipa';
+
 export function generateAltStoreApp(
   baseURL: string,
   buildsDir: string
 ): AppMetadata {
-  const versions = parseBuilds(buildsDir, baseURL);
+  const hosted = parseBuilds(buildsDir, baseURL);
+  const githubAlpha: BuildVersion = {
+    version: 'alpha',
+    buildVersion: 'alpha',
+    date: new Date().toISOString(),
+    localizedDescription:
+      'Rolling CI alpha from GitHub Releases. Unsigned; replaced on every successful default-branch or develop build.',
+    downloadURL: GITHUB_ALPHA_IPA_URL,
+    size: 1,
+    minOSVersion: '17.0',
+    platform: 'iOS',
+    isBeta: true,
+  };
+  const versions = [githubAlpha, ...hosted];
 
   return {
     name: 'iCube',
