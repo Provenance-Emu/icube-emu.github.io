@@ -64,13 +64,17 @@ jobs:
       - name: Commit and push
         run: |
           set -euo pipefail
-          if git diff --quiet && git diff --cached --quiet; then
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Stage FIRST, then test the index. The IPA and .alpha-sha are new files
+          # on the first run, and `git diff` reports only tracked changes — so
+          # checking before staging saw a clean tree and skipped the commit even
+          # though a 90 MB IPA had just been written.
+          git add public/builds-versioned/1.0.0/iOS
+          if git diff --cached --quiet; then
             echo "No change — feed is current."
             exit 0
           fi
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/builds-versioned/1.0.0/iOS
           git commit \
             -m "chore(feed): sync latest iCube alpha build" \
             -m "Pushing to main triggers deploy.yml, which regenerates /api/altstore so the AltStore and SideStore feeds advertise this build."
