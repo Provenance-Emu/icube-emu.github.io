@@ -4,6 +4,10 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  # iCube's build.yml sends this after publishing an alpha, so a new build
+  # reaches the feed without waiting for a site commit.
+  repository_dispatch:
+    types: [companion-release]
 
 permissions:
   contents: read
@@ -33,6 +37,36 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
+      # The feed is generated at build time: prebuild
+      # (scripts/generate-versioned-ipas.js) reads public/builds/ and emits
+      # public/builds-versioned/, which buildParser scans for /api/altstore.
+      #
+      # public/builds/ only holds the hand-added beta IPAs, so the feed advertised
+      # the Aug 2026 betas indefinitely while iCube CI published newer alphas to
+      # GitHub Releases that never reached the site. Fetch the current alpha into
+      # the working tree instead of committing it: builds-versioned/ is already
+      # gitignored as generated output, and committing a 90 MB IPA per build would
+      # grow a 244 MB repo with no LFS for artifacts that are reproducible.
+      #
+      # Directory must be exactly "iOS": buildParser matches
+      # /^(iOS|tvOS)(?:-Beta(\d+))?$/i and silently skips anything else.
+      # iOS only for now — the alpha release carries no tvOS artifact.
+      - name: Fetch latest iCube alpha build
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          DEST="public/builds/1.0.0/iOS"
+          mkdir -p "$DEST"
+          if gh release download alpha --repo Provenance-Emu/iCube \
+               --pattern 'Non-Jailbroken.ipa' --output "$DEST/iCube.ipa" --clobber; then
+            [ -s "$DEST/iCube.ipa" ] || { echo "::warning::alpha IPA was empty — feed keeps the committed betas"; rm -f "$DEST/iCube.ipa"; exit 0; }
+            echo "Fetched alpha -> $DEST/iCube.ipa ($(stat -c%s "$DEST/iCube.ipa" 2>/dev/null || stat -f%z "$DEST/iCube.ipa") bytes)"
+          else
+            echo "::warning::could not download the alpha release — feed keeps the committed betas"
+          fi
+
       - name: Build with Next.js
         run: npm run build
         env:
