@@ -8,6 +8,13 @@ on:
   # reaches the feed without waiting for a site commit.
   repository_dispatch:
     types: [companion-release]
+  # Fallback for when the dispatch above never arrives: iCube's build sends it
+  # with FEED_DISPATCH_TOKEN, a fine-grained PAT that (as of Sept 2026) is not
+  # scoped to this repo, so it fails with HTTP 403 and the site keeps serving a
+  # stale IPA. The hourly `check` job compares the alpha asset's updated_at
+  # with the stamp the last deploy published and redeploys only on change.
+  schedule:
+    - cron: '20 * * * *'
 
 permissions:
   contents: read
@@ -19,7 +26,35 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Scheduled runs only. Cheap (two HTTP calls) so it can run every hour.
+  check:
+    name: Alpha changed since last deploy?
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.cmp.outputs.changed }}
+    steps:
+      - id: cmp
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -uo pipefail
+          latest=$(gh api repos/Provenance-Emu/iCube/releases/tags/alpha \
+            --jq '.assets[] | select(.name=="Non-Jailbroken.ipa") | .updated_at' 2>/dev/null || true)
+          deployed=$(curl -fsS --max-time 20 "https://icube-emu.com/alpha-stamp.txt?nocache=$(date +%s)" || echo none)
+          echo "latest=${latest:-<api failed>}  deployed=${deployed}"
+          # An API failure must not trigger a redeploy — nothing to deploy from.
+          if [ -z "$latest" ] || [ "$latest" = "$deployed" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
   build:
+    needs: check
+    # `check` is skipped on every non-schedule event, and a skipped dependency
+    # would skip us too without !cancelled(). On schedule, build only on change.
+    if: ${{ !cancelled() && (github.event_name != 'schedule' || needs.check.outputs.changed == 'true') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -63,6 +98,11 @@ jobs:
                --pattern 'Non-Jailbroken.ipa' --output "$DEST/iCube.ipa" --clobber; then
             [ -s "$DEST/iCube.ipa" ] || { echo "::warning::alpha IPA was empty — feed keeps the committed betas"; rm -f "$DEST/iCube.ipa"; exit 0; }
             echo "Fetched alpha -> $DEST/iCube.ipa ($(stat -c%s "$DEST/iCube.ipa" 2>/dev/null || stat -f%z "$DEST/iCube.ipa") bytes)"
+            # Published as /alpha-stamp.txt so the hourly `check` job can tell
+            # whether the deployed IPA is already the current one.
+            STAMP=$(gh api repos/Provenance-Emu/iCube/releases/tags/alpha \
+              --jq '.assets[] | select(.name=="Non-Jailbroken.ipa") | .updated_at' 2>/dev/null || true)
+            echo "ALPHA_STAMP=${STAMP:-unknown}" >> "$GITHUB_ENV"
           else
             echo "::warning::could not download the alpha release — feed keeps the committed betas"
           fi
@@ -72,8 +112,10 @@ jobs:
         env:
           NEXT_PUBLIC_BASE_URL: https://icube-emu.com
 
-      - name: Write build SHA
-        run: echo "${{ github.sha }}" > ./out/build-sha.txt
+      - name: Write build SHA and alpha stamp
+        run: |
+          echo "${{ github.sha }}" > ./out/build-sha.txt
+          echo "${ALPHA_STAMP:-unknown}" > ./out/alpha-stamp.txt
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
