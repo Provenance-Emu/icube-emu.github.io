@@ -1,7 +1,15 @@
 # Provenance family sites: refresh, cross-link, cross-SEO plan
 
 Written 2026-09-07. Covers icube-emu.com, ifly-emu.com, provenance-emu.com and
-jaguar.provenance-emu.com. Status: DRAFT, awaiting approval before any code changes.
+jaguar.provenance-emu.com.
+
+Status (2026-09-08): Phase 1 done and live on iCube and iFly. Phase 2 done and live on iCube, iFly
+and Provenance; the Jaguar footer/publisher change is open as libretro/virtualjaguar-libretro#751
+(jaguar.provenance-emu.com is built hourly by the Provenance-Emu fork's "Publish site" workflow from
+libretro's `develop`, so it goes live once that PR merges). Decisions since the draft: every app has
+a Plus tier on the App Store build only; sideloads and self-builds unlock everything. Feeds stay
+separate for now; a combined-feed migration needs a real 301, which GitHub Pages cannot serve for
+JSON, so the /sources/ pages point people at the combined provenance-emu.com/apps.json instead.
 
 ## 1. What the survey found
 
