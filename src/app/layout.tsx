@@ -112,6 +112,12 @@ const jsonLd = {
     name: "Joseph Mattiello",
     url: "https://joemattiello.dev",
   },
+  publisher: {
+    "@type": "Organization",
+    "@id": "https://provenance-emu.com/#organization",
+    name: "Provenance",
+    url: "https://provenance-emu.com/",
+  },
   offers: {
     "@type": "Offer",
     price: "0",
