@@ -78,6 +78,13 @@ export default function DownloadsPage() {
                 View JSON Feed
               </Link>
             </div>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
+              Prefer one feed for every Provenance app?{' '}
+              <Link href="/sources/" className="text-blue-600 dark:text-blue-400 hover:underline">See all sideload sources.</Link>
+            </p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+              Sideloaded and self-built copies include every Plus feature at no cost. Plus purchases apply to the App Store build.
+            </p>
           </div>
 
           {/* External Download Sources */}
