@@ -17,103 +17,40 @@ export default function Support() {
             Support
           </h1>
 
-          {/* FAQ Section */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
-              Frequently Asked Questions
+          {/* FAQ callout */}
+          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-8 text-center">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              Looking for a quick answer?
             </h2>
-
-            <div className="space-y-6">
-              <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  How do I install games on iCube?
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  You&apos;ll need to provide your own GameCube (ISO) and Wii (WBFS/ISO) game files.
-                  These can be imported through iTunes file sharing, cloud storage, or other file management apps.
-                  Make sure you own the original games before using ROM files.
-                </p>
-              </div>
-
-              <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  How do I install iCube (sideloaded)?
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  iCube is distributed via sideloading for iOS/iPadOS and tvOS. <br /> We recommend using{' '}
-                  <a href="https://sidestore.io" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">SideStore</a>{' '}
-                  to install the app on your iOS/iPadOS device. To install on your tvOS device, use{' '}
-                  <a href="https://sideloadly.io" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Sideloadly</a>{' '}
-                  . To enable JIT on iOS/iPadOS, we recommend using{' '}
-                  <a href="https://github.com/StephenDev0/StikDebug" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">StikDebug</a>.
-                </p>
-              </div>
-
-              <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  Which controllers are supported?
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  iCube supports MFi (Made for iPhone) controllers, PlayStation DualShock 4,
-                  PlayStation DualSense, Xbox Wireless Controllers, and the Siri Remote on Apple TV.
-                  Touch controls are also available on iPhone and iPad.
-                </p>
-              </div>
-
-              <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  What devices are compatible?
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  iCube requires iOS/iPadOS 16.0 or later for iPhone and iPad, and tvOS 17.0 or later for Apple TV.
-                  For optimal JIT-less performance, we recommend newer devices like iPhone 16 or later,
-                  iPad (7th generation) or later, and Apple TV 4K (4th generation).
-                </p>
-              </div>
-
-              <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  Can I save my game progress?
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  Yes! iCube supports both in-game saves (like the original consoles) and save states,
-                  which allow you to save and load your progress at any point during gameplay.
-                  All saves are stored locally on your device.
-                </p>
-              </div>
-
-              <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  Why are some games not working properly?
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  While iCube has high compatibility, some games may have issues due to their complexity
-                  or specific hardware requirements. We&apos;re constantly working to improve compatibility
-                  through regular updates.
-                </p>
-              </div>
-
-              <div className="pb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  How can I improve performance?
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  For better performance, try reducing the internal resolution, disabling enhanced features
-                  like anti-aliasing, closing other apps, and ensuring your device isn&apos;t overheating.
-                  Performance varies based on the game and your device&apos;s capabilities.
-                </p>
-              </div>
-            </div>
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+              Check the FAQ &amp; Troubleshooting page first &mdash; it covers installation,
+              controllers, compatibility, and performance.
+            </p>
+            <Link
+              href="/guide/faq/"
+              className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-lg transition-colors"
+            >
+              Go to FAQ &amp; Troubleshooting →
+            </Link>
           </div>
 
-          {/* Help Articles Section */}
+          {/* Guides Section */}
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
-              Help Articles
+              Guides
             </h2>
 
             <div className="grid md:grid-cols-2 gap-6">
-              <Link href="/help/gamecube-bios/" className="block p-6 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+              <Link href="/guide/" className="block p-6 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">
+                  Full Guide →
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Importing games, supported formats, BIOS setup, and FAQ, all in one place.
+                </p>
+              </Link>
+
+              <Link href="/guide/bios/" className="block p-6 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
                 <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">
                   GameCube BIOS (IPL) →
                 </h3>
@@ -123,13 +60,23 @@ export default function Support() {
                 </p>
               </Link>
 
-              <Link href="/help/web-import/" className="block p-6 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+              <Link href="/guide/importing/" className="block p-6 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
                 <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">
-                  Import Games over Wi-Fi →
+                  Importing Games →
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
                   Use iCube&apos;s built-in web server to drag and drop ROM/ISO files from
                   your computer.
+                </p>
+              </Link>
+
+              <Link href="/controllers/" className="block p-6 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">
+                  Controllers →
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  MFi, PlayStation, Xbox, and Switch controllers, touch controls, and DSU
+                  motion support.
                 </p>
               </Link>
             </div>
