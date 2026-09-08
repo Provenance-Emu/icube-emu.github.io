@@ -3,7 +3,12 @@
 Written 2026-09-07. Covers icube-emu.com, ifly-emu.com, provenance-emu.com and
 jaguar.provenance-emu.com.
 
-Status (2026-09-08): Phases 1, 2 and 3 done and live on iCube, iFly and Provenance (iCube now has
+Status (2026-09-08): Phase 4 site half done and live: both Next sites render screenshots from
+`src/data/screenshots.json` produced by `scripts/import-screenshots.mjs`, the AltStore feeds take their
+screenshot URLs from the same manifest, and the iFly site no longer shows iCube's GameCube iPad shots
+(they were byte-identical copies; replaced from the 2026-08 capture set). Remaining phase 4 app-side
+work: iCube demo library + capture harness, iFly gameplay/tvOS captures, Provenance iPhone/iPad
+snapshot run. Phases 1, 2 and 3 done and live on iCube, iFly and Provenance (iCube now has
 /guide/*, /controllers/, /compare/*; iFly has /compare/*; Provenance links back from /compare/ and the
 GameCube/Dreamcast system pages; old iCube /help/* URLs are noindex refresh stubs). Phase 2 note: the Jaguar footer/publisher change is open as libretro/virtualjaguar-libretro#751
 (jaguar.provenance-emu.com is built hourly by the Provenance-Emu fork's "Publish site" workflow from
