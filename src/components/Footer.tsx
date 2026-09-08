@@ -42,7 +42,10 @@ export default function Footer() {
           <div>
             <h3 className="text-xs font-semibold text-gray-700 dark:text-gray-400 uppercase tracking-wider mb-3">Support</h3>
             <div className="flex flex-col gap-2">
-              <FooterLink href="/support/">FAQ &amp; Help</FooterLink>
+              <FooterLink href="/guide/faq/">FAQ &amp; Help</FooterLink>
+              <FooterLink href="/guide/">Guide</FooterLink>
+              <FooterLink href="/controllers/">Controllers</FooterLink>
+              <FooterLink href="/compare/">Compare</FooterLink>
               <FooterLink href="/donate/">Donate</FooterLink>
               <FooterLink href="/links/">Links</FooterLink>
               <FooterLink href="/status/">Site Status</FooterLink>
