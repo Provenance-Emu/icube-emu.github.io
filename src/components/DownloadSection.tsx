@@ -1,5 +1,9 @@
 import React from 'react';
-import ButtonLink, { GitHubIcon } from '@/components/ButtonLink';
+import { GitHubIcon } from '@/components/ButtonLink';
+import StoreBadge, { AltStoreGlyph, SideStoreGlyph } from '@/components/StoreBadge';
+
+const ALTSTORE_URL = 'altstore://source?url=' + encodeURIComponent('https://icube-emu.com/api/altstore');
+const SIDESTORE_URL = 'sidestore://source?url=' + encodeURIComponent('https://icube-emu.com/api/sidestore');
 
 export type DownloadSectionProps = {
   title?: string;
@@ -50,9 +54,41 @@ const DownloadSection: React.FC<DownloadSectionProps> = ({
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{title}</h2>
         {description ?? <DefaultDescription />}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
-          <ButtonLink href="https://github.com/Provenance-Emu/iCube/releases/latest" leftIcon={<GitHubIcon className="w-5 h-5" />}>Latest stable</ButtonLink>
-          <ButtonLink href="https://github.com/Provenance-Emu/iCube/releases/tag/alpha" leftIcon={<GitHubIcon className="w-5 h-5" />}>Alpha (CI)</ButtonLink>
+        <div className="flex flex-wrap gap-3 justify-center items-center mb-4">
+          <StoreBadge
+            href={ALTSTORE_URL}
+            eyebrow="Add to"
+            label="AltStore"
+            icon={<AltStoreGlyph className="w-6 h-6" />}
+            external={false}
+          />
+          <StoreBadge
+            href={SIDESTORE_URL}
+            eyebrow="Add to"
+            label="SideStore"
+            icon={<SideStoreGlyph className="w-6 h-6" />}
+            external={false}
+          />
+          <StoreBadge
+            href="https://github.com/Provenance-Emu/iCube/releases/latest"
+            eyebrow="Download from"
+            label="GitHub"
+            icon={<GitHubIcon className="w-6 h-6" />}
+          />
+        </div>
+        <p className="text-sm text-gray-500 dark:text-gray-500 mb-6">
+          Sideloaded and self-built copies include every Plus feature at no cost. Plus purchases apply to the App Store build.
+        </p>
+        <div className="flex justify-center mb-6">
+          <a
+            href="https://github.com/Provenance-Emu/iCube/releases/tag/alpha"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+          >
+            <GitHubIcon className="w-4 h-4" />
+            Alpha (CI) build
+          </a>
         </div>
       </div>
     </section>

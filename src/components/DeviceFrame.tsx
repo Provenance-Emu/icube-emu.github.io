@@ -13,6 +13,8 @@ interface DeviceFrameProps {
   className?: string;
   video?: boolean;
   videoSrc?: string;
+  /** Override the default frame width (e.g. "w-72"). */
+  widthClassName?: string;
 }
 
 const frameStyles: Record<DeviceType, { outer: string; inner: string; aspect: string; width: string }> = {
@@ -36,11 +38,12 @@ const frameStyles: Record<DeviceType, { outer: string; inner: string; aspect: st
   },
 };
 
-const DeviceFrame: React.FC<DeviceFrameProps> = ({ type, src, alt, width, height, priority = false, className = '', video = false, videoSrc }) => {
+const DeviceFrame: React.FC<DeviceFrameProps> = ({ type, src, alt, width, height, priority = false, className = '', video = false, videoSrc, widthClassName }) => {
   const s = frameStyles[type];
+  const w = widthClassName ?? s.width;
 
   return (
-    <div className={`${s.width} ${className}`}>
+    <div className={`${w} ${className}`}>
       <div className={s.outer}>
         {type === 'iphone' && (
           <div className="relative">
@@ -63,7 +66,7 @@ const DeviceFrame: React.FC<DeviceFrameProps> = ({ type, src, alt, width, height
               alt={alt}
               {...(width && height ? { width, height } : { fill: true })}
               className="h-full w-full object-cover"
-              sizes={s.width.replace('w-', '').replace(/[\[\]]/g, '')}
+              sizes={w.replace('w-', '').replace(/[\[\]]/g, '')}
               priority={priority}
             />
           )}

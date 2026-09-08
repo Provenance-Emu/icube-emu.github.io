@@ -163,14 +163,14 @@ const Features: React.FC<FeaturesProps> = ({ compact = false, className }) => {
 
   return (
     <div className={className}>
-      <div className={`grid gap-8 ${compact ? 'md:grid-cols-3' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
+      <div className={`grid gap-6 ${compact ? 'md:grid-cols-3' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
         {items.map((f) => (
-          <div key={f.title} className="text-center bg-white/60 dark:bg-gray-800/60 rounded-lg p-6 shadow">
-            <div className="text-4xl mb-3" aria-hidden>
+          <div key={f.title} className="h-full flex flex-col items-center text-center bg-white/60 dark:bg-gray-800/60 rounded-lg p-6 shadow">
+            <div className="mb-3" aria-hidden>
               {f.icon ?? '🔹'}
             </div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{f.title}</h3>
-            <p className="text-gray-600 dark:text-gray-400">{f.description}</p>
+            <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">{f.title}</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">{f.description}</p>
           </div>
         ))}
       </div>
