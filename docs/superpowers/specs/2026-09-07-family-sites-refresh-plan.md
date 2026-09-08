@@ -6,9 +6,13 @@ jaguar.provenance-emu.com.
 Status (2026-09-08): Phase 4 site half done and live: both Next sites render screenshots from
 `src/data/screenshots.json` produced by `scripts/import-screenshots.mjs`, the AltStore feeds take their
 screenshot URLs from the same manifest, and the iFly site no longer shows iCube's GameCube iPad shots
-(they were byte-identical copies; replaced from the 2026-08 capture set). Remaining phase 4 app-side
-work: iCube demo library + capture harness, iFly gameplay/tvOS captures, Provenance iPhone/iPad
-snapshot run. Phases 1, 2 and 3 done and live on iCube, iFly and Provenance (iCube now has
+(they were byte-identical copies; replaced from the 2026-08 capture set). Phase 4 app side (2026-09-08): iCube app gained `-SCREENSHOT_MODE 1` (DEBUG only, 16 fictional
+titles, procedural art) and `tools/screenshots/` (shots.json, capture.py, run.sh) on `develop`; 13
+simulator captures imported to icube-emu.com. iFly harness fixed (tvOS remote/focus steps; search
+shots match the seeded library) but the run mixed real titles (iPhone) with the fictional seed (iPad,
+tvOS) and gameplay was only the SEGA boot splash, so nothing was imported; re-run against the seed for
+a consistent set. Provenance `fastlane snapshot` is blocked by a link failure in UITesting.xcodeproj
+(171 duplicate symbols: zstd.o vs libchdr-virtualjaguar.o), unpushed Snapfile device fix on develop. Phases 1, 2 and 3 done and live on iCube, iFly and Provenance (iCube now has
 /guide/*, /controllers/, /compare/*; iFly has /compare/*; Provenance links back from /compare/ and the
 GameCube/Dreamcast system pages; old iCube /help/* URLs are noindex refresh stubs). Phase 2 note: the Jaguar footer/publisher change is open as libretro/virtualjaguar-libretro#751
 (jaguar.provenance-emu.com is built hourly by the Provenance-Emu fork's "Publish site" workflow from
