@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { family } from '@/data/family';
 
 const FooterLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
   <Link href={href} className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors text-sm">
@@ -16,7 +17,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 mt-16">
       <div className="container mx-auto px-4 py-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-8">
 
           <div className="col-span-2 md:col-span-1">
             <div className="text-xl font-bold text-gray-900 dark:text-white mb-2">
@@ -31,6 +32,7 @@ export default function Footer() {
             <h3 className="text-xs font-semibold text-gray-700 dark:text-gray-400 uppercase tracking-wider mb-3">App</h3>
             <div className="flex flex-col gap-2">
               <FooterLink href="/downloads/">Downloads</FooterLink>
+              <FooterLink href="/sources/">Sources</FooterLink>
               <FooterLink href="/testflight/">TestFlight Beta</FooterLink>
               <FooterLink href="/features/">Features</FooterLink>
               <FooterLink href="/about/">About</FooterLink>
@@ -53,6 +55,15 @@ export default function Footer() {
               <ExternalFooterLink href="https://discord.com/invite/4TK7PU5">Discord</ExternalFooterLink>
               <ExternalFooterLink href="https://x.com/ProvenanceApp">X / Twitter</ExternalFooterLink>
               <ExternalFooterLink href="https://github.com/Provenance-Emu/Provenance">GitHub</ExternalFooterLink>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xs font-semibold text-gray-700 dark:text-gray-400 uppercase tracking-wider mb-3">More from Provenance</h3>
+            <div className="flex flex-col gap-2">
+              {family.filter((site) => site.key !== 'icube').map((site) => (
+                <ExternalFooterLink key={site.key} href={site.url}>{site.name}</ExternalFooterLink>
+              ))}
             </div>
           </div>
 
