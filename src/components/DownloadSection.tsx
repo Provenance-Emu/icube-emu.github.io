@@ -1,11 +1,9 @@
 import React from 'react';
-import ButtonLink, { GitHubIcon, ItchIcon } from '@/components/ButtonLink';
-import ItchIoEmbed from '@/components/ItchIoEmbed';
+import ButtonLink, { GitHubIcon } from '@/components/ButtonLink';
 
 export type DownloadSectionProps = {
   title?: string;
   description?: React.ReactNode;
-  showEmbed?: boolean;
   className?: string;
 };
 
@@ -45,7 +43,6 @@ const DefaultDescription = () => (
 const DownloadSection: React.FC<DownloadSectionProps> = ({
   title = 'Download',
   description,
-  showEmbed = false,
   className,
 }) => {
   return (
@@ -54,14 +51,9 @@ const DownloadSection: React.FC<DownloadSectionProps> = ({
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{title}</h2>
         {description ?? <DefaultDescription />}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
-          <ButtonLink href="https://github.com/Provenance-Emu/iCube/releases" leftIcon={<GitHubIcon className="w-5 h-5" />}>Sideload via GitHub</ButtonLink>
-          <ButtonLink href="https://provenance-emu.itch.io/icube" leftIcon={<ItchIcon className="w-5 h-5" />}>Sideload via itch.io</ButtonLink>
+          <ButtonLink href="https://github.com/Provenance-Emu/iCube/releases/latest" leftIcon={<GitHubIcon className="w-5 h-5" />}>Latest stable</ButtonLink>
+          <ButtonLink href="https://github.com/Provenance-Emu/iCube/releases/tag/alpha" leftIcon={<GitHubIcon className="w-5 h-5" />}>Alpha (CI)</ButtonLink>
         </div>
-        {showEmbed && (
-          <div className="flex justify-center">
-            <ItchIoEmbed itchId="3854531" linkColor="#5b96fa" title="iCube for iOS and tvOS by Provenance EMU" />
-          </div>
-        )}
       </div>
     </section>
   );

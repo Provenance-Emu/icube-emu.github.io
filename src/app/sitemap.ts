@@ -10,6 +10,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/features/`,  lastModified: '2025-10-05', changeFrequency: 'monthly', priority: 0.8 },
     { url: `${base}/about/`,     lastModified: '2025-10-05', changeFrequency: 'monthly', priority: 0.7 },
     { url: `${base}/support/`,   lastModified: '2025-10-05', changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${base}/help/gamecube-bios/`, lastModified: '2026-06-04', changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${base}/help/web-import/`,    lastModified: '2026-06-04', changeFrequency: 'monthly', priority: 0.5 },
     { url: `${base}/donate/`,    lastModified: '2025-10-05', changeFrequency: 'monthly', priority: 0.5 },
     { url: `${base}/links/`,     lastModified: '2025-10-05', changeFrequency: 'monthly', priority: 0.4 },
     { url: `${base}/privacy/`,   lastModified: '2026-05-31', changeFrequency: 'yearly',  priority: 0.2 },
