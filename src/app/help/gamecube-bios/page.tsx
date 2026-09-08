@@ -71,6 +71,92 @@ export default function GameCubeBiosHelp() {
             </p>
           </div>
 
+          {/* How to dump it */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              Dumping the IPL from your own console
+            </h2>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
+              The IPL lives in the boot ROM of a real GameCube or Wii. There is no software
+              download for it; you read it off hardware you own. The usual route is to run
+              homebrew on the console (loaders like Swiss or PicoBoot), then run a dumper that
+              writes the boot ROM out to an SD card or over the network as{' '}
+              <code className="font-mono text-sm bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">IPL.bin</code>.
+            </p>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
+              This is the same dump Dolphin uses, so any Dolphin IPL guide applies directly to
+              iCube. For step-by-step instructions and current tools, see the{' '}
+              <a
+                href="https://wiki.provenance-emu.com/installation-and-usage/roms/ripping-roms#gamecube--wii"
+                className="text-blue-600 dark:text-blue-400 hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Provenance ripping guide
+              </a>{' '}
+              and Dolphin&apos;s own ripping documentation.
+            </p>
+            <p className="text-gray-600 dark:text-gray-300">
+              Disc-dumping tools such as CleanRip pull games, not the boot ROM. Dumping the IPL
+              is a separate homebrew step.
+            </p>
+          </div>
+
+          {/* Identify a good dump */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              Identifying a good dump
+            </h2>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
+              A correct IPL is exactly <strong>2,097,152 bytes</strong> (2&nbsp;MiB) and is named{' '}
+              <code className="font-mono text-sm bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">IPL.bin</code>.
+              iCube checks the file against a list of known-good dumps by{' '}
+              <strong>CRC32</strong>. If yours does not match, iCube reports{' '}
+              <em>&ldquo;The IPL file is not a known good dump&rdquo;</em> and prints the CRC32 it
+              computed, so you can compare it against the table below.
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm text-gray-600 dark:text-gray-300 mb-4">
+                <thead>
+                  <tr className="border-b border-gray-200 dark:border-gray-700">
+                    <th className="py-2 pr-4 font-semibold text-gray-900 dark:text-white">Region / Revision</th>
+                    <th className="py-2 pr-4 font-semibold text-gray-900 dark:text-white">Board</th>
+                    <th className="py-2 font-semibold text-gray-900 dark:text-white">CRC32</th>
+                  </tr>
+                </thead>
+                <tbody className="font-mono">
+                  <tr className="border-b border-gray-100 dark:border-gray-700/50"><td className="py-1.5 pr-4">NTSC 1.0</td><td className="py-1.5 pr-4">DOL-001 / DOT-001 / SL-GC10</td><td className="py-1.5">6DAC1F2A</td></tr>
+                  <tr className="border-b border-gray-100 dark:border-gray-700/50"><td className="py-1.5 pr-4">NTSC 1.1</td><td className="py-1.5 pr-4">DOL-001</td><td className="py-1.5">D5E6FEEA</td></tr>
+                  <tr className="border-b border-gray-100 dark:border-gray-700/50"><td className="py-1.5 pr-4">NTSC 1.2</td><td className="py-1.5 pr-4">DOL-001</td><td className="py-1.5">D235E3F9</td></tr>
+                  <tr className="border-b border-gray-100 dark:border-gray-700/50"><td className="py-1.5 pr-4">NTSC 1.2</td><td className="py-1.5 pr-4">DOL-101</td><td className="py-1.5">86573808</td></tr>
+                  <tr className="border-b border-gray-100 dark:border-gray-700/50"><td className="py-1.5 pr-4">MPAL 1.1 (Brazil)</td><td className="py-1.5 pr-4">DOL-002</td><td className="py-1.5">667D0B64</td></tr>
+                  <tr className="border-b border-gray-100 dark:border-gray-700/50"><td className="py-1.5 pr-4">PAL 1.0</td><td className="py-1.5 pr-4">DOL-001 / DOT-001P</td><td className="py-1.5">4F319F43</td></tr>
+                  <tr className="border-b border-gray-100 dark:border-gray-700/50"><td className="py-1.5 pr-4">PAL 1.2</td><td className="py-1.5 pr-4">DOL-101</td><td className="py-1.5">AD1B7F16</td></tr>
+                  <tr><td className="py-1.5 pr-4">Triforce</td><td className="py-1.5 pr-4">Arcade IPL</td><td className="py-1.5">D1883221</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
+              On a Mac you can compute the CRC32 with{' '}
+              <code className="font-mono text-sm bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">crc32 IPL.bin</code>{' '}
+              (from <code className="font-mono text-sm bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">libarchive-zip-perl</code>),
+              or check the byte count with{' '}
+              <code className="font-mono text-sm bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">ls -l IPL.bin</code>.
+            </p>
+            <p className="text-gray-600 dark:text-gray-300">
+              For full MD5 and SHA-1 hashes of every revision, cross-reference the{' '}
+              <a
+                href="http://redump.org/"
+                className="text-blue-600 dark:text-blue-400 hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Redump
+              </a>{' '}
+              database, the standard reference for verified GameCube IPL dumps.
+            </p>
+          </div>
+
           {/* Where to put it */}
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
@@ -80,8 +166,13 @@ export default function GameCubeBiosHelp() {
               Once you have your <code className="font-mono text-sm bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">IPL.bin</code>,
               place it in iCube&apos;s GameCube system folder (the Dolphin{' '}
               <code className="font-mono text-sm bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">Sys/GC</code>{' '}
-              path inside iCube&apos;s app storage), organized by region. You can copy the
-              file over Wi-Fi using iCube&apos;s built-in web server &mdash; see{' '}
+              path inside iCube&apos;s app storage), in the subfolder for its region:{' '}
+              <code className="font-mono text-sm bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">USA</code>,{' '}
+              <code className="font-mono text-sm bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">JAP</code>, or{' '}
+              <code className="font-mono text-sm bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">EUR</code>{' '}
+              (so a US dump lands at{' '}
+              <code className="font-mono text-sm bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">Sys/GC/USA/IPL.bin</code>).
+              You can copy the file over Wi-Fi using iCube&apos;s built-in web server. See{' '}
               <Link href="/help/web-import/" className="text-blue-600 dark:text-blue-400 hover:underline">
                 Import games over Wi-Fi
               </Link>{' '}
