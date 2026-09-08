@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import SocialButton, { BmcIcon, PatreonIcon } from '@/components/SocialButton';
 
 export const metadata: Metadata = {
@@ -102,6 +103,35 @@ export default function Support() {
                   Performance varies based on the game and your device&apos;s capabilities.
                 </p>
               </div>
+            </div>
+          </div>
+
+          {/* Help Articles Section */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+              Help Articles
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <Link href="/help/gamecube-bios/" className="block p-6 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">
+                  GameCube BIOS (IPL) →
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  What the GameCube IPL is, when it&apos;s required, and how to install your
+                  own in iCube.
+                </p>
+              </Link>
+
+              <Link href="/help/web-import/" className="block p-6 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">
+                  Import Games over Wi-Fi →
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Use iCube&apos;s built-in web server to drag and drop ROM/ISO files from
+                  your computer.
+                </p>
+              </Link>
             </div>
           </div>
 

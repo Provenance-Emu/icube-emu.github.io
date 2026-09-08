@@ -86,7 +86,7 @@ const CSP = [
   "script-src 'self' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https: blob:",
-  "frame-src https://itch.io https://html.itch.zone https://v6p9d9t4.ssl.hwcdn.net",
+  "frame-src 'none'",
   "connect-src 'self'",
   "font-src 'self'",
   "object-src 'none'",

@@ -5,7 +5,7 @@ export type SocialButtonProps = {
   label: string;
   leftIcon?: React.ReactNode;
   className?: string;
-  variant?: 'default' | 'discord' | 'x' | 'bmc' | 'patreon' | 'venmo' | 'zelle' | 'opencollective';
+  variant?: 'default' | 'discord' | 'x' | 'bmc' | 'patreon' | 'venmo' | 'zelle' | 'opencollective' | 'itch';
 };
 
 const baseClasses =
@@ -20,6 +20,7 @@ const variantClasses = {
   venmo: 'bg-sky-500 text-white hover:bg-sky-400',
   zelle: 'bg-purple-700 text-white hover:bg-purple-600',
   opencollective: 'bg-blue-600 text-white hover:bg-blue-500',
+  itch: 'bg-rose-600 text-white hover:bg-rose-500',
 } as const;
 
 export const DiscordIcon: React.FC<{ className?: string }> = ({ className }) => (

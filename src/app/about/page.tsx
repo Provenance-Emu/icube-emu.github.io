@@ -90,7 +90,7 @@ export default function About() {
             </div>
           </div>
 
-          <DownloadSection className="mt-8" showEmbed />
+          <DownloadSection className="mt-8" />
 
           {/* Community Section */}
           <section className="container mx-auto px-4 py-8">

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import SocialButton, { BmcIcon, PatreonIcon, VenmoIcon, ZelleIcon, OpenCollectiveIcon } from '@/components/SocialButton';
+import { ItchIcon } from '@/components/ButtonLink';
 
 export const metadata: Metadata = {
   title: 'Support Development',
@@ -57,6 +58,12 @@ export default function DonatePage() {
               label="Open Collective"
               leftIcon={<OpenCollectiveIcon className="w-5 h-5" />}
               variant="opencollective"
+            />
+            <SocialButton
+              href="https://provenance-emu.itch.io/icube"
+              label="Pay what you want on itch.io"
+              leftIcon={<ItchIcon className="w-5 h-5" />}
+              variant="itch"
             />
           </div>
 

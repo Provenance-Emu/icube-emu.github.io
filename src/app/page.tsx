@@ -56,7 +56,7 @@ export default function Home() {
       </section>
 
       {/* Download Section */}
-      <DownloadSection className="pb-4" showEmbed />
+      <DownloadSection className="pb-4" />
 
       {/* Community Section */}
       <section className="container mx-auto px-4 pb-8">
