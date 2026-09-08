@@ -128,6 +128,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    # Same trap as `build`: the skipped `check` job is in this job's transitive
+    # needs chain, so the implicit success() is false on every push event and
+    # the site never deployed. Gate on build's own result instead.
+    if: ${{ !cancelled() && needs.build.result == 'success' }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
