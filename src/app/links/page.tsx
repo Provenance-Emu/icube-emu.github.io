@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import DownloadSection from '@/components/DownloadSection';
 import SocialButton, { DiscordIcon, XIcon, BmcIcon, PatreonIcon } from '@/components/SocialButton';
+import { family } from '@/data/family';
 
 export const metadata: Metadata = {
   title: 'Links & Resources',
@@ -153,6 +154,21 @@ export default function Links() {
                   </p>
                 </div>
               </a>
+
+              {family.filter((site) => ['provenance', 'ifly', 'jaguar', 'wiki'].includes(site.key)).map((site) => (
+                <a key={site.key} href={site.url}
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="flex items-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors">
+                  <div className="text-2xl mr-4">🚀</div>
+                  <div>
+                    <h3 className="font-semibold text-blue-900 dark:text-blue-300">{site.name}</h3>
+                    <p className="text-sm text-blue-700 dark:text-blue-400">
+                      {site.tagline}
+                    </p>
+                  </div>
+                </a>
+              ))}
 
               <a href="https://dolphinios.oatmealdome.me"
                  target="_blank"
