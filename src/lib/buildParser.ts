@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import plist from 'plist';
+import { screenshots } from '@/data/screenshots';
 
 export interface BuildVersion {
   version: string;
@@ -220,13 +221,9 @@ iCube is a fork of DolphiniOS, optimized for iOS and tvOS devices.`,
     iconURL: `${baseURL}/icon-1024.png`,
     tintColor: '#3B82F6',
     category: 'games',
-    screenshots: [
-      `${baseURL}/screenshots/iphone1-library.jpg`,
-      `${baseURL}/screenshots/iphone2-search.jpg`,
-      `${baseURL}/screenshots/iphone3-emu.webp`,
-      `${baseURL}/screenshots/iphone7-touchcontrols.jpg`,
-      `${baseURL}/screenshots/iphone8-pause.jpg`,
-    ],
+    screenshots: screenshots('iphone')
+      .slice(0, 8)
+      .map((item) => `${baseURL}${item.jpg}`),
     versions: versions.map(v => {
       // Make version strings unique to prevent duplicate version errors
       // Include platform suffix (iOS/tvOS) and beta number if applicable
