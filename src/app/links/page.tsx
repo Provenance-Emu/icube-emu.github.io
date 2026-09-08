@@ -22,7 +22,7 @@ export default function Links() {
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
               Download iCube
             </h2>
-            <DownloadSection showEmbed />
+            <DownloadSection />
           </div>
 
           {/* Dolphin Resources */}
