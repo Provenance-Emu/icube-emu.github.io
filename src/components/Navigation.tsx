@@ -9,6 +9,7 @@ const Navigation = () => {
   const navItems = [
     { href: '/', label: 'Home' },
     { href: '/downloads/', label: 'Downloads' },
+    { href: '/guide/', label: 'Guide' },
     { href: '/sources/', label: 'Sources' },
     { href: '/about/', label: 'About' },
     { href: '/features/', label: 'Features' },
