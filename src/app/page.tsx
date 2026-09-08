@@ -1,9 +1,5 @@
 import type { Metadata } from 'next';
-import iphone1 from '@/images/screenshots/ios/iphone1-library.jpg';
-import iphone2 from '@/images/screenshots/ios/iphone2-search.jpg';
-import iphone3 from '@/images/screenshots/ios/iphone3-emu.webp';
-import ipad1 from '@/images/screenshots/ipad/ipad1-library.jpg';
-import ipad2 from '@/images/screenshots/ipad/ipad2-search.jpg';
+import { screenshots } from '@/data/screenshots';
 
 export const metadata: Metadata = {
   title: { absolute: 'iCube – GameCube & Wii Emulator for iOS & tvOS' },
@@ -15,11 +11,13 @@ import SocialButton, { DiscordIcon, XIcon, BmcIcon, PatreonIcon } from '@/compon
 import Features from '@/components/Features';
 import DeviceFrame from '@/components/DeviceFrame';
 import VideoShowcase from '@/components/VideoShowcase';
-import tvos1 from '@/images/screenshots/tvos/tvos-pause.webp';
-import tvos2 from '@/images/screenshots/tvos/tvos-settings.webp';
-import tvos3 from '@/images/screenshots/tvos/tvos-sources.webp';
 
 export default function Home() {
+  const iphoneShots = screenshots('iphone', { limit: 3 });
+  const ipadShots = screenshots('ipad', { limit: 2 });
+  const appletvShots = screenshots('appletv', { limit: 3 });
+  const watchShots = screenshots('watch');
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-blue-900">
       {/* Hero Section */}
@@ -99,12 +97,16 @@ export default function Home() {
             iPhone
           </h3>
           <div className="flex flex-wrap justify-center gap-6">
-            {([
-              [iphone1, 'iCube game library on iPhone'],
-              [iphone2, 'iCube game search on iPhone'],
-              [iphone3, 'iCube running a GameCube game on iPhone'],
-            ] as const).map(([img, alt], idx) => (
-              <DeviceFrame key={`iphone-${idx}`} type="iphone" src={img} alt={alt} priority={idx === 0} />
+            {iphoneShots.map((shot, idx) => (
+              <DeviceFrame
+                key={shot.id}
+                type="iphone"
+                src={shot.webp}
+                alt={shot.alt}
+                width={shot.width}
+                height={shot.height}
+                priority={idx === 0}
+              />
             ))}
           </div>
         </div>
@@ -115,11 +117,15 @@ export default function Home() {
             iPad
           </h3>
           <div className="flex flex-wrap justify-center gap-6">
-            {([
-              [ipad1, 'iCube game library on iPad'],
-              [ipad2, 'iCube game search on iPad'],
-            ] as const).map(([img, alt], idx) => (
-              <DeviceFrame key={`ipad-${idx}`} type="ipad" src={img} alt={alt} />
+            {ipadShots.map((shot) => (
+              <DeviceFrame
+                key={shot.id}
+                type="ipad"
+                src={shot.webp}
+                alt={shot.alt}
+                width={shot.width}
+                height={shot.height}
+              />
             ))}
           </div>
         </div>
@@ -130,15 +136,40 @@ export default function Home() {
             Apple TV
           </h3>
           <div className="flex flex-wrap justify-center gap-6">
-            {([
-              [tvos1, 'iCube pause menu on Apple TV'],
-              [tvos2, 'iCube settings on Apple TV'],
-              [tvos3, 'iCube game sources on Apple TV'],
-            ] as const).map(([img, alt], idx) => (
-              <DeviceFrame key={`appletv-${idx}`} type="appletv" src={img} alt={alt} />
+            {appletvShots.map((shot) => (
+              <DeviceFrame
+                key={shot.id}
+                type="appletv"
+                src={shot.webp}
+                alt={shot.alt}
+                width={shot.width}
+                height={shot.height}
+              />
             ))}
           </div>
         </div>
+
+        {/* Apple Watch Screenshots: DeviceFrame has no watch frame yet, so this
+            renders only as a note that the manifest has items pending a frame. */}
+        {watchShots.length > 0 && (
+          <div className="mb-16">
+            <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6 text-center">
+              Apple Watch
+            </h3>
+            <div className="flex flex-wrap justify-center gap-6">
+              {watchShots.map((shot) => (
+                <DeviceFrame
+                  key={shot.id}
+                  type="ipad"
+                  src={shot.webp}
+                  alt={shot.alt}
+                  width={shot.width}
+                  height={shot.height}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       {/* Features Section */}
