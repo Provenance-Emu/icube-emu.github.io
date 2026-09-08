@@ -7,6 +7,8 @@ interface DeviceFrameProps {
   type: DeviceType;
   src: StaticImageData | string;
   alt: string;
+  width?: number;
+  height?: number;
   priority?: boolean;
   className?: string;
   video?: boolean;
@@ -34,7 +36,7 @@ const frameStyles: Record<DeviceType, { outer: string; inner: string; aspect: st
   },
 };
 
-const DeviceFrame: React.FC<DeviceFrameProps> = ({ type, src, alt, priority = false, className = '', video = false, videoSrc }) => {
+const DeviceFrame: React.FC<DeviceFrameProps> = ({ type, src, alt, width, height, priority = false, className = '', video = false, videoSrc }) => {
   const s = frameStyles[type];
 
   return (
@@ -45,7 +47,7 @@ const DeviceFrame: React.FC<DeviceFrameProps> = ({ type, src, alt, priority = fa
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[35%] h-[1.1rem] bg-gray-800 rounded-b-xl z-10" />
           </div>
         )}
-        <div className={`${s.inner} ${s.aspect}`}>
+        <div className={`${s.inner} ${s.aspect} relative`}>
           {video && videoSrc ? (
             <video
               src={videoSrc}
@@ -59,6 +61,7 @@ const DeviceFrame: React.FC<DeviceFrameProps> = ({ type, src, alt, priority = fa
             <Image
               src={src}
               alt={alt}
+              {...(width && height ? { width, height } : { fill: true })}
               className="h-full w-full object-cover"
               sizes={s.width.replace('w-', '').replace(/[\[\]]/g, '')}
               priority={priority}
