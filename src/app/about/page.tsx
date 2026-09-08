@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import DownloadSection from '@/components/DownloadSection';
 import SocialButton, { DiscordIcon, XIcon, BmcIcon, PatreonIcon } from '@/components/SocialButton';
+import { family } from '@/data/family';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -91,6 +92,19 @@ export default function About() {
           </div>
 
           <DownloadSection className="mt-8" />
+
+          {/* Provenance Family Section */}
+          <section className="container mx-auto px-4 py-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Part of the Provenance family</h2>
+              <p className="text-gray-600 dark:text-gray-300">
+                iCube is built by the same team behind{' '}
+                <a href={family.find((s) => s.key === 'provenance')!.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Provenance</a>, a multi-system retro emulator for iOS, tvOS, and macOS, and{' '}
+                <a href={family.find((s) => s.key === 'ifly')!.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">iFly</a>, a Dreamcast emulator for iOS and tvOS. For guides, ROM ripping, and BIOS help across all of our apps, check the{' '}
+                <a href={family.find((s) => s.key === 'wiki')!.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Provenance Wiki</a>.
+              </p>
+            </div>
+          </section>
 
           {/* Community Section */}
           <section className="container mx-auto px-4 py-8">
