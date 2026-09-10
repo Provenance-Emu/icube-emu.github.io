@@ -27,7 +27,7 @@
     "adm-zip": "^0.6.0",
     "bplist-creator": "^0.1.1",
     "bplist-parser": "^0.3.2",
-    "next": "^15.5.21",
+    "next": "^15.5.25",
     "plist": "^3.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
@@ -42,7 +42,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "^15.5.14",
-    "sharp": "^0.34.4",
+    "sharp": "^0.35.4",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
