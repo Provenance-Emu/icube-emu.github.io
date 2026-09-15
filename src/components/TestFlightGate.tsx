@@ -15,6 +15,10 @@ export default function TestFlightGate() {
   useEffect(() => {
     try {
       const stored = typeof window !== "undefined" ? window.localStorage.getItem(STORAGE_KEY) : null;
+      // Deliberate: the gate must render the same on the server and on first
+      // client paint, so localStorage is read after mount rather than in a
+      // useState initializer.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setGatePassed(stored === "true");
     } catch {}
     setChecking(false);
