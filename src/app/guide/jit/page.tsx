@@ -219,10 +219,12 @@ export default function JitGuide() {
                 It says a previous attempt did not complete
               </h4>
               <p className="text-gray-600 dark:text-gray-300">
-                iCube remembers when an authorization attempt failed badly and declines to
-                repeat it on its own, so a bad setup cannot make the app fail at every
-                launch. Tapping <strong>Enable JIT via StikDebug</strong> clears that and
-                tries again.
+                iCube remembers when an authorization attempt never finished and declines
+                to repeat it on its own, so a bad setup cannot make the app fail at every
+                launch. A <strong>Retry JIT Authorization</strong> button appears in{' '}
+                <strong>Settings &rarr; Debug &rarr; Environment</strong> while that is in
+                effect; tapping it, or tapping <strong>Enable JIT via StikDebug</strong>,
+                re-arms it.
               </p>
             </div>
           </div>
