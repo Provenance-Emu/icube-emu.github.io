@@ -5,6 +5,7 @@ export const GUIDE_PAGES: GuidePage[] = [
   { href: '/guide/importing/', label: 'Importing Games', blurb: 'Import GameCube and Wii games over Wi-Fi with the built-in web server.' },
   { href: '/guide/formats/', label: 'Supported Formats', blurb: 'ISO, RVZ, WBFS, and every disc format iCube reads — plus which to pick.' },
   { href: '/guide/bios/', label: 'GameCube BIOS (IPL)', blurb: 'When you need the GameCube IPL, and how to dump and install your own.' },
+  { href: '/guide/jit/', label: 'JIT & Performance', blurb: 'Why JIT is fast, what iOS 26 changed, and how to turn it on with StikDebug.' },
   { href: '/guide/faq/', label: 'FAQ & Troubleshooting', blurb: 'Answers to the most common questions.' },
 ];
 

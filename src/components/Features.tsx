@@ -111,6 +111,12 @@ const allFeatures: Feature[] = [
     icon: <IconWrap><SparklesIcon /></IconWrap>,
   },
   {
+    title: 'JIT Recompiler on iOS 26',
+    description:
+      'The PowerPC JIT runs again under iOS 26\u2019s Trusted Execution Monitor, several times faster than the interpreter. Sideloaded builds, with StikDebug attached.',
+    icon: <IconWrap><BoltIcon /></IconWrap>,
+  },
+  {
     title: 'ARM64 Optimized Interpreter',
     description:
       'ARM64-specific optimizations in the CPU interpreter for faster JIT-less performance on iOS/tvOS.',

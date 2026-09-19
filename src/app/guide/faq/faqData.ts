@@ -7,7 +7,7 @@ export const faqItems: FaqItem[] = [
   },
   {
     q: 'How do I install iCube (sideloaded)?',
-    a: 'iCube is distributed via sideloading for iOS/iPadOS and tvOS. We recommend using SideStore to install the app on your iOS/iPadOS device. To install on your tvOS device, use Sideloadly. To enable JIT on iOS/iPadOS, we recommend using StikDebug.',
+    a: 'iCube is distributed via sideloading for iOS/iPadOS and tvOS. We recommend using SideStore to install the app on your iOS/iPadOS device. To install on your tvOS device, use Sideloadly. To enable JIT on iOS/iPadOS, we recommend using StikDebug \u2014 see the JIT & Performance guide. JIT is only available on the sideloaded builds, never on TestFlight or the App Store.',
   },
   {
     q: 'Which controllers are supported?',
@@ -26,8 +26,12 @@ export const faqItems: FaqItem[] = [
     a: "While iCube has high compatibility, some games may have issues due to their complexity or specific hardware requirements. We're constantly working to improve compatibility through regular updates.",
   },
   {
+    q: 'Does JIT work on iOS 26?',
+    a: "Yes, on the sideloaded builds. iOS 26's Trusted Execution Monitor requires a debugger to authorize each page of JIT memory before it will run, and iCube now performs that handshake at startup when StikDebug (or any attached debugger) is present. TestFlight and App Store builds cannot do this at all, because Apple does not permit the required entitlement there; they always run the Cached Interpreter. See the JIT & Performance guide.",
+  },
+  {
     q: 'How can I improve performance?',
-    a: "For better performance, try reducing the internal resolution, disabling enhanced features like anti-aliasing, closing other apps, and ensuring your device isn't overheating. Performance varies based on the game and your device's capabilities.",
+    a: "The single biggest win is turning on JIT, which is several times faster than the interpreter \u2014 see the JIT & Performance guide. Beyond that, try reducing the internal resolution, disabling enhanced features like anti-aliasing, closing other apps, and ensuring your device isn't overheating. Performance varies based on the game and your device's capabilities.",
   },
   {
     q: 'Do I need the GameCube BIOS (IPL)?',
