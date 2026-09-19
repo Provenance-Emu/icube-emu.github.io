@@ -7,7 +7,7 @@
     "dev:port": "next dev --turbopack --port",
     "dev:debug": "NODE_OPTIONS='--inspect' next dev --turbopack",
     "prebuild": "node scripts/generate-versioned-ipas.js",
-    "build": "next build --turbopack",
+    "build": "next build --turbopack && node scripts/fixup-api-routes.js",
     "build:analyze": "ANALYZE=true next build --turbopack",
     "start": "next start",
     "start:port": "next start --port",
@@ -19,9 +19,9 @@
     "deps:check": "npm outdated",
     "deps:update": "npm update",
     "info": "next info",
-    "warp:dev": "echo '🚀 Starting Next.js dev server with Turbopack...' && npm run dev",
-    "warp:build": "echo '🔨 Building for production...' && npm run build && echo '✅ Build complete!'",
-    "warp:clean-dev": "npm run clean && echo '🧹 Cache cleared!' && npm run dev"
+    "warp:dev": "echo '\ud83d\ude80 Starting Next.js dev server with Turbopack...' && npm run dev",
+    "warp:build": "echo '\ud83d\udd28 Building for production...' && npm run build && echo '\u2705 Build complete!'",
+    "warp:clean-dev": "npm run clean && echo '\ud83e\uddf9 Cache cleared!' && npm run dev"
   },
   "dependencies": {
     "adm-zip": "^0.6.0",
