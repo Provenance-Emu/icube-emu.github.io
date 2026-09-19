@@ -105,15 +105,21 @@ export default function JitGuide() {
         <ol className="list-decimal list-inside text-gray-600 dark:text-gray-300 space-y-2 mb-4">
           <li>Install StikDebug and complete its one-time pairing setup.</li>
           <li>
-            Open iCube and go to <strong>Settings &rarr; Debug</strong>. If your device
-            needs JIT enabling, you&apos;ll see an <strong>Enable JIT via StikDebug</strong>{' '}
-            button.
+            Open iCube and go to <strong>Settings &rarr; Debug &rarr; Environment</strong>.
+            If your device needs JIT enabling, an{' '}
+            <strong>Enable JIT via StikDebug</strong> button appears there.
           </li>
           <li>
-            Tap it. iCube hands StikDebug its own broker script, StikDebug attaches and
-            authorizes the code region, and iCube comes back to the foreground.
+            Tap it. iCube hands StikDebug its own broker script over the URL scheme, so
+            there is nothing to set up inside StikDebug itself.
           </li>
-          <li>Start your game. JIT is active for as long as the app stays running.</li>
+          <li>
+            StikDebug attaches and relaunches iCube. Wait for iCube to come back.
+          </li>
+          <li>
+            Open a game. The code region is authorized as it boots, and JIT stays active
+            for as long as the app keeps running.
+          </li>
         </ol>
         <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded p-4">
           <p className="text-gray-700 dark:text-gray-200 text-sm">
@@ -131,9 +137,16 @@ export default function JitGuide() {
           Checking whether it worked
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Under <strong>Settings &rarr; Debug</strong>, iCube reports its own JIT state:
-          whether JIT was acquired, whether a debugger is attached right now, and whether
-          the code region was authorized.
+          Under <strong>Settings &rarr; Debug &rarr; Environment</strong>, iCube reports its
+          own state. <strong>JIT</strong> says whether the capability was acquired,{' '}
+          <strong>Debugger</strong> whether one is attached right now,{' '}
+          <strong>TXM JIT Region</strong> whether the code region was authorized, and{' '}
+          <strong>JIT Error</strong> carries the reason when something did not work.
+        </p>
+        <p className="text-gray-600 dark:text-gray-300 mb-4">
+          On a working iOS 26 setup, <strong>TXM JIT Region</strong> reads{' '}
+          <em>Authorized</em>. It stays that way after StikDebug disconnects, so{' '}
+          <strong>Debugger: Not Attached</strong> alongside it is normal and not a problem.
         </p>
         <p className="text-gray-600 dark:text-gray-300">
           The honest test is the frame rate. If a game that used to crawl now holds its
