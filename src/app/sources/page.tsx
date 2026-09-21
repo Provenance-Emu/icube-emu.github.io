@@ -51,6 +51,26 @@ export default function SourcesPage() {
             Sideloaded and self-built copies include every Plus feature at no cost. Plus purchases apply to the App Store build.
           </p>
 
+          {/*
+            Until 21 September 2026 the alpha entry in these feeds advertised a
+            version string the IPA did not carry, so SideStore downloaded ~90 MB
+            and then refused to install it. The feeds are fixed, but AltStore and
+            SideStore cache a source until it is refreshed, so anyone who hit this
+            is still holding the broken copy and has no way to know it changed.
+          */}
+          <div className="max-w-2xl mx-auto mb-12 rounded-lg border border-amber-300 bg-amber-50 p-4 dark:border-amber-700/60 dark:bg-amber-950/40">
+            <h2 className="mb-1 font-semibold text-amber-900 dark:text-amber-200">
+              Install failed with a build-number mismatch?
+            </h2>
+            <p className="text-sm text-amber-900/90 dark:text-amber-100/90">
+              That was a bug in our feed, not your device or your signing setup. The alpha
+              advertised a version number the app itself did not carry, and SideStore
+              correctly refused to install it. It is fixed as of 21 September 2026.
+              Pull to refresh the source in AltStore or SideStore and install again &mdash;
+              your stores cache the old copy until you do.
+            </p>
+          </div>
+
           <div className="space-y-8">
             {sources.map((source) => (
               <div key={source.name} className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
