@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import path from 'path';
 import { generateAltStoreApp } from '@/lib/buildParser';
-import { applyAlphaReleaseInfo, fetchAlphaReleaseInfo } from '@/lib/alphaRelease';
+import { feedNews } from '@/lib/feedNews';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600; // Revalidate every hour
@@ -21,11 +21,6 @@ export async function GET() {
     // AltStore/SideStore don't support multiple platforms per app
     app.versions = app.versions.filter(v => v.platform === 'iOS');
 
-    // Replace the rolling alpha entry's placeholders (size 1, constant buildVersion,
-    // site-build timestamp) with the real published asset's values. Without a
-    // buildVersion that changes, AltStore/SideStore can never offer an alpha update.
-    app.versions = applyAlphaReleaseInfo(app.versions, await fetchAlphaReleaseInfo());
-
     const source = {
       name: 'iCube',
       identifier: 'com.joemattiello.icube.source',
@@ -37,18 +32,7 @@ export async function GET() {
       tintColor: '#3B82F6',
       featuredApps: [app.bundleIdentifier],
       apps: [app],
-      news: [
-        {
-          title: 'Welcome to iCube',
-          identifier: 'welcome-to-icube',
-          caption: 'GameCube & Wii emulation on iOS and tvOS',
-          date: '2025-09-22',
-          tintColor: '#3B82F6',
-          imageURL: `${baseURL}/icon-1024.png`,
-          notify: false,
-          url: 'https://icube-emu.com',
-        },
-      ],
+      news: feedNews(baseURL),
     };
 
     return NextResponse.json(source, {

@@ -81,10 +81,16 @@ function generateVersionString(versionDir, platformDir) {
   const platform = platformMatch[1];
   const betaNumber = platformMatch[2];
   
-  // Add beta suffix
-  if (betaNumber) {
-    versionString += `-beta${betaNumber}`;
-  }
+  // Only the hand-added betas need stamping. They were all cut from the same
+  // 1.0.0 and share a CFBundleVersion, so without a unique string per build the
+  // feed cannot tell them apart. Non-beta directories hold the rolling CI alpha,
+  // which deploy.yml re-downloads on every build: its CFBundleVersion already
+  // changes per build, it is served straight from the GitHub release rather than
+  // from Pages, and rewriting it here would only put a fabricated string back
+  // into the one entry this whole exercise was about. Leave it alone.
+  if (!betaNumber) return null;
+  
+  versionString += `-beta${betaNumber}`;
   
   // Add platform suffix
   versionString += `-${platform.toLowerCase()}`;
@@ -133,7 +139,7 @@ function main() {
       // Generate custom version string
       const customVersion = generateVersionString(versionDir, platformDir);
       if (!customVersion) {
-        console.log(`⚠️  Skipping invalid platform directory: ${platformDir}`);
+        console.log(`⏭️  Not stamping ${versionDir}/${platformDir} (served as built)`);
         continue;
       }
 
