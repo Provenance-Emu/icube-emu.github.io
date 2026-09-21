@@ -11,10 +11,20 @@ on:
   # Fallback for when the dispatch above never arrives: iCube's build sends it
   # with FEED_DISPATCH_TOKEN, a fine-grained PAT that (as of Sept 2026) is not
   # scoped to this repo, so it fails with HTTP 403 and the site keeps serving a
-  # stale IPA. The hourly `check` job compares the alpha asset's updated_at
-  # with the stamp the last deploy published and redeploys only on change.
+  # stale IPA. The `check` job compares the alpha asset's updated_at with the
+  # stamp the last deploy published and redeploys only on change.
+  #
+  # Every 15 minutes, not hourly, because a stale feed is now an INSTALL FAILURE
+  # rather than a cosmetic lag. The feed states the alpha's real CFBundleVersion
+  # (see buildParser.ts), and iCube's build.yml stamps a new one per CI run, so
+  # between an alpha being republished and this job redeploying, the feed names a
+  # build number the IPA behind the rolling URL no longer carries — exactly the
+  # mismatch SideStore refuses to install. This bounds that window at ~15 min
+  # instead of ~60. Fixing FEED_DISPATCH_TOKEN's scope would close it properly;
+  # the `check` job is two HTTP calls and deploys only on a real change, so the
+  # tighter interval costs approximately nothing.
   schedule:
-    - cron: '20 * * * *'
+    - cron: '*/15 * * * *'
 
 permissions:
   contents: read
