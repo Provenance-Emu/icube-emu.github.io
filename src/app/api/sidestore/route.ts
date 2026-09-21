@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import path from 'path';
 import { generateAltStoreApp } from '@/lib/buildParser';
-import { applyAlphaReleaseInfo, fetchAlphaReleaseInfo } from '@/lib/alphaRelease';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600; // Revalidate every hour
@@ -20,11 +19,6 @@ export async function GET() {
     // Filter to iOS only to avoid duplicate version errors
     // AltStore/SideStore don't support multiple platforms per app
     app.versions = app.versions.filter(v => v.platform === 'iOS');
-
-    // Replace the rolling alpha entry's placeholders (size 1, constant buildVersion,
-    // site-build timestamp) with the real published asset's values. Without a
-    // buildVersion that changes, AltStore/SideStore can never offer an alpha update.
-    app.versions = applyAlphaReleaseInfo(app.versions, await fetchAlphaReleaseInfo());
 
     const source = {
       name: 'iCube',

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import plist from 'plist';
+import { readIpaInfo } from '@/lib/ipaInfo';
 import { screenshots } from '@/data/screenshots';
 
 export interface BuildVersion {
@@ -27,13 +27,6 @@ export interface AppMetadata {
   category: string;
   screenshots?: string[];
   versions: BuildVersion[];
-}
-
-interface DistributionSummary {
-  [key: string]: Array<{
-    buildNumber: string;
-    versionNumber?: string;
-  }>;
 }
 
 /**
@@ -84,25 +77,17 @@ export function parseBuilds(buildsDir: string, baseURL: string): BuildVersion[] 
       const ipaPath = path.join(platformPath, ipaFile);
       const ipaStats = fs.statSync(ipaPath);
 
-      // Try to read DistributionSummary.plist for metadata
-      const distSummaryPath = path.join(platformPath, 'DistributionSummary.plist');
-      let buildNumber = '1';
-      let versionNumber = versionDir;
-
-      if (fs.existsSync(distSummaryPath)) {
-        try {
-          const distSummaryContent = fs.readFileSync(distSummaryPath, 'utf8');
-          const distSummary = plist.parse(distSummaryContent) as DistributionSummary;
-
-          // Get the first app entry (should be iCube.ipa)
-          const appKey = Object.keys(distSummary).find(key => key.endsWith('.ipa'));
-          if (appKey && distSummary[appKey] && distSummary[appKey][0]) {
-            buildNumber = distSummary[appKey][0].buildNumber || buildNumber;
-            versionNumber = distSummary[appKey][0].versionNumber || versionNumber;
-          }
-        } catch (error) {
-          console.error(`Error parsing DistributionSummary.plist for ${platformDir}:`, error);
-        }
+      // The IPA is the source of truth for its own version strings. SideStore
+      // verifies the downloaded bundle against the feed and refuses to install on
+      // a mismatch, so anything derived from directory names or
+      // DistributionSummary.plist (which the alpha ingest never produces) is a
+      // guess that eventually diverges from the artifact. Read the plist instead.
+      const ipaInfo = readIpaInfo(ipaPath);
+      if (!ipaInfo) {
+        console.warn(
+          `[buildParser] skipping ${versionDir}/${platformDir}: could not read the IPA's Info.plist`
+        );
+        continue;
       }
 
       // Get file modification time as release date
@@ -112,20 +97,24 @@ export function parseBuilds(buildsDir: string, baseURL: string): BuildVersion[] 
       const downloadURL = `${baseURL}/builds-versioned/${versionDir}/${platformDir}/${ipaFile}`;
 
       // Create version description
-      let description = `iCube ${versionNumber}`;
+      let description = `iCube ${ipaInfo.version}`;
       if (isBeta) {
         description += ` Beta ${betaNumber}`;
       }
       description += ` for ${platform}`;
 
       versions.push({
-        version: versionNumber,
-        buildVersion: buildNumber,
+        version: ipaInfo.version,
+        buildVersion: ipaInfo.buildVersion,
         date: releaseDate,
         localizedDescription: description,
         downloadURL,
         size: ipaStats.size,
-        minOSVersion: platform === 'tvOS' ? '16.0' : '15.0',
+        // The bundle's real MinimumOSVersion, not a per-platform guess. AltStore
+        // hides versions whose minimum the device cannot meet, so claiming 15.0
+        // for a bundle that needs 17.0 offers iOS 15/16 users a build that will
+        // not launch.
+        minOSVersion: ipaInfo.minOSVersion ?? (platform === 'tvOS' ? '16.0' : '15.0'),
         platform,
         isBeta,
         betaNumber,
@@ -177,28 +166,68 @@ function compareVersions(a: string, b: string): number {
 /**
  * Generate AltStore/SideStore compatible app metadata
  */
-/** Rolling CI IPA hosted on the iCube GitHub `alpha` prerelease. */
+/** Rolling CI IPA published on the iCube GitHub `alpha` prerelease. */
 export const GITHUB_ALPHA_IPA_URL =
   'https://github.com/Provenance-Emu/iCube/releases/download/alpha/Non-Jailbroken.ipa';
+
+/**
+ * deploy.yml downloads the current alpha to public/builds/1.0.0/iOS/iCube.ipa
+ * before the site builds, so the real artifact is on disk when the feed is
+ * generated. We take the metadata from that copy but serve it from the GitHub
+ * release URL: the IPA is ~90 MB and GitHub Pages caps a single file at 100 MB.
+ */
+const ALPHA_IPA_RELATIVE_PATH = path.join('1.0.0', 'iOS', 'iCube.ipa');
+
+/**
+ * Build the rolling-alpha entry from the artifact itself.
+ *
+ * This used to be a hardcoded literal with `version: 'alpha'`, `size: 1` and a
+ * buildVersion synthesised from the release timestamp, none of which the IPA
+ * carried — so SideStore downloaded 90 MB and then refused to install with
+ * "Expected version: 2026.09.19.1023, Found version: 13". There is no correct
+ * value to invent here, so when the artifact is absent (local dev, or a failed
+ * fetch in CI) we return null and the feed simply has no alpha entry. A missing
+ * entry costs a user one download from GitHub; a lying one costs them 90 MB and
+ * a dead end.
+ */
+function alphaVersion(buildsDir: string): BuildVersion | null {
+  const ipaPath = path.join(buildsDir, ALPHA_IPA_RELATIVE_PATH);
+  if (!fs.existsSync(ipaPath)) {
+    console.warn('[buildParser] no alpha IPA on disk — omitting the alpha entry');
+    return null;
+  }
+
+  const info = readIpaInfo(ipaPath);
+  if (!info) {
+    console.warn('[buildParser] alpha IPA unreadable — omitting the alpha entry');
+    return null;
+  }
+
+  const stats = fs.statSync(ipaPath);
+  return {
+    version: info.version,
+    buildVersion: info.buildVersion,
+    date: stats.mtime.toISOString(),
+    localizedDescription:
+      'Rolling CI alpha from GitHub Releases. Unsigned; replaced on every successful default-branch or develop build.',
+    downloadURL: GITHUB_ALPHA_IPA_URL,
+    size: stats.size,
+    minOSVersion: info.minOSVersion ?? '17.0',
+    platform: 'iOS',
+    isBeta: true,
+  };
+}
 
 export function generateAltStoreApp(
   baseURL: string,
   buildsDir: string
 ): AppMetadata {
   const hosted = parseBuilds(buildsDir, baseURL);
-  const githubAlpha: BuildVersion = {
-    version: 'alpha',
-    buildVersion: 'alpha',
-    date: new Date().toISOString(),
-    localizedDescription:
-      'Rolling CI alpha from GitHub Releases. Unsigned; replaced on every successful default-branch or develop build.',
-    downloadURL: GITHUB_ALPHA_IPA_URL,
-    size: 1,
-    minOSVersion: '17.0',
-    platform: 'iOS',
-    isBeta: true,
-  };
-  const versions = [githubAlpha, ...hosted];
+  const alpha = alphaVersion(buildsDir);
+  // The alpha is by definition the newest build, so keep it first explicitly.
+  // compareVersions() splits on '.' and Number()s the parts, which yields NaN
+  // for any prerelease suffix ('1.0.0-beta9-ios'), so it cannot order these.
+  const versions = alpha ? [alpha, ...hosted] : hosted;
 
   return {
     name: 'iCube',
@@ -224,31 +253,12 @@ iCube is a fork of DolphiniOS, optimized for iOS and tvOS devices.`,
     screenshots: screenshots('iphone')
       .slice(0, 8)
       .map((item) => `${baseURL}${item.jpg}`),
-    versions: versions.map(v => {
-      // Make version strings unique to prevent duplicate version errors
-      // Include platform suffix (iOS/tvOS) and beta number if applicable
-      let versionString = v.version;
-      
-      // Add beta suffix for beta builds
-      if (v.isBeta && v.betaNumber) {
-        versionString += `-beta${v.betaNumber}`;
-      }
-      
-      // Add platform suffix to differentiate iOS and tvOS builds
-      versionString += `-${v.platform.toLowerCase()}`;
-      
-      return {
-        version: versionString,
-        buildVersion: versionString, // Must match the version in the modified IPA
-        date: v.date,
-        localizedDescription: v.localizedDescription,
-        downloadURL: v.downloadURL,
-        size: v.size,
-        minOSVersion: v.minOSVersion,
-        platform: v.platform,
-        isBeta: v.isBeta,
-        betaNumber: v.betaNumber,
-      };
-    }),
+    // Emitted verbatim. `version` and `buildVersion` were rewritten here to
+    // "<dir>-beta<n>-<platform>" to keep entries unique, which broke the spec's
+    // hard requirement that both equal the IPA's CFBundleShortVersionString and
+    // CFBundleVersion. Uniqueness is now a property of the artifacts themselves:
+    // generate-versioned-ipas.js stamps each hosted beta's Info.plist, and every
+    // string below is read back out of the bundle being linked.
+    versions,
   };
 }
