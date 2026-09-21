@@ -218,6 +218,33 @@ function alphaVersion(buildsDir: string): BuildVersion | null {
   };
 }
 
+/**
+ * AltStore and SideStore key an app's versions by `version`, so two entries
+ * sharing one is the "duplicate version errors" condition that the old
+ * "<dir>-beta<n>-<platform>" mangling existed to avoid. Reading the strings off
+ * the bundles removes the mangling but not the constraint: the rolling alpha now
+ * reports its real 1.0.0, and a stable 1.0.0 dropped into public/builds/ would
+ * report the same thing with a different buildVersion.
+ *
+ * Nothing collides today. Rather than leave that to be discovered in users'
+ * stores, drop the later entry and say so — earlier entries win, and the alpha
+ * is placed first precisely because it is the build we least want to lose.
+ */
+function dedupeVersions(versions: BuildVersion[]): BuildVersion[] {
+  const seen = new Set<string>();
+  return versions.filter((v) => {
+    if (seen.has(v.version)) {
+      console.warn(
+        `[buildParser] duplicate version "${v.version}" (${v.downloadURL}) — dropping it; ` +
+          `give this build a distinct CFBundleShortVersionString`
+      );
+      return false;
+    }
+    seen.add(v.version);
+    return true;
+  });
+}
+
 export function generateAltStoreApp(
   baseURL: string,
   buildsDir: string
@@ -227,7 +254,7 @@ export function generateAltStoreApp(
   // The alpha is by definition the newest build, so keep it first explicitly.
   // compareVersions() splits on '.' and Number()s the parts, which yields NaN
   // for any prerelease suffix ('1.0.0-beta9-ios'), so it cannot order these.
-  const versions = alpha ? [alpha, ...hosted] : hosted;
+  const versions = dedupeVersions(alpha ? [alpha, ...hosted] : hosted);
 
   return {
     name: 'iCube',
