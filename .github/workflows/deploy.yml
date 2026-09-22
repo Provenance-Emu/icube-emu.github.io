@@ -49,8 +49,18 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -uo pipefail
-          latest=$(gh api repos/Provenance-Emu/iCube/releases/tags/alpha \
-            --jq '.assets[] | select(.name=="Non-Jailbroken.ipa") | .updated_at' 2>/dev/null || true)
+          # Prefer the newest immutable per-build tag (alpha-<run number>). It is
+          # what the feed links, it sorts numerically, and comparing tag names is
+          # exact -- no timestamp parsing, no clock skew. Fall back to the rolling
+          # asset's updated_at for the window before iCube has published its first
+          # pinned release.
+          latest=$(gh release list --repo Provenance-Emu/iCube --limit 100 \
+            --json tagName --jq '.[].tagName' 2>/dev/null \
+            | grep -E '^alpha-[0-9]+$' | sort -t- -k2 -n -r | head -1 || true)
+          if [ -z "$latest" ]; then
+            latest=$(gh api repos/Provenance-Emu/iCube/releases/tags/alpha \
+              --jq '.assets[] | select(.name=="Non-Jailbroken.ipa") | .updated_at' 2>/dev/null || true)
+          fi
           deployed=$(curl -fsS --max-time 20 "https://icube-emu.com/alpha-stamp.txt?nocache=$(date +%s)" || echo none)
           echo "latest=${latest:-<api failed>}  deployed=${deployed}"
           # An API failure must not trigger a redeploy — nothing to deploy from.
@@ -108,17 +118,54 @@ jobs:
           set -euo pipefail
           DEST="public/builds/1.0.0/iOS"
           mkdir -p "$DEST"
-          if gh release download alpha --repo Provenance-Emu/iCube \
+
+          # Prefer an immutable per-build release over the rolling `alpha` tag.
+          #
+          # The feed is a static snapshot: it states the IPA's real version
+          # strings, and AltStore/SideStore verify the download against them. If
+          # the URL it links is the rolling one, every new alpha silently
+          # invalidates the deployed feed until this workflow runs again, and
+          # installs fail in the meantime. Linking a tag whose bytes can never be
+          # replaced makes a stale feed merely OLD rather than broken.
+          #
+          # Numeric sort on the run-number suffix, so alpha-99 does not beat
+          # alpha-104 the way a lexical sort would.
+          PIN=$(gh release list --repo Provenance-Emu/iCube --limit 100 \
+            --json tagName --jq '.[].tagName' 2>/dev/null \
+            | grep -E '^alpha-[0-9]+$' | sort -t- -k2 -n -r | head -1 || true)
+
+          if [ -n "$PIN" ]; then
+            SRC_TAG="$PIN"
+          else
+            # Only before iCube's first pinned release exists. Same behaviour as
+            # before: correct at deploy time, drifts until the next deploy.
+            echo "::warning::no immutable alpha-<n> release found — falling back to the rolling alpha tag"
+            SRC_TAG="alpha"
+          fi
+
+          if gh release download "$SRC_TAG" --repo Provenance-Emu/iCube \
                --pattern 'Non-Jailbroken.ipa' --output "$DEST/iCube.ipa" --clobber; then
             [ -s "$DEST/iCube.ipa" ] || { echo "::warning::alpha IPA was empty — feed keeps the committed betas"; rm -f "$DEST/iCube.ipa"; exit 0; }
-            echo "Fetched alpha -> $DEST/iCube.ipa ($(stat -c%s "$DEST/iCube.ipa" 2>/dev/null || stat -f%z "$DEST/iCube.ipa") bytes)"
-            # Published as /alpha-stamp.txt so the hourly `check` job can tell
-            # whether the deployed IPA is already the current one.
-            STAMP=$(gh api repos/Provenance-Emu/iCube/releases/tags/alpha \
-              --jq '.assets[] | select(.name=="Non-Jailbroken.ipa") | .updated_at' 2>/dev/null || true)
+            echo "Fetched $SRC_TAG -> $DEST/iCube.ipa ($(stat -c%s "$DEST/iCube.ipa" 2>/dev/null || stat -f%z "$DEST/iCube.ipa") bytes)"
+
+            # Tell the feed generator which URL these bytes came from, so it
+            # links the artifact it actually read rather than a hardcoded
+            # constant. Written next to the IPA; buildParser falls back to the
+            # rolling URL when it is absent (local dev, or the fallback above).
+            printf '{"tag":"%s","downloadURL":"https://github.com/Provenance-Emu/iCube/releases/download/%s/Non-Jailbroken.ipa"}\n' \
+              "$SRC_TAG" "$SRC_TAG" > "$DEST/alpha-source.json"
+
+            # Published as /alpha-stamp.txt so the `check` job can tell whether
+            # the deployed feed already points at the current build.
+            if [ "$SRC_TAG" = "alpha" ]; then
+              STAMP=$(gh api repos/Provenance-Emu/iCube/releases/tags/alpha \
+                --jq '.assets[] | select(.name=="Non-Jailbroken.ipa") | .updated_at' 2>/dev/null || true)
+            else
+              STAMP="$SRC_TAG"
+            fi
             echo "ALPHA_STAMP=${STAMP:-unknown}" >> "$GITHUB_ENV"
           else
-            echo "::warning::could not download the alpha release — feed keeps the committed betas"
+            echo "::warning::could not download $SRC_TAG — feed keeps the committed betas"
           fi
 
       - name: Build with Next.js

@@ -179,6 +179,40 @@ export const GITHUB_ALPHA_IPA_URL =
 const ALPHA_IPA_RELATIVE_PATH = path.join('1.0.0', 'iOS', 'iCube.ipa');
 
 /**
+ * Written next to the IPA by deploy.yml, naming the release the bytes came from.
+ *
+ * The feed must link the artifact it actually read. Pointing at the rolling
+ * `alpha` tag meant every new CI build silently invalidated the deployed feed --
+ * the version strings below describe bytes that URL no longer serves, and
+ * SideStore refuses to install on exactly that. iCube's CI now also publishes
+ * each build under an immutable `alpha-<run number>` tag, and deploy.yml records
+ * which one it downloaded here, so a stale feed offers an OLDER alpha instead of
+ * a broken one.
+ */
+const ALPHA_SOURCE_RELATIVE_PATH = path.join('1.0.0', 'iOS', 'alpha-source.json');
+
+/**
+ * Resolve the URL for the bytes on disk. Falls back to the rolling tag only when
+ * the sidecar is missing — local dev, or the window before iCube has published
+ * its first pinned release — which is the old, drift-prone behaviour and no worse
+ * than it was.
+ */
+function alphaDownloadURL(buildsDir: string): string {
+  const sourcePath = path.join(buildsDir, ALPHA_SOURCE_RELATIVE_PATH);
+  try {
+    const raw = fs.readFileSync(sourcePath, 'utf8');
+    const parsed = JSON.parse(raw) as { tag?: unknown; downloadURL?: unknown };
+    if (typeof parsed.downloadURL === 'string' && parsed.downloadURL.startsWith('https://')) {
+      return parsed.downloadURL;
+    }
+    console.warn(`[buildParser] ${sourcePath} has no usable downloadURL — using the rolling alpha tag`);
+  } catch {
+    console.warn('[buildParser] no alpha-source.json — using the rolling alpha tag');
+  }
+  return GITHUB_ALPHA_IPA_URL;
+}
+
+/**
  * Build the rolling-alpha entry from the artifact itself.
  *
  * This used to be a hardcoded literal with `version: 'alpha'`, `size: 1` and a
@@ -210,7 +244,7 @@ function alphaVersion(buildsDir: string): BuildVersion | null {
     date: stats.mtime.toISOString(),
     localizedDescription:
       'Rolling CI alpha from GitHub Releases. Unsigned; replaced on every successful default-branch or develop build.',
-    downloadURL: GITHUB_ALPHA_IPA_URL,
+    downloadURL: alphaDownloadURL(buildsDir),
     size: stats.size,
     minOSVersion: info.minOSVersion ?? '17.0',
     platform: 'iOS',
