@@ -31,6 +31,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/guide/', file: 'src/app/guide/page.tsx', changeFrequency: 'monthly', priority: 0.7 },
     { path: '/guide/importing/', file: 'src/app/guide/importing/page.tsx', changeFrequency: 'monthly', priority: 0.6 },
     { path: '/guide/formats/', file: 'src/app/guide/formats/page.tsx', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/guide/dumping-discs/', file: 'src/app/guide/dumping-discs/page.tsx', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/guide/dumping-wiiware/', file: 'src/app/guide/dumping-wiiware/page.tsx', changeFrequency: 'monthly', priority: 0.6 },
     { path: '/guide/bios/', file: 'src/app/guide/bios/page.tsx', changeFrequency: 'monthly', priority: 0.6 },
     { path: '/guide/faq/', file: 'src/app/guide/faq/page.tsx', changeFrequency: 'monthly', priority: 0.6 },
     { path: '/controllers/', file: 'src/app/controllers/page.tsx', changeFrequency: 'monthly', priority: 0.6 },

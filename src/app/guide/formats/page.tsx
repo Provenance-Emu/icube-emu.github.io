@@ -105,7 +105,15 @@ export default function FormatsGuide() {
         </h2>
         <p className="text-gray-600 dark:text-gray-300">
           Use Dolphin on your Mac or PC, or a homebrew disc-dumping tool such as CleanRip on
-          real hardware, to rip your own GameCube and Wii discs. See{' '}
+          real hardware, to rip your own GameCube and Wii discs. Step by step:{' '}
+          <Link href="/guide/dumping-discs/" className="text-blue-600 dark:text-blue-400 hover:underline">
+            Dumping GameCube &amp; Wii Discs
+          </Link>{' '}
+          and{' '}
+          <Link href="/guide/dumping-wiiware/" className="text-blue-600 dark:text-blue-400 hover:underline">
+            WiiWare, Virtual Console &amp; Channels
+          </Link>
+          . See{' '}
           <Link href="/guide/importing/" className="text-blue-600 dark:text-blue-400 hover:underline">
             Importing Games
           </Link>{' '}
