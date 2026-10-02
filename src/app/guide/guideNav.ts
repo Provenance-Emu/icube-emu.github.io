@@ -4,6 +4,8 @@ export const GUIDE_PAGES: GuidePage[] = [
   { href: '/guide/', label: 'Overview', blurb: 'Start here — get your first game running.' },
   { href: '/guide/importing/', label: 'Importing Games', blurb: 'Import GameCube and Wii games over Wi-Fi with the built-in web server.' },
   { href: '/guide/formats/', label: 'Supported Formats', blurb: 'ISO, RVZ, WBFS, and every disc format iCube reads — plus which to pick.' },
+  { href: '/guide/dumping-discs/', label: 'Dumping Discs', blurb: 'Dump your own GameCube and Wii discs with CleanRip, join the parts, and convert to RVZ.' },
+  { href: '/guide/dumping-wiiware/', label: 'WiiWare & Channels', blurb: 'Get WiiWare, Virtual Console, and channel titles in via a .wad or a BootMii NAND backup.' },
   { href: '/guide/bios/', label: 'GameCube BIOS (IPL)', blurb: 'When you need the GameCube IPL, and how to dump and install your own.' },
   { href: '/guide/jit/', label: 'JIT & Performance', blurb: 'Why JIT is fast, what iOS 26 changed, and how to turn it on with StikDebug.' },
   { href: '/guide/faq/', label: 'FAQ & Troubleshooting', blurb: 'Answers to the most common questions.' },
