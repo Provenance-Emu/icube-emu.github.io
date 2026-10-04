@@ -123,10 +123,11 @@ export default function DumpingWiiWareGuide() {
           Back up the whole console with BootMii
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mb-4">
-          BootMii writes two files to the root of the SD card:{' '}
-          <code className={code}>nand.bin</code> (the console&apos;s storage) and{' '}
-          <code className={code}>keys.bin</code> (1,024 bytes of keys needed to decrypt it). The
-          Wii Hacks Guide has the steps for making the backup:{' '}
+          BootMii writes <code className={code}>nand.bin</code> (the console&apos;s storage) and{' '}
+          <code className={code}>keys.bin</code> (1,024 bytes of keys needed to decrypt it) to the
+          root of the SD card. Depending on how the backup was made, the keys may already be at
+          the end of <code className={code}>nand.bin</code>. The Wii Hacks Guide has the steps for
+          making the backup:{' '}
           <a href="https://wii.hacks.guide/bootmii" className={link} target="_blank" rel="noopener noreferrer">
             BootMii Backup
           </a>{' '}
@@ -138,28 +139,42 @@ export default function DumpingWiiWareGuide() {
         </p>
 
         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-          Append the keys before you import
+          Check the size, then append the keys only if they&apos;re missing
         </h3>
         <p className="text-gray-600 dark:text-gray-300 mb-4">
           Dolphin on a computer asks for <code className={code}>keys.bin</code> separately. iCube
-          can&apos;t, so the keys have to be at the end of the <code className={code}>nand.bin</code>{' '}
-          file before you import it. Join them on your computer.
+          can&apos;t, so it accepts exactly two file sizes for this import:
         </p>
-        <p className="text-gray-600 dark:text-gray-300 mb-2">On macOS or Linux:</p>
+        <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2 mb-4">
+          <li>
+            <strong>553,649,152 bytes:</strong> <code className={code}>nand.bin</code> already has
+            the keys at the end. Import it as it is.
+          </li>
+          <li>
+            <strong>553,648,128 bytes:</strong> the keys are missing. Append{' '}
+            <code className={code}>keys.bin</code> first. The result should be 553,649,152 bytes.
+          </li>
+        </ul>
+        <p className="text-gray-600 dark:text-gray-300 mb-4">
+          Check your file&apos;s size before you touch it (<code className={code}>ls -l</code> on
+          macOS or Linux, <code className={code}>dir</code> on Windows, or Get Info in Finder).
+          Don&apos;t append <code className={code}>keys.bin</code> to a 553,649,152-byte file. That
+          makes it 553,650,176 bytes, and iCube rejects it.
+        </p>
+        <p className="text-gray-600 dark:text-gray-300 mb-2">
+          To append the keys to a 553,648,128-byte file, on macOS or Linux:
+        </p>
         <pre className={pre}>{'cat nand.bin keys.bin > nand_with_keys.bin'}</pre>
         <p className="text-gray-600 dark:text-gray-300 mb-2">On Windows, in Command Prompt:</p>
         <pre className={pre}>{'copy /b nand.bin + keys.bin nand_with_keys.bin'}</pre>
-        <p className="text-gray-600 dark:text-gray-300 mb-6">
-          A BootMii backup is 553,648,128 bytes. With the keys appended it is 553,649,152 bytes
-          (the extra 1,024). iCube rejects any other size.
-        </p>
 
         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Import it</h3>
         <ol className="list-decimal list-inside text-gray-600 dark:text-gray-300 space-y-3 mb-4">
           <li>
-            Put <code className={code}>nand_with_keys.bin</code> somewhere the Files app can see it,
-            such as iCloud Drive or <strong>On My iPhone</strong>. iCube opens it with the standard
-            Files picker.
+            Put the 553,649,152-byte file (<code className={code}>nand.bin</code>, or{' '}
+            <code className={code}>nand_with_keys.bin</code> if you appended the keys) somewhere the
+            Files app can see it, such as iCloud Drive or <strong>On My iPhone</strong>. iCube opens
+            it with the standard Files picker.
           </li>
           <li>
             In iCube&apos;s library, open the <strong>Import</strong> menu and choose{' '}
@@ -189,13 +204,14 @@ export default function DumpingWiiWareGuide() {
             <strong>
               &ldquo;The decryption keys need to be appended to the NAND backup file.&rdquo;
             </strong>{' '}
-            The file is a bare <code className={code}>nand.bin</code>. Append{' '}
+            The file is a bare 553,648,128-byte <code className={code}>nand.bin</code>. Append{' '}
             <code className={code}>keys.bin</code> as shown above and import again.
           </li>
           <li>
             <strong>&ldquo;This file does not look like a BootMii NAND backup.&rdquo;</strong> The
-            file size is wrong. A truncated copy or the wrong <code className={code}>.bin</code> will
-            do this. Check it against the two sizes above.
+            file size is neither of the two above. Appending the keys to a file that already had
+            them (553,650,176 bytes), a truncated copy, or the wrong{' '}
+            <code className={code}>.bin</code> will all do this.
           </li>
           <li>
             <strong>&ldquo;This file does not contain a valid Wii filesystem.&rdquo;</strong>{' '}

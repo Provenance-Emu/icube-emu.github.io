@@ -107,11 +107,23 @@ export default function DumpingDiscsGuide() {
           <li>
             Insert the disc and press <strong>A</strong>.
           </li>
+          <li>
+            For a Wii disc, CleanRip then shows its <strong>Wii Disc Ripper Setup</strong> screen.
+            Set <strong>New device per chunk</strong> to <strong>No</strong>. It defaults to{' '}
+            <strong>Yes</strong>, which makes CleanRip stop and ask for another storage device
+            after every chunk, so a one-card dump never finishes on its own. Leave{' '}
+            <strong>Chunk Size</strong> at its 1 GB default, or choose <strong>Max</strong> for
+            fewer, larger parts (about 4 GB each on FAT32).
+          </li>
         </ol>
         <p className="text-gray-600 dark:text-gray-300 mb-4">
-          A GameCube disc produces one file. A Wii disc produces several part files, because
-          FAT32 can&apos;t hold a single file larger than 4 GiB. The part names and the folder
-          they land in depend on your CleanRip version, so check the card.
+          A GameCube disc produces one file. A Wii disc is written in parts named{' '}
+          <code className={code}>&lt;name&gt;.part0.iso</code>,{' '}
+          <code className={code}>&lt;name&gt;.part1.iso</code>, and so on. At the default 1 GB
+          chunk size that is five parts for a single-layer disc and eight for a dual-layer disc.
+          FAT32 can&apos;t hold a file over 4 GiB, so even <strong>Max</strong> splits a Wii disc.
+          CleanRip may rename the files to the game&apos;s name from the{' '}
+          <code className={code}>redump.org</code> data.
         </p>
         <p className="text-gray-600 dark:text-gray-300">
           A disc that plays fine can still throw an unrecovered read error during a dump. Clean
@@ -125,16 +137,23 @@ export default function DumpingDiscsGuide() {
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mb-4">
           Skip this for GameCube discs. For a Wii disc, join the parts into one{' '}
-          <code className={code}>.iso</code> before importing. Order matters: the first part goes
-          first. The names below are placeholders for whatever CleanRip wrote.
+          <code className={code}>.iso</code> before importing. List every part, in numeric order,
+          with <code className={code}>part0</code> first. The commands below are for a
+          single-layer disc at the default chunk size, so they list{' '}
+          <code className={code}>part0</code> to <code className={code}>part4</code>. A dual-layer
+          disc has eight parts (<code className={code}>part0</code> to{' '}
+          <code className={code}>part7</code>), and a different chunk size changes the count. Swap
+          in your own file names.
         </p>
         <p className="text-gray-600 dark:text-gray-300 mb-2">On macOS or Linux:</p>
-        <pre className={pre}>{'cat game.part0.iso game.part1.iso game.part2.iso > game.iso'}</pre>
+        <pre className={pre}>{'cat game.part0.iso game.part1.iso game.part2.iso game.part3.iso game.part4.iso > game.iso'}</pre>
         <p className="text-gray-600 dark:text-gray-300 mb-2">On Windows, in Command Prompt:</p>
-        <pre className={pre}>{'copy /b game.part0.iso + game.part1.iso + game.part2.iso game.iso'}</pre>
+        <pre className={pre}>{'copy /b game.part0.iso + game.part1.iso + game.part2.iso + game.part3.iso + game.part4.iso game.iso'}</pre>
         <p className="text-gray-600 dark:text-gray-300">
           A full single-layer Wii disc image is about 4.7 GB and a dual-layer one is about 8.5
-          GB. If your joined file is well short of that, a part is missing or out of order.
+          GB. If your joined file is well short of that, a part is missing or truncated. Size
+          can&apos;t tell you the parts went together in the right order. The verify step below is
+          what catches that.
         </p>
       </div>
 
@@ -156,8 +175,8 @@ export default function DumpingDiscsGuide() {
           In Dolphin on your Mac or PC, right-click the game in the list and choose{' '}
           <strong>Convert File&hellip;</strong>. Pick format <code className={code}>RVZ</code>, block
           size 128 KiB, and compression <code className={code}>zstd</code> at level 5. Dolphin
-          proposes that block size, method, and level by default. Higher levels only make the
-          conversion slower.
+          proposes that block size, method, and level by default. Higher levels can shrink the file
+          a little further, at the cost of a slower conversion.
         </p>
         <p className="text-gray-600 dark:text-gray-300 mb-2">
           From a terminal, <code className={code}>dolphin-tool</code> does the same job:
