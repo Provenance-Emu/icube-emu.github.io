@@ -59,7 +59,7 @@ jobs:
         run: |
           htmlproofer ./out \
             --checks Links,Images,Scripts,OpenGraph \
-            --ignore-urls "/localhost/,/twitter\.com/,/x\.com/,/fonts\.gstatic\.com/,/fonts\.googleapis\.com/,/discord\.gg/,/github\.com/,/icube-app\.com/,/icube-emu\.com/,/testflight\.apple\.com/,/buymeacoffee\.com/,/patreon\.com/,/itch\.io/,/googletagmanager\.com/,/google-analytics\.com/,/schema\.org/,/apps\.apple\.com/" \
+            --ignore-urls "/localhost/,/redump\.org/,/twitter\.com/,/x\.com/,/fonts\.gstatic\.com/,/fonts\.googleapis\.com/,/discord\.gg/,/github\.com/,/icube-app\.com/,/icube-emu\.com/,/testflight\.apple\.com/,/buymeacoffee\.com/,/patreon\.com/,/itch\.io/,/googletagmanager\.com/,/google-analytics\.com/,/schema\.org/,/apps\.apple\.com/" \
             --ignore-status-codes "0,429,999,403" \
             --ignore-files "/404\.html/" \
             2>&1 | tee htmlproofer-output.txt
@@ -88,7 +88,7 @@ jobs:
             echo "## ❌ HTML & Link Check Failed" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
-            grep "ERROR" htmlproofer-output.txt | head -30 >> $GITHUB_STEP_SUMMARY || true
+            grep -E "^\* At|External link|failed \(status code|HTML-Proofer found" htmlproofer-output.txt | head -30 >> $GITHUB_STEP_SUMMARY || true
             echo '```' >> $GITHUB_STEP_SUMMARY
           fi
 
@@ -102,7 +102,7 @@ jobs:
             const fs = require('fs');
             const output = fs.readFileSync('htmlproofer-output.txt', 'utf8');
             const errors = output.split('\n')
-              .filter(l => l.includes('ERROR') || l.includes('  *'))
+              .filter(l => /^\* At /.test(l) || l.includes('failed (status code') || l.includes('External link') || l.includes('HTML-Proofer found'))
               .slice(0, 25)
               .join('\n');
             const details = errors

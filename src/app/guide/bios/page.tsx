@@ -91,7 +91,7 @@ export default function GameCubeBiosGuide() {
           This is the same dump Dolphin uses, so any Dolphin IPL guide applies directly to
           iCube. For step-by-step instructions and current tools, see the{' '}
           <a
-            href="https://wiki.provenance-emu.com/installation-and-usage/roms/ripping-roms#gamecube--wii"
+            href="https://wiki.provenance-emu.com/installation-and-usage/roms/ripping-roms#gamecube-and-wii"
             className="text-blue-600 dark:text-blue-400 hover:underline"
             target="_blank"
             rel="noopener noreferrer"
