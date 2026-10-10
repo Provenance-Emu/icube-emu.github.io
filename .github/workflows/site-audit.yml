@@ -44,6 +44,8 @@ jobs:
 
       - name: Build site
         run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1

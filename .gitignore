@@ -43,5 +43,8 @@ next-env.d.ts
 # generated versioned IPAs (produced by prebuild script)
 /public/builds-versioned/
 
+# GitHub release notes for the Downloads page (scripts/fetch-releases.mjs)
+/data/releases.json
+
 # Claude Code internal files
 .claude/

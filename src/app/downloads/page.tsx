@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import path from 'path';
 import Link from 'next/link';
 import { parseBuilds } from '@/lib/buildParser';
+import { readReleases } from '@/lib/releases';
+import ReleaseList from '@/components/ReleaseList';
 
 export const metadata: Metadata = {
   title: 'Downloads',
@@ -16,6 +18,7 @@ export default function DownloadsPage() {
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://icube-emu.com';
   const buildsDir = path.join(process.cwd(), 'public', 'builds');
   const versions = parseBuilds(buildsDir, baseURL);
+  const releases = readReleases();
 
   // Group versions by platform
   const iosVersions = versions.filter(v => v.platform === 'iOS');
@@ -137,10 +140,13 @@ export default function DownloadsPage() {
             </div>
             <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
               <p className="text-sm text-blue-800 dark:text-blue-200">
-                <strong>💡 Tip:</strong> Check GitHub Releases for detailed changelogs and release notes for each version.
+                <strong>💡 Tip:</strong> Release notes for recent builds are listed below. The full history is on GitHub Releases.
               </p>
             </div>
           </div>
+
+          {/* GitHub releases with expandable changelogs */}
+          <ReleaseList releases={releases} />
 
           {/* iOS Downloads */}
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">

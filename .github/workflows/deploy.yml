@@ -172,6 +172,8 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_BASE_URL: https://icube-emu.com
+          # prebuild fetches the release notes; the token avoids the anonymous API rate limit.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Write build SHA and alpha stamp
         run: |
