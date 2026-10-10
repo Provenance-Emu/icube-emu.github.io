@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "dev:port": "next dev --turbopack --port",
     "dev:debug": "NODE_OPTIONS='--inspect' next dev --turbopack",
-    "prebuild": "node scripts/generate-versioned-ipas.js",
+    "prebuild": "node scripts/generate-versioned-ipas.js && node scripts/fetch-releases.mjs",
     "build": "next build --turbopack && node scripts/fixup-api-routes.js",
     "build:analyze": "ANALYZE=true next build --turbopack",
     "start": "next start",
