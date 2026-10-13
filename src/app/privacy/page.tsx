@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy - iCube",
   description:
-    "iCube has no accounts, ads or tracking. Anonymous crash and performance reports are on by default and can be turned off in Settings. Your games and files stay on your device. iCloud and local network features are user-controlled.",
+    "iCube itself has no accounts, ads or tracking. Anonymous crash and performance reports are on by default and can be turned off in Settings. Your games and files stay on your device. iCloud and local network features are user-controlled.",
   alternates: { canonical: 'https://icube-emu.com/privacy/' },
 };
 
@@ -23,8 +23,9 @@ export default function Privacy() {
             <section>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 iCube does not collect any personally identifiable information.
-                No accounts, no logins, no ads, no advertising or marketing tracking,
-                and we never sell data.
+                iCube itself has no accounts, no ads and no advertising or marketing tracking,
+                and we never sell data. Optional RetroAchievements sign-in goes to
+                retroachievements.org (see below).
               </p>
             </section>
 
@@ -44,7 +45,7 @@ export default function Privacy() {
                 What a report contains: the crash or error details, device model, OS version, app version, timings and frame-rate summaries, and settings that help us reproduce a problem (for example the CPU core in use). Reports are not linked to your identity and are never used for tracking or advertising. iCube sets no account, name or email on a report.
               </p>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                What the App Store version leaves out: the title or ID of the game you were playing, and file names and file paths. Network request details are not recorded either. Builds distributed outside the App Store (for example sideloaded builds) can also include the ID of the game being played, and say so in their own Settings → Privacy screen.
+                The App Store version is designed to leave out the title or ID of the game you were playing and file paths. Paths inside the app&apos;s data folders are replaced before a report is sent, and network request details are not recorded. Builds distributed outside the App Store (for example sideloaded builds) can also include the ID of the game being played, and say so in their own Settings → Privacy screen.
               </p>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 Like any internet request, a report reaches Sentry&apos;s servers together with the sender&apos;s IP address. We do not use it to identify you.
@@ -73,10 +74,13 @@ export default function Privacy() {
               <ul className="list-disc pl-6 mt-3 space-y-1 text-gray-700 dark:text-gray-300 leading-relaxed">
                 <li>Cheat codes are downloaded from a public code database (codes.rc24.xyz) when you open the cheats screen for a game. The request includes that game&apos;s public ID.</li>
                 <li>Game cover art is downloaded from GameTDB only if you turn on that setting. It is off by default.</li>
-                <li>The skin store (iPhone and iPad) downloads a public catalog and the skins you choose.</li>
+                <li>RetroAchievements is optional and off by default. If you turn it on and sign in, your RetroAchievements username and password go to retroachievements.org once, and it returns a token. The password is not stored. The username and token are kept in iCube&apos;s settings on your device (and in your own iCloud if iCloud Sync is on). While achievements are on, the loaded game&apos;s identifier and your progress are sent to retroachievements.org, under its privacy policy. The developer does not receive them.</li>
                 <li>The Dolphin blog in the app loads the blog&apos;s public feed.</li>
                 <li>WiiConnect24 channels use WiiLink only if you turn on that setting.</li>
               </ul>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                The skin store (iPhone and iPad) and the in-app Help download static files that we publish: the skin catalog and skins from GitHub Pages (provenance-emu.com) and GitHub, and help pages from our public GitHub repository. We run no server for these and keep no request logs of our own; GitHub and its content delivery network may log requests, as any website host does. Nothing about you is uploaded.
+              </p>
             </section>
 
             <section>

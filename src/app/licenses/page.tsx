@@ -42,9 +42,9 @@ const components: Component[] = [
     url: 'https://github.com/swisspol/GCDWebServer',
   },
   {
-    name: 'Bugsnag',
+    name: 'Sentry',
     license: 'MIT',
-    url: 'https://github.com/bugsnag/bugsnag-cocoa',
+    url: 'https://github.com/getsentry/sentry-cocoa',
   },
   {
     name: 'libretro database',
