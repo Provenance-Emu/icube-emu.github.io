@@ -176,6 +176,10 @@ export default function DumpingWiiWareGuide() {
         <pre className={pre}>{'copy /b nand.bin + keys.bin nand_with_keys.bin'}</pre>
 
         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Import it</h3>
+        <p className="text-gray-600 dark:text-gray-300 mb-3">
+          <strong>iPhone and iPad:</strong> (Apple TV has no file picker; use the Web UI upload in
+          the <em>Install Your Own Wii System Files</em> guide instead.)
+        </p>
         <ol className="list-decimal list-inside text-gray-600 dark:text-gray-300 space-y-3 mb-4">
           <li>
             Put the 553,649,152-byte file (<code className={code}>nand.bin</code>, or{' '}
@@ -196,8 +200,9 @@ export default function DumpingWiiWareGuide() {
           The import writes the backup&apos;s files into iCube&apos;s emulated Wii NAND, which by
           default is the <code className={code}>Wii</code> folder in the User Folder, replacing any
           file at the same path. If you&apos;ve already played Wii games in iCube and want to keep
-          that progress, copy your User Folder somewhere safe first. You can see where it is in{' '}
-          <strong>Settings &rarr; Debug &rarr; Environment &rarr; User Folder</strong>.
+          that progress, copy your User Folder somewhere safe first. On iPhone and iPad you can see that
+          folder in the Files app, under <strong>On My iPhone</strong> (or{' '}
+          <strong>On My iPad</strong>) &rarr; <strong>iCube</strong>.
         </p>
       </div>
 

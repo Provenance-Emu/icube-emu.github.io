@@ -35,9 +35,9 @@ export default function WiiSystemFilesGuide() {
       <div className={card}>
         <p className={`${body} mb-4`}>
           Wii games run on top of the Wii&apos;s system software: the System Menu, the IOS modules,
-          and the channels. iCube does not include or download any of it. If a Wii game needs it,
-          iCube uses the files from your own console, which you copy over from a BootMii NAND
-          backup.
+          and the channels. iCube does not include any of it, and the App Store version of iCube does
+          not download it either. If a Wii game needs it, iCube uses the files from your own
+          console, which you copy over from a BootMii NAND backup.
         </p>
         <p className={body}>
           This page covers making that backup on a Wii you own and importing it on iPhone, iPad,
@@ -52,7 +52,9 @@ export default function WiiSystemFilesGuide() {
           (the NAND) stops with a message like{' '}
           <strong>&ldquo;Could not launch title &hellip; because it is missing from the NAND.&rdquo;</strong>{' '}
           The alert has a <strong>How to Install Wii System Files</strong> button that opens this
-          guide. You can also open it from the <strong>System</strong> menu in the library.
+          guide. In the App Store version you can also open it from the <strong>System</strong> menu in
+          the library (<strong>Install Wii System Files&hellip;</strong>). Other builds of iCube have
+          different entries in that menu.
         </p>
         <p className={`${body} mb-4`}>Not every game asks for it. Install the files when one does.</p>
         <p className={body}>
@@ -131,7 +133,9 @@ export default function WiiSystemFilesGuide() {
           </li>
         </ul>
         <p className={body}>
-          iCube refuses the import while a game is running. Quit the game first.
+          Quit any running game before you import. The Web UI upload below is refused while a game
+          is running; the iPhone and iPad picker does not check, so make sure the game is closed
+          yourself.
         </p>
       </div>
 
@@ -176,7 +180,7 @@ export default function WiiSystemFilesGuide() {
         </p>
         <ol className={`list-decimal list-inside ${body} space-y-3 mb-4`}>
           <li>
-            On the Apple TV, open iCube and go to <strong>Settings &rarr; Web UI &amp; WebDAV</strong>.
+            On the Apple TV, open iCube and go to <strong>Settings &rarr; Sync &amp; Network &rarr; Web UI &amp; WebDAV</strong>.
             It shows the Web UI address.
           </li>
           <li>Open that address in a browser on your computer.</li>
