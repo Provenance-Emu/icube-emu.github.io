@@ -56,8 +56,7 @@ export default function DumpingWiiWareGuide() {
           <li>
             <strong>Everything on the console: a BootMii NAND backup.</strong> This brings over
             your Wii saves, installed channels, and system files in one go. The file is about 553
-            MB, and importing it is iPhone and iPad only (not Apple TV), so use it when you want
-            your saves and not just one game.
+            MB. Use it when you want your saves or the system files, and not just one game.
           </li>
         </ul>
       </div>
@@ -138,6 +137,14 @@ export default function DumpingWiiWareGuide() {
           .
         </p>
 
+        <p className="text-gray-600 dark:text-gray-300 mb-4">
+          For the full walkthrough, including Apple TV, see{' '}
+          <Link href="/guide/wii-system-files/" className={link}>
+            Install Your Own Wii System Files
+          </Link>
+          .
+        </p>
+
         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
           Check the size, then append the keys only if they&apos;re missing
         </h3>
@@ -178,8 +185,7 @@ export default function DumpingWiiWareGuide() {
           </li>
           <li>
             In iCube&apos;s library, open the <strong>Import</strong> menu and choose{' '}
-            <strong>Import BootMii NAND Backup&hellip;</strong>. This menu item is on iPhone and iPad
-            only, not Apple TV.
+            <strong>Import BootMii NAND Backup&hellip;</strong>.
           </li>
           <li>
             Pick the <code className={code}>.bin</code> file and wait for{' '}
