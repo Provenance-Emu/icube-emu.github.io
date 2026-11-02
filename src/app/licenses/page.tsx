@@ -18,7 +18,7 @@ const components: Component[] = [
   {
     name: 'Dolphin',
     license: 'GPL-2.0+',
-    url: 'https://github.com/JoeMatt/dolphin',
+    url: 'https://github.com/Provenance-Emu/iCube',
     note: 'Custom modifications by Joseph Mattiello. Corresponding source available at the link above.',
   },
   {
@@ -42,9 +42,9 @@ const components: Component[] = [
     url: 'https://github.com/swisspol/GCDWebServer',
   },
   {
-    name: 'Bugsnag',
+    name: 'Sentry',
     license: 'MIT',
-    url: 'https://github.com/bugsnag/bugsnag-cocoa',
+    url: 'https://github.com/getsentry/sentry-cocoa',
   },
   {
     name: 'libretro database',
@@ -119,7 +119,7 @@ export default function Licenses() {
                 Per the GPL-2.0+ license under which Dolphin is distributed, the corresponding
                 source for the version of Dolphin used in iCube is available at{" "}
                 <a
-                  href="https://github.com/JoeMatt/dolphin"
+                  href="https://github.com/Provenance-Emu/iCube"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 dark:text-blue-400 hover:underline transition-colors"
