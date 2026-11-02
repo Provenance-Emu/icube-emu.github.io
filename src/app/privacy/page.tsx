@@ -73,7 +73,7 @@ export default function Privacy() {
               <ul className="list-disc pl-6 mt-3 space-y-1 text-gray-700 dark:text-gray-300 leading-relaxed">
                 <li>Cheat codes are downloaded from a public code database (codes.rc24.xyz) when you open the cheats screen for a game. The request includes that game&apos;s public ID.</li>
                 <li>Game cover art is downloaded from GameTDB only if you turn on that setting. It is off by default.</li>
-                <li>RetroAchievements is optional and off by default. If you turn it on and sign in, your RetroAchievements username and password go to retroachievements.org once, and it returns a token. The password is not stored. The username and token are kept in iCube&apos;s settings on your device (and in your own iCloud if iCloud Sync is on). While achievements are on, the loaded game&apos;s identifier and your progress are sent to retroachievements.org, under its privacy policy. The developer does not receive them.</li>
+                <li>RetroAchievements is optional and off by default. If you turn it on and sign in, your RetroAchievements username and password go to retroachievements.org once, and it returns a token. The password is not stored. The username and token are kept in iCube&apos;s settings on your device. The RetroAchievements settings file is excluded from iCube&apos;s iCloud sync. While achievements are on, the loaded game&apos;s identifier and your progress are sent to retroachievements.org, under its privacy policy. The developer does not receive them.</li>
                 <li>The Dolphin blog in the app loads the blog&apos;s public feed.</li>
                 <li>WiiConnect24 channels use WiiLink only if you turn on that setting.</li>
               </ul>
