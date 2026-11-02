@@ -78,7 +78,7 @@ export default function Privacy() {
                 <li>WiiConnect24 channels use WiiLink only if you turn on that setting.</li>
               </ul>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                The skin store (iPhone and iPad) and the in-app Help download static files that we publish: the skin catalog and skins from GitHub Pages (provenance-emu.com) and GitHub, and help pages from our public GitHub repository. We run no server for these and keep no request logs of our own; GitHub and its content delivery network may log requests, as any website host does. Nothing about you is uploaded.
+                The skin store (iPhone and iPad) and the in-app Help download static files that we publish: the skin catalog and skins from GitHub Pages (provenance-emu.com) and GitHub, and help pages from our public GitHub repository. GitHub and its content delivery network receive these requests and may keep logs under their own policies. These downloads do not upload your library files.
               </p>
             </section>
 
