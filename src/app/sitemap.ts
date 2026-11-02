@@ -41,6 +41,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/compare/icube-vs-provenance/', file: 'src/app/compare/icube-vs-provenance/page.tsx', changeFrequency: 'monthly', priority: 0.5 },
     { path: '/donate/', file: 'src/app/donate/page.tsx', changeFrequency: 'monthly', priority: 0.5 },
     { path: '/links/', file: 'src/app/links/page.tsx', changeFrequency: 'monthly', priority: 0.4 },
+    { path: '/app-store/', file: 'src/app/app-store/page.tsx', changeFrequency: 'monthly', priority: 0.7 },
+    { path: '/guide/wii-system-files/', file: 'src/app/guide/wii-system-files/page.tsx', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/help/save-state-compatibility/', file: 'src/app/help/save-state-compatibility/page.tsx', changeFrequency: 'monthly', priority: 0.5 },
     { path: '/privacy/', file: 'src/app/privacy/page.tsx', changeFrequency: 'yearly', priority: 0.2 },
     { path: '/licenses/', file: 'src/app/licenses/page.tsx', changeFrequency: 'yearly', priority: 0.2 },
   ]
