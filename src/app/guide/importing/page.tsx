@@ -44,9 +44,11 @@ export default function ImportingGuide() {
             <strong>same Wi-Fi network</strong>.
           </li>
           <li>
-            In iCube, open <strong>Settings</strong> and enable the web server. The{' '}
-            <strong>Web UI</strong> and <strong>WebDAV</strong> addresses appear there
-            once it&apos;s running (they read <em>Not Running</em> when it&apos;s off).
+            In iCube, open <strong>Settings</strong> → <strong>Sync &amp; Network</strong> →{' '}
+            <strong>Web UI &amp; WebDAV</strong>. The server starts by itself while iCube is open
+            and pauses while a game is running, so there is nothing to switch on. The{' '}
+            <strong>Web UI</strong> and <strong>WebDAV</strong> addresses are shown there
+            (they read <em>Not Running</em> while a game is running).
           </li>
           <li>
             On your computer or another phone, open a browser and go to the{' '}
