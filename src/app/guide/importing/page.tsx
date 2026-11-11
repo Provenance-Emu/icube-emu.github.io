@@ -92,6 +92,25 @@ export default function ImportingGuide() {
         </p>
       </div>
 
+      <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+          Self-hosted game libraries
+        </h2>
+        <p className="text-gray-600 dark:text-gray-300 mb-4">
+          iCube development builds can browse and import your own GameCube and Wii games from an{' '}
+          <a href="https://github.com/Provenance-Emu/emulator-content-server" className="text-blue-600 dark:text-blue-400 hover:underline">
+            Emulation Server (ECS)
+          </a>.
+        </p>
+        <p className="text-gray-600 dark:text-gray-300">
+          Direct support for self-hosted{' '}
+          <a href="https://github.com/rommapp/romm" className="text-blue-600 dark:text-blue-400 hover:underline">
+            RomM
+          </a>{' '}
+          libraries is in development.
+        </p>
+      </section>
+
       {/* Troubleshooting */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
