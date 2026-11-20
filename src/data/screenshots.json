@@ -1,6 +1,132 @@
 {
-  "generatedAt": "2026-09-08T08:43:31.530Z",
+  "generatedAt": "2026-11-20T07:42:18.019810+00:00",
   "items": [
+    {
+      "id": "iphone/2026-11-play",
+      "device": "iphone",
+      "locale": "en-US",
+      "slug": "play",
+      "alt": "Neverball and SuperTux Wii gameplay in iCube with native touch controls.",
+      "caption": "Neverball + SuperTux Wii. Trinitron CRT.",
+      "theme": "dark",
+      "order": 1,
+      "width": 1200,
+      "height": 2607,
+      "webp": "/screenshots/2026-11/iphone/play.webp",
+      "jpg": "/screenshots/2026-11/iphone/play.jpg",
+      "capturedAt": "2026-11-19",
+      "source": "icube-iphone-dark-play-v2.png",
+      "featured": true,
+      "presentation": "artwork"
+    },
+    {
+      "id": "iphone/2026-11-library",
+      "device": "iphone",
+      "locale": "en-US",
+      "slug": "library",
+      "alt": "Four homebrew titles in the iCube dark-mode library.",
+      "caption": "Your own collection, in dark mode.",
+      "theme": "dark",
+      "order": 2,
+      "width": 1200,
+      "height": 2607,
+      "webp": "/screenshots/2026-11/iphone/library.webp",
+      "jpg": "/screenshots/2026-11/iphone/library.jpg",
+      "capturedAt": "2026-11-19",
+      "source": "icube-iphone-dark-library-v1.png",
+      "featured": true,
+      "presentation": "artwork"
+    },
+    {
+      "id": "iphone/2026-11-trinitron",
+      "device": "iphone",
+      "locale": "en-US",
+      "slug": "trinitron",
+      "alt": "SuperTux Wii with native Trinitron rendering in iCube.",
+      "caption": "Trinitron, rendered inside the app.",
+      "theme": "dark",
+      "order": 3,
+      "width": 1200,
+      "height": 2607,
+      "webp": "/screenshots/2026-11/iphone/trinitron.webp",
+      "jpg": "/screenshots/2026-11/iphone/trinitron.jpg",
+      "capturedAt": "2026-11-19",
+      "source": "icube-iphone-dark-crt-v2.png",
+      "featured": true,
+      "presentation": "artwork"
+    },
+    {
+      "id": "ipad/2026-11-play",
+      "device": "ipad",
+      "locale": "en-US",
+      "slug": "play",
+      "alt": "Neverball coin run and SuperTux Wii in the native iCube iPad layout.",
+      "caption": "Homebrew gameplay. Native iPad controls.",
+      "theme": "dark",
+      "order": 4,
+      "width": 1200,
+      "height": 1600,
+      "webp": "/screenshots/2026-11/ipad/play.webp",
+      "jpg": "/screenshots/2026-11/ipad/play.jpg",
+      "capturedAt": "2026-11-19",
+      "source": "icube-ipad-dark-play-v3.png",
+      "featured": true,
+      "presentation": "artwork"
+    },
+    {
+      "id": "ipad/2026-11-library",
+      "device": "ipad",
+      "locale": "en-US",
+      "slug": "library",
+      "alt": "iCube iPad library with four real homebrew titles and save states.",
+      "caption": "Your games and recent save states.",
+      "theme": "dark",
+      "order": 5,
+      "width": 1200,
+      "height": 1600,
+      "webp": "/screenshots/2026-11/ipad/library.webp",
+      "jpg": "/screenshots/2026-11/ipad/library.jpg",
+      "capturedAt": "2026-11-19",
+      "source": "icube-ipad-dark-library-v2.png",
+      "featured": true,
+      "presentation": "artwork"
+    },
+    {
+      "id": "appletv/2026-11-01-coin-run",
+      "device": "appletv",
+      "locale": "en-US",
+      "slug": "01-coin-run",
+      "alt": "Neverball coin run on Apple TV.",
+      "caption": "Neverball coin run on Apple TV. Trinitron CRT.",
+      "theme": "dark",
+      "order": 1,
+      "width": 1600,
+      "height": 900,
+      "webp": "/screenshots/2026-11/appletv/01-coin-run.webp",
+      "jpg": "/screenshots/2026-11/appletv/01-coin-run.jpg",
+      "capturedAt": "2026-11-15",
+      "source": "icube-neverball-tvos-01-coin-run.png",
+      "featured": true,
+      "presentation": "artwork"
+    },
+    {
+      "id": "appletv/2026-11-02-moving-platform",
+      "device": "appletv",
+      "locale": "en-US",
+      "slug": "02-moving-platform",
+      "alt": "Neverball moving platforms on Apple TV.",
+      "caption": "Neverball moving platforms on Apple TV. Trinitron CRT.",
+      "theme": "dark",
+      "order": 2,
+      "width": 1600,
+      "height": 900,
+      "webp": "/screenshots/2026-11/appletv/02-moving-platform.webp",
+      "jpg": "/screenshots/2026-11/appletv/02-moving-platform.jpg",
+      "capturedAt": "2026-11-15",
+      "source": "icube-neverball-tvos-02-moving-platform.png",
+      "featured": true,
+      "presentation": "artwork"
+    },
     {
       "id": "appletv/library",
       "device": "appletv",
@@ -9,13 +135,14 @@
       "alt": "iCube library on Apple TV",
       "caption": "iCube on Apple TV, built for the remote and for controllers.",
       "theme": "dark",
-      "order": 1,
+      "order": 101,
       "width": 1920,
       "height": 1080,
       "webp": "/screenshots/appletv/library.webp",
       "jpg": "/screenshots/appletv/library.jpg",
       "capturedAt": "2026-09-08T08:29:43.352Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/appletv/library.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/appletv/library.png",
+      "featured": false
     },
     {
       "id": "appletv/settings-root",
@@ -25,13 +152,14 @@
       "alt": "iCube settings screen",
       "caption": "Every Dolphin setting, organised for touch.",
       "theme": "dark",
-      "order": 2,
+      "order": 102,
       "width": 1920,
       "height": 1080,
       "webp": "/screenshots/appletv/settings-root.webp",
       "jpg": "/screenshots/appletv/settings-root.jpg",
       "capturedAt": "2026-09-08T08:31:00.752Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/appletv/settings-root.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/appletv/settings-root.png",
+      "featured": false
     },
     {
       "id": "appletv/pause",
@@ -40,13 +168,14 @@
       "slug": "pause",
       "alt": "iCube pause menu on Apple TV",
       "caption": "Quick access pause menu",
-      "order": 3,
+      "order": 103,
       "width": 1200,
       "height": 675,
       "webp": "/screenshots/appletv/pause.webp",
       "jpg": "/screenshots/appletv/pause.jpg",
       "capturedAt": "2026-09-08T06:22:16.569Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/appletv/appletv-pause.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/appletv/appletv-pause.png",
+      "featured": false
     },
     {
       "id": "appletv/settings",
@@ -55,13 +184,14 @@
       "slug": "settings",
       "alt": "iCube settings on Apple TV",
       "caption": "Configure iCube on the big screen",
-      "order": 4,
+      "order": 104,
       "width": 1200,
       "height": 675,
       "webp": "/screenshots/appletv/settings.webp",
       "jpg": "/screenshots/appletv/settings.jpg",
       "capturedAt": "2026-09-08T06:22:16.572Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/appletv/appletv-settings.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/appletv/appletv-settings.png",
+      "featured": false
     },
     {
       "id": "appletv/sources",
@@ -70,13 +200,14 @@
       "slug": "sources",
       "alt": "iCube game sources on Apple TV",
       "caption": "Manage your game sources",
-      "order": 5,
+      "order": 105,
       "width": 1200,
       "height": 675,
       "webp": "/screenshots/appletv/sources.webp",
       "jpg": "/screenshots/appletv/sources.jpg",
       "capturedAt": "2026-09-08T06:22:16.577Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/appletv/appletv-sources.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/appletv/appletv-sources.png",
+      "featured": false
     },
     {
       "id": "ipad/library-light",
@@ -86,13 +217,14 @@
       "alt": "iCube game library showing a grid of generated cover art",
       "caption": "Your GameCube and Wii library, with cover art, favourites and platform filters.",
       "theme": "light",
-      "order": 1,
+      "order": 101,
       "width": 1200,
       "height": 1600,
       "webp": "/screenshots/ipad/library-light.webp",
       "jpg": "/screenshots/ipad/library-light.jpg",
       "capturedAt": "2026-09-08T08:40:37.895Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/ipad/library-light.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/ipad/library-light.png",
+      "featured": false
     },
     {
       "id": "ipad/settings-root",
@@ -102,13 +234,14 @@
       "alt": "iCube settings screen",
       "caption": "Every Dolphin setting, organised for touch.",
       "theme": "dark",
-      "order": 2,
+      "order": 102,
       "width": 1200,
       "height": 1600,
       "webp": "/screenshots/ipad/settings-root.webp",
       "jpg": "/screenshots/ipad/settings-root.jpg",
       "capturedAt": "2026-09-08T08:41:11.457Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/ipad/settings-root.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/ipad/settings-root.png",
+      "featured": false
     },
     {
       "id": "ipad/emulation",
@@ -117,13 +250,14 @@
       "slug": "emulation",
       "alt": "iCube running a GameCube game on iPad",
       "caption": "Smooth in-game emulation",
-      "order": 3,
+      "order": 103,
       "width": 1600,
       "height": 1199,
       "webp": "/screenshots/ipad/emulation.webp",
       "jpg": "/screenshots/ipad/emulation.jpg",
       "capturedAt": "2026-09-08T06:22:16.517Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/ipad/ipad-emulation.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/ipad/ipad-emulation.png",
+      "featured": false
     },
     {
       "id": "ipad/library-dark",
@@ -133,13 +267,14 @@
       "alt": "iCube game library in dark mode",
       "caption": "Light and dark, everywhere.",
       "theme": "dark",
-      "order": 4,
+      "order": 104,
       "width": 1200,
       "height": 1600,
       "webp": "/screenshots/ipad/library-dark.webp",
       "jpg": "/screenshots/ipad/library-dark.jpg",
       "capturedAt": "2026-09-08T08:40:54.803Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/ipad/library-dark.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/ipad/library-dark.png",
+      "featured": false
     },
     {
       "id": "ipad/settings-graphics",
@@ -149,13 +284,14 @@
       "alt": "Graphics enhancement settings in iCube",
       "caption": "Render above native resolution, with anisotropic filtering and MSAA.",
       "theme": "dark",
-      "order": 5,
+      "order": 105,
       "width": 1200,
       "height": 1600,
       "webp": "/screenshots/ipad/settings-graphics.webp",
       "jpg": "/screenshots/ipad/settings-graphics.jpg",
       "capturedAt": "2026-09-08T08:41:34.895Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/ipad/settings-graphics.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/ipad/settings-graphics.png",
+      "featured": false
     },
     {
       "id": "ipad/shaders",
@@ -164,13 +300,14 @@
       "slug": "shaders",
       "alt": "iCube shader options on iPad",
       "caption": "Fine-tune visuals with custom shaders",
-      "order": 6,
+      "order": 106,
       "width": 1600,
       "height": 1199,
       "webp": "/screenshots/ipad/shaders.webp",
       "jpg": "/screenshots/ipad/shaders.jpg",
       "capturedAt": "2026-09-08T06:22:16.511Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/ipad/ipad-shaders.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/ipad/ipad-shaders.png",
+      "featured": false
     },
     {
       "id": "ipad/pause",
@@ -179,13 +316,14 @@
       "slug": "pause",
       "alt": "iCube pause menu on iPad",
       "caption": "Quick access pause menu",
-      "order": 7,
+      "order": 107,
       "width": 1600,
       "height": 1199,
       "webp": "/screenshots/ipad/pause.webp",
       "jpg": "/screenshots/ipad/pause.jpg",
       "capturedAt": "2026-09-08T06:22:16.522Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/ipad/ipad-pause.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/ipad/ipad-pause.png",
+      "featured": false
     },
     {
       "id": "ipad/context-menu",
@@ -194,13 +332,14 @@
       "slug": "context-menu",
       "alt": "iCube game context menu on iPad",
       "caption": "Long-press for quick game actions",
-      "order": 8,
+      "order": 108,
       "width": 1600,
       "height": 1199,
       "webp": "/screenshots/ipad/context-menu.webp",
       "jpg": "/screenshots/ipad/context-menu.jpg",
       "capturedAt": "2026-09-08T06:22:16.541Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/ipad/ipad-context-menu.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/ipad/ipad-context-menu.png",
+      "featured": false
     },
     {
       "id": "ipad/per-game-settings",
@@ -209,13 +348,14 @@
       "slug": "per-game-settings",
       "alt": "iCube per-game settings on iPad",
       "caption": "Tailor settings for each game",
-      "order": 9,
+      "order": 109,
       "width": 1600,
       "height": 1199,
       "webp": "/screenshots/ipad/per-game-settings.webp",
       "jpg": "/screenshots/ipad/per-game-settings.jpg",
       "capturedAt": "2026-09-08T06:22:16.558Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/ipad/ipad-per-game-settings.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/ipad/ipad-per-game-settings.png",
+      "featured": false
     },
     {
       "id": "ipad/cheats",
@@ -224,13 +364,14 @@
       "slug": "cheats",
       "alt": "iCube cheats menu on iPad",
       "caption": "Enable classic cheat codes",
-      "order": 10,
+      "order": 110,
       "width": 800,
       "height": 600,
       "webp": "/screenshots/ipad/cheats.webp",
       "jpg": "/screenshots/ipad/cheats.jpg",
       "capturedAt": "2026-09-08T06:22:16.564Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/ipad/ipad-cheats.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/ipad/ipad-cheats.png",
+      "featured": false
     },
     {
       "id": "iphone/library-light",
@@ -240,13 +381,14 @@
       "alt": "iCube game library showing a grid of generated cover art",
       "caption": "Your GameCube and Wii library, with cover art, favourites and platform filters.",
       "theme": "light",
-      "order": 1,
+      "order": 101,
       "width": 736,
       "height": 1600,
       "webp": "/screenshots/iphone/library-light.webp",
       "jpg": "/screenshots/iphone/library-light.jpg",
       "capturedAt": "2026-09-08T08:39:24.554Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/iphone/library-light.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/iphone/library-light.png",
+      "featured": false
     },
     {
       "id": "iphone/search",
@@ -256,13 +398,14 @@
       "alt": "Searching the iCube library",
       "caption": "Find any title instantly.",
       "theme": "dark",
-      "order": 2,
+      "order": 102,
       "width": 736,
       "height": 1600,
       "webp": "/screenshots/iphone/search.webp",
       "jpg": "/screenshots/iphone/search.jpg",
       "capturedAt": "2026-09-08T08:40:01.303Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/iphone/search.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/iphone/search.png",
+      "featured": false
     },
     {
       "id": "iphone/emulation",
@@ -271,13 +414,14 @@
       "slug": "emulation",
       "alt": "iCube running a GameCube game on iPhone",
       "caption": "Smooth in-game emulation",
-      "order": 3,
+      "order": 103,
       "width": 736,
       "height": 1600,
       "webp": "/screenshots/iphone/emulation.webp",
       "jpg": "/screenshots/iphone/emulation.jpg",
       "capturedAt": "2026-09-08T06:22:16.444Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/iphone/iphone-emulation.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/iphone/iphone-emulation.png",
+      "featured": false
     },
     {
       "id": "iphone/library-dark",
@@ -287,13 +431,14 @@
       "alt": "iCube game library in dark mode",
       "caption": "Light and dark, everywhere.",
       "theme": "dark",
-      "order": 4,
+      "order": 104,
       "width": 736,
       "height": 1600,
       "webp": "/screenshots/iphone/library-dark.webp",
       "jpg": "/screenshots/iphone/library-dark.jpg",
       "capturedAt": "2026-09-08T08:39:42.118Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/iphone/library-dark.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/iphone/library-dark.png",
+      "featured": false
     },
     {
       "id": "iphone/shaders",
@@ -302,13 +447,14 @@
       "slug": "shaders",
       "alt": "iCube shader options on iPhone",
       "caption": "Fine-tune visuals with custom shaders",
-      "order": 5,
+      "order": 105,
       "width": 736,
       "height": 1600,
       "webp": "/screenshots/iphone/shaders.webp",
       "jpg": "/screenshots/iphone/shaders.jpg",
       "capturedAt": "2026-09-08T06:22:16.446Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/iphone/iphone-shaders.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/iphone/iphone-shaders.png",
+      "featured": false
     },
     {
       "id": "iphone/settings-graphics",
@@ -318,13 +464,14 @@
       "alt": "Graphics enhancement settings in iCube",
       "caption": "Render above native resolution, with anisotropic filtering and MSAA.",
       "theme": "dark",
-      "order": 6,
+      "order": 106,
       "width": 736,
       "height": 1600,
       "webp": "/screenshots/iphone/settings-graphics.webp",
       "jpg": "/screenshots/iphone/settings-graphics.jpg",
       "capturedAt": "2026-09-08T08:38:12.418Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/iphone/settings-graphics.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/iphone/settings-graphics.png",
+      "featured": false
     },
     {
       "id": "iphone/settings-controllers",
@@ -334,13 +481,14 @@
       "alt": "Controller settings in iCube",
       "caption": "Map MFi, DualSense and Xbox controllers, or use touch controls.",
       "theme": "dark",
-      "order": 7,
+      "order": 107,
       "width": 736,
       "height": 1600,
       "webp": "/screenshots/iphone/settings-controllers.webp",
       "jpg": "/screenshots/iphone/settings-controllers.jpg",
       "capturedAt": "2026-09-08T08:38:32.282Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/iphone/settings-controllers.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/iphone/settings-controllers.png",
+      "featured": false
     },
     {
       "id": "iphone/emulation-shader",
@@ -349,13 +497,14 @@
       "slug": "emulation-shader",
       "alt": "iCube gameplay with a shader applied on iPhone",
       "caption": "Shaders applied during gameplay",
-      "order": 8,
+      "order": 108,
       "width": 736,
       "height": 1600,
       "webp": "/screenshots/iphone/emulation-shader.webp",
       "jpg": "/screenshots/iphone/emulation-shader.jpg",
       "capturedAt": "2026-09-08T06:22:16.449Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/iphone/iphone-emulation-shader.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/iphone/iphone-emulation-shader.png",
+      "featured": false
     },
     {
       "id": "iphone/touch-controls",
@@ -364,13 +513,14 @@
       "slug": "touch-controls",
       "alt": "iCube touch controls on iPhone",
       "caption": "Customizable on-screen touch controls",
-      "order": 9,
+      "order": 109,
       "width": 736,
       "height": 1600,
       "webp": "/screenshots/iphone/touch-controls.webp",
       "jpg": "/screenshots/iphone/touch-controls.jpg",
       "capturedAt": "2026-09-08T06:22:16.455Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/iphone/iphone-touch-controls.jpg"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/iphone/iphone-touch-controls.jpg",
+      "featured": false
     },
     {
       "id": "iphone/performance-controls",
@@ -379,13 +529,14 @@
       "slug": "performance-controls",
       "alt": "iCube performance controls on iPhone",
       "caption": "Tune performance to your device",
-      "order": 10,
+      "order": 110,
       "width": 736,
       "height": 1600,
       "webp": "/screenshots/iphone/performance-controls.webp",
       "jpg": "/screenshots/iphone/performance-controls.jpg",
       "capturedAt": "2026-09-08T06:22:16.452Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/iphone/iphone-performance-controls.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/iphone/iphone-performance-controls.png",
+      "featured": false
     },
     {
       "id": "iphone/pause",
@@ -394,13 +545,14 @@
       "slug": "pause",
       "alt": "iCube pause menu on iPhone",
       "caption": "Quick access pause menu",
-      "order": 11,
+      "order": 111,
       "width": 736,
       "height": 1600,
       "webp": "/screenshots/iphone/pause.webp",
       "jpg": "/screenshots/iphone/pause.jpg",
       "capturedAt": "2026-09-08T06:22:16.457Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/iphone/iphone-pause.jpg"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/iphone/iphone-pause.jpg",
+      "featured": false
     },
     {
       "id": "iphone/cheats",
@@ -409,13 +561,14 @@
       "slug": "cheats",
       "alt": "iCube cheats menu on iPhone",
       "caption": "Enable classic cheat codes",
-      "order": 12,
+      "order": 112,
       "width": 736,
       "height": 1600,
       "webp": "/screenshots/iphone/cheats.webp",
       "jpg": "/screenshots/iphone/cheats.jpg",
       "capturedAt": "2026-09-08T06:22:16.460Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/iphone/iphone-cheats.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-shots/iphone/iphone-cheats.png",
+      "featured": false
     },
     {
       "id": "iphone/library-gamecube",
@@ -425,13 +578,14 @@
       "alt": "iCube library filtered to GameCube titles",
       "caption": "Filter by GameCube, Wii or WiiWare in one tap.",
       "theme": "dark",
-      "order": 13,
+      "order": 113,
       "width": 736,
       "height": 1600,
       "webp": "/screenshots/iphone/library-gamecube.webp",
       "jpg": "/screenshots/iphone/library-gamecube.jpg",
       "capturedAt": "2026-09-08T08:37:11.972Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/iphone/library-gamecube.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/iphone/library-gamecube.png",
+      "featured": false
     },
     {
       "id": "iphone/settings-root",
@@ -441,13 +595,14 @@
       "alt": "iCube settings screen",
       "caption": "Every Dolphin setting, organised for touch.",
       "theme": "dark",
-      "order": 14,
+      "order": 114,
       "width": 736,
       "height": 1600,
       "webp": "/screenshots/iphone/settings-root.webp",
       "jpg": "/screenshots/iphone/settings-root.jpg",
       "capturedAt": "2026-09-08T08:37:49.874Z",
-      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/iphone/settings-root.png"
+      "source": "/private/tmp/claude-501/-Users-jmattiello-Workspace-Provenance-iCube-icube-emu-github-io/d50e2394-0447-43c9-aa2b-3a3de7226a2c/scratchpad/icube-captures/iphone/settings-root.png",
+      "featured": false
     }
   ]
 }
