@@ -1,0 +1,24 @@
+{
+  "main": {
+    "src": "/video/2026-11/gameplay.mp4",
+    "poster": "/video/2026-11/gameplay.webp",
+    "width": 1920,
+    "height": 824
+  },
+  "previews": [
+    {
+      "title": "iPhone",
+      "src": "/video/2026-11/iphone.mp4",
+      "poster": "/video/2026-11/iphone.webp",
+      "width": 720,
+      "height": 1560
+    },
+    {
+      "title": "iPad",
+      "src": "/video/2026-11/ipad.mp4",
+      "poster": "/video/2026-11/ipad.webp",
+      "width": 900,
+      "height": 1200
+    }
+  ]
+}

@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import { screenshots } from '@/data/screenshots';
+import ScreenshotGallery from '@/components/ScreenshotGallery';
 
 export const metadata: Metadata = {
   title: { absolute: 'iCube – GameCube & Wii Emulator for iOS & tvOS' },
@@ -11,17 +13,13 @@ import SocialButton, { DiscordIcon, XIcon, BmcIcon, PatreonIcon } from '@/compon
 import StoreBadge, { AltStoreGlyph, SideStoreGlyph } from '@/components/StoreBadge';
 import { GitHubIcon } from '@/components/ButtonLink';
 import Features from '@/components/Features';
-import DeviceFrame from '@/components/DeviceFrame';
 import VideoShowcase from '@/components/VideoShowcase';
 
 const ALTSTORE_URL = 'altstore://source?url=' + encodeURIComponent('https://icube-emu.com/api/altstore');
 const SIDESTORE_URL = 'sidestore://source?url=' + encodeURIComponent('https://icube-emu.com/api/sidestore');
 
 export default function Home() {
-  const iphoneShots = screenshots('iphone', { limit: 3 });
-  const ipadShots = screenshots('ipad', { limit: 2 });
-  const appletvShots = screenshots('appletv', { limit: 3 });
-  const watchShots = screenshots('watch');
+  const iphoneShots = screenshots('iphone', { featured: true, limit: 1 });
   const heroShot = iphoneShots[0];
 
   return (
@@ -64,15 +62,9 @@ export default function Home() {
           </div>
           {heroShot && (
             <div className="flex justify-center md:justify-end">
-              <DeviceFrame
-                type="iphone"
-                src={heroShot.webp}
-                alt={heroShot.alt}
-                width={heroShot.width}
-                height={heroShot.height}
-                priority
-                widthClassName="w-72"
-              />
+              <a href={heroShot.jpg} className="block w-72 overflow-hidden rounded-2xl border border-white/15 shadow-2xl">
+                <Image src={heroShot.webp} alt={heroShot.alt} width={heroShot.width} height={heroShot.height} sizes="288px" priority className="h-auto w-full" />
+              </a>
             </div>
           )}
         </div>
@@ -94,6 +86,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <VideoShowcase />
 
       {/* Download Section */}
       <DownloadSection className="pb-4" />
@@ -122,94 +116,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Video Showcase — drop MP4 at public/video/gameplay.mp4 to activate */}
-      <VideoShowcase />
-
-      {/* Screenshots Section */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
-          Screenshots
-        </h2>
-
-        {/* iPhone Screenshots */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6 text-center">
-            iPhone
-          </h3>
-          <div className="flex flex-wrap justify-center gap-6">
-            {iphoneShots.map((shot, idx) => (
-              <DeviceFrame
-                key={shot.id}
-                type="iphone"
-                src={shot.webp}
-                alt={shot.alt}
-                width={shot.width}
-                height={shot.height}
-                priority={idx === 0}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* iPad Screenshots */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6 text-center">
-            iPad
-          </h3>
-          <div className="flex flex-wrap justify-center gap-6">
-            {ipadShots.map((shot) => (
-              <DeviceFrame
-                key={shot.id}
-                type="ipad"
-                src={shot.webp}
-                alt={shot.alt}
-                width={shot.width}
-                height={shot.height}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Apple TV Screenshots */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6 text-center">
-            Apple TV
-          </h3>
-          <div className="flex flex-wrap justify-center gap-6">
-            {appletvShots.map((shot) => (
-              <DeviceFrame
-                key={shot.id}
-                type="appletv"
-                src={shot.webp}
-                alt={shot.alt}
-                width={shot.width}
-                height={shot.height}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Apple Watch Screenshots: DeviceFrame has no watch frame yet, so this
-            renders only as a note that the manifest has items pending a frame. */}
-        {watchShots.length > 0 && (
-          <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6 text-center">
-              Apple Watch
-            </h3>
-            <div className="flex flex-wrap justify-center gap-6">
-              {watchShots.map((shot) => (
-                <DeviceFrame
-                  key={shot.id}
-                  type="ipad"
-                  src={shot.webp}
-                  alt={shot.alt}
-                  width={shot.width}
-                  height={shot.height}
-                />
-              ))}
-            </div>
-          </div>
-        )}
+      <section id="screenshots" className="container mx-auto px-4 py-16">
+        <h2 className="mb-5 text-center text-3xl font-bold text-gray-900 dark:text-white">See it in action</h2>
+        <p className="mx-auto mb-12 max-w-2xl text-center text-sm text-gray-600 dark:text-gray-300">Actual app captures with homebrew games. Game files are imported separately.</p>
+        <ScreenshotGallery device="iphone" title="iPhone" />
+        <ScreenshotGallery device="ipad" title="iPad" />
+        <ScreenshotGallery device="appletv" title="Apple TV" />
       </section>
 
       {/* Features Section */}

@@ -3,6 +3,10 @@ import manifest from './screenshots.json';
 export type Device = 'iphone' | 'ipad' | 'appletv' | 'watch' | 'mac';
 
 export interface ScreenshotItem {
+  featured?: boolean;
+  presentation?: "artwork" | "native";
+  premium?: string;
+  developmentPreview?: boolean;
   id: string;
   device: Device;
   locale: string;
@@ -28,6 +32,7 @@ const typedManifest = manifest as ScreenshotManifest;
 
 export interface ScreenshotsOptions {
   locale?: string;
+  featured?: boolean;
   limit?: number;
 }
 
@@ -37,7 +42,7 @@ export interface ScreenshotsOptions {
 export function screenshots(device: Device, opts: ScreenshotsOptions = {}): ScreenshotItem[] {
   const locale = opts.locale ?? 'en-US';
   const items = typedManifest.items
-    .filter((item) => item.device === device && item.locale === locale)
+    .filter((item) => item.device === device && item.locale === locale && (!opts.featured || item.featured))
     .sort((a, b) => a.order - b.order);
   return typeof opts.limit === 'number' ? items.slice(0, opts.limit) : items;
 }
