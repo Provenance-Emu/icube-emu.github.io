@@ -1,12 +1,7 @@
 import media from '@/data/media.json';
 import commercial from '@/data/commercial-media.json';
 
-function Player({clip,label}:{clip:typeof media.main;label:string}) {
-  return <video controls muted playsInline preload="none" poster={clip.poster} width={clip.width} height={clip.height} aria-label={label} className="h-auto w-full rounded-2xl bg-black" style={{aspectRatio:`${clip.width} / ${clip.height}`}}>
-    <source src={clip.src} type="video/mp4" />
-    <a href={clip.src}>Download the gameplay video</a>
-  </video>;
-}
+import Player from './GameplayPlayer';
 
 export default function VideoShowcase() {
   return <section id="gameplay" className="container mx-auto px-4 py-16">
