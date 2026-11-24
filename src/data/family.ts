@@ -12,6 +12,7 @@ export const family: FamilySite[] = [
   { key: 'icube', name: 'iCube', url: 'https://icube-emu.com/', tagline: 'GameCube & Wii emulator for iOS and tvOS' },
   { key: 'ifly', name: 'iFly', url: 'https://ifly-emu.com/', tagline: 'Dreamcast emulator for iOS and tvOS' },
   { key: 'jaguar', name: 'Virtual Jaguar libretro', url: 'https://jaguar.provenance-emu.com/', tagline: 'Atari Jaguar core for RetroArch and Provenance, plus a desktop app for macOS, Windows and Linux' },
+  { key: 'emulation-server', name: 'Emulation Server', url: 'https://provenance-emu.com/emulator-content-server/', tagline: 'Self-hosted game library for compatible emulators' },
   { key: 'wiki', name: 'Provenance Wiki', url: 'https://wiki.provenance-emu.com/', tagline: 'Guides, ROM ripping, BIOS help' },
   { key: 'github', name: 'GitHub', url: 'https://github.com/Provenance-Emu', tagline: 'Source code for every app' },
   { key: 'discord', name: 'Discord', url: 'https://discord.gg/4TK7PU5', tagline: 'Community chat' },

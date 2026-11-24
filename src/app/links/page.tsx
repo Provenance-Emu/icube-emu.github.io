@@ -155,7 +155,7 @@ export default function Links() {
                 </div>
               </a>
 
-              {family.filter((site) => ['provenance', 'ifly', 'jaguar', 'wiki'].includes(site.key)).map((site) => (
+              {family.filter((site) => ['provenance', 'ifly', 'jaguar', 'emulation-server', 'wiki'].includes(site.key)).map((site) => (
                 <a key={site.key} href={site.url}
                    target="_blank"
                    rel="noopener noreferrer"
