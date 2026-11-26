@@ -1,0 +1,38 @@
+{
+  "iphone/play": {
+    "id": "iphone-play",
+    "src": "/screenshots/web-gallery/iphone-play-thumb.webp",
+    "href": "/screenshots/web-gallery/iphone-play.webp",
+    "alt": "Neverball gameplay with the on-screen purple GameCube controller skin",
+    "width": 640,
+    "height": 1390,
+    "caption": "Neverball · Purple GameCube skin"
+  },
+  "iphone/library": {
+    "id": "iphone-library",
+    "src": "/screenshots/web-gallery/iphone-library-thumb.webp",
+    "href": "/screenshots/web-gallery/iphone-library.webp",
+    "alt": "iCube dark iPhone library with four homebrew games and clear covers",
+    "width": 640,
+    "height": 1390,
+    "caption": "Your GameCube and Wii library · Dark mode"
+  },
+  "ipad/play": {
+    "id": "ipad-play",
+    "src": "/screenshots/web-gallery/ipad-play-thumb.webp",
+    "href": "/screenshots/web-gallery/ipad-play.webp",
+    "alt": "SuperTux Wii gameplay on iPad in landscape with Trinitron and touch controls",
+    "width": 960,
+    "height": 720,
+    "caption": "SuperTux Wii · Trinitron CRT and landscape controls"
+  },
+  "ipad/library": {
+    "id": "ipad-library",
+    "src": "/screenshots/web-gallery/ipad-library-thumb.webp",
+    "href": "/screenshots/web-gallery/ipad-library.webp",
+    "alt": "iCube landscape library on iPad with game covers and recent titles",
+    "width": 960,
+    "height": 720,
+    "caption": "Your collection and recent games · Landscape library"
+  }
+}

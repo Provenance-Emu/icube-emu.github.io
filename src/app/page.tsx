@@ -1,6 +1,7 @@
-import SharedMediaHero from '@/components/SharedMediaHero';
+import SharedMediaHero from '@provenance-emu/web-media/hero';
+import MediaGallery from '@provenance-emu/web-media/gallery';
 import type { Metadata } from 'next';
-import ScreenshotGallery from '@/components/ScreenshotGallery';
+import { galleryGroups } from '@/data/gallery';
 
 export const metadata: Metadata = {
   title: { absolute: 'iCube – GameCube & Wii Emulator for iOS & tvOS' },
@@ -82,9 +83,7 @@ export default function Home() {
       <section id="screenshots" className="container mx-auto px-4 py-16">
         <h2 className="mb-5 text-center text-3xl font-bold text-gray-900 dark:text-white">See it in action</h2>
         <p className="mx-auto mb-12 max-w-2xl text-center text-sm text-gray-600 dark:text-gray-300">Actual app captures with homebrew games. Game files are imported separately.</p>
-        <ScreenshotGallery device="iphone" title="iPhone" />
-        <ScreenshotGallery device="ipad" title="iPad" />
-        <ScreenshotGallery device="appletv" title="Apple TV" />
+        <MediaGallery brand="cube" groups={galleryGroups} />
       </section>
 
       {/* Features Section */}
