@@ -1,6 +1,5 @@
-import Image from 'next/image';
+import SharedMediaHero from '@/components/SharedMediaHero';
 import type { Metadata } from 'next';
-import { screenshots } from '@/data/screenshots';
 import ScreenshotGallery from '@/components/ScreenshotGallery';
 
 export const metadata: Metadata = {
@@ -19,56 +18,20 @@ const ALTSTORE_URL = 'altstore://source?url=' + encodeURIComponent('https://icub
 const SIDESTORE_URL = 'sidestore://source?url=' + encodeURIComponent('https://icube-emu.com/api/sidestore');
 
 export default function Home() {
-  const iphoneShots = screenshots('iphone', { featured: true, limit: 1 });
-  const heroShot = iphoneShots[0];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-blue-900">
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 md:py-20">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div className="text-center md:text-left">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight text-balance">
-              GameCube and Wii.
-              <br />
-              On your iPhone, iPad and Apple TV.
-            </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-xl mx-auto md:mx-0">
-              iCube brings classic Nintendo GameCube and Wii games to your Apple devices, built on
-              the proven Dolphin emulator foundation. No JIT required.
-            </p>
-            <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-              <StoreBadge
-                href={ALTSTORE_URL}
-                eyebrow="Add to"
-                label="AltStore"
-                icon={<AltStoreGlyph className="w-6 h-6" />}
-                external={false}
-              />
-              <StoreBadge
-                href={SIDESTORE_URL}
-                eyebrow="Add to"
-                label="SideStore"
-                icon={<SideStoreGlyph className="w-6 h-6" />}
-                external={false}
-              />
-              <StoreBadge
-                href="https://github.com/Provenance-Emu/iCube/releases/latest"
-                eyebrow="Download from"
-                label="GitHub"
-                icon={<GitHubIcon className="w-6 h-6" />}
-              />
-            </div>
-          </div>
-          {heroShot && (
-            <div className="flex justify-center md:justify-end">
-              <a href={heroShot.jpg} className="block w-72 overflow-hidden rounded-2xl border border-white/15 shadow-2xl">
-                <Image src={heroShot.webp} alt={heroShot.alt} width={heroShot.width} height={heroShot.height} sizes="288px" priority className="h-auto w-full" />
-              </a>
-            </div>
-          )}
-        </div>
-      </section>
+      <SharedMediaHero
+        brand="cube"
+        title="GameCube and Wii. Anywhere."
+        description="Play on iPhone, iPad, and Apple TV with native touch controls, controller skins, and Dolphin emulation."
+        primary={{ src: '/video/hero/supertux-wii.mp4', poster: '/video/hero/supertux-wii.webp', label: 'SuperTux Wii · Wii', width: 768, height: 576 }}
+        companion={{ src: '/video/hero/neverball-purple.mp4', poster: '/video/hero/neverball-purple.webp', label: 'Neverball · Purple GameCube skin', width: 432, height: 938 }}
+        actions={<>
+          <StoreBadge href={ALTSTORE_URL} eyebrow="Add to" label="AltStore" icon={<AltStoreGlyph className="w-6 h-6" />} external={false} />
+          <StoreBadge href={SIDESTORE_URL} eyebrow="Add to" label="SideStore" icon={<SideStoreGlyph className="w-6 h-6" />} external={false} />
+          <StoreBadge href="https://github.com/Provenance-Emu/iCube/releases/latest" eyebrow="Download from" label="GitHub" icon={<GitHubIcon className="w-6 h-6" />} />
+        </>}
+      />
 
       {/* Stats row */}
       <section className="container mx-auto px-4 pb-12">
