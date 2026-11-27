@@ -12,7 +12,7 @@ import DownloadSection from '@/components/DownloadSection';
 import SocialButton, { DiscordIcon, XIcon, BmcIcon, PatreonIcon } from '@/components/SocialButton';
 import StoreBadge, { AltStoreGlyph, SideStoreGlyph } from '@/components/StoreBadge';
 import { GitHubIcon } from '@/components/ButtonLink';
-import Features from '@/components/Features';
+import FeatureSpotlight from '@/components/FeatureSpotlight';
 import VideoShowcase from '@/components/VideoShowcase';
 
 const ALTSTORE_URL = 'altstore://source?url=' + encodeURIComponent('https://icube-emu.com/api/altstore');
@@ -56,6 +56,23 @@ export default function Home() {
       {/* Download Section */}
       <DownloadSection className="pb-4" />
 
+      <section id="screenshots" className="container mx-auto scroll-mt-20 px-4 py-12 md:py-16">
+        <h2 className="mb-5 text-center text-3xl font-bold text-gray-900 dark:text-white">See it in action</h2>
+        <p className="mx-auto mb-12 max-w-2xl text-center text-sm text-gray-600 dark:text-gray-300">Actual app captures with homebrew games. Game files are imported separately.</p>
+        <MediaGallery brand="cube" groups={galleryGroups} />
+      </section>
+
+      <section className="border-y border-indigo-950/15 dark:border-white/10 bg-white/65 dark:bg-white/[.035]">
+        <div className="container mx-auto px-4 py-12 md:py-16">
+          <FeatureSpotlight
+            title="Find your next game."
+            description="Keep your GameCube and Wii collection together, revisit recently played games, and return to your saves from the library."
+            href="/features/"
+            linkLabel="Explore features"
+          />
+        </div>
+      </section>
+
       {/* Community + Support Section */}
       <section className="container mx-auto px-4 pb-8">
         <div className="max-w-4xl mx-auto grid sm:grid-cols-2 gap-6">
@@ -80,24 +97,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="screenshots" className="container mx-auto px-4 py-16">
-        <h2 className="mb-5 text-center text-3xl font-bold text-gray-900 dark:text-white">See it in action</h2>
-        <p className="mx-auto mb-12 max-w-2xl text-center text-sm text-gray-600 dark:text-gray-300">Actual app captures with homebrew games. Game files are imported separately.</p>
-        <MediaGallery brand="cube" groups={galleryGroups} />
-      </section>
-
-      {/* Features Section */}
-      <section className="bg-white dark:bg-gray-800 py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
-            Features
-          </h2>
-          <Features compact />
-          <div className="text-center mt-8">
-            <a href="/features/" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold">See all features →</a>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

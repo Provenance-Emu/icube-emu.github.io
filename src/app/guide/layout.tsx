@@ -19,7 +19,7 @@ export default function GuideLayout({ children }: { children: React.ReactNode })
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <nav
               aria-label="Guide navigation"
-              className="flex gap-2 overflow-x-auto rounded-lg bg-white p-3 shadow-lg dark:bg-gray-800 lg:flex-col lg:gap-1"
+              className="flex flex-wrap gap-2 rounded-lg bg-white p-3 shadow-lg dark:bg-gray-800 lg:flex-col lg:gap-1"
             >
               {GUIDE_PAGES.map((p) => {
                 const active = p.href === normalized;
@@ -27,6 +27,7 @@ export default function GuideLayout({ children }: { children: React.ReactNode })
                   <Link
                     key={p.href}
                     href={p.href}
+                  aria-current={active ? 'page' : undefined}
                     className={`whitespace-nowrap rounded-md px-3 py-2 text-sm transition-colors ${
                       active
                         ? 'bg-blue-600 font-medium text-white'
