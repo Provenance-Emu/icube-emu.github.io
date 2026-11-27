@@ -27,7 +27,12 @@ export default function FeaturesPage() {
       </header>
       <section className="container mx-auto px-4 py-12 md:py-16" aria-labelledby="feature-list">
         <div className="mx-auto max-w-5xl">
-          <h2 id="feature-list" className="mb-7 text-2xl font-bold text-slate-950 dark:text-white">Feature list</h2>
+          <div className="mb-7 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <h2 id="feature-list" className="text-2xl font-bold text-slate-950 dark:text-white">Feature list</h2>
+            <Link href="/#screenshots" className="inline-flex min-h-11 items-center gap-2 rounded-sm text-sm font-semibold underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 text-indigo-700 dark:text-indigo-300">
+              Browse device screenshots <span aria-hidden="true">→</span>
+            </Link>
+          </div>
           <Features />
 
           <div className="text-center mt-12">
