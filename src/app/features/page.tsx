@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Features from '@/components/Features';
+import FeatureSpotlight from '@/components/FeatureSpotlight';
 import SocialButton, { DiscordIcon, XIcon } from '@/components/SocialButton';
 
 export const metadata: Metadata = {
@@ -12,17 +13,26 @@ export const metadata: Metadata = {
 export default function FeaturesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-blue-900">
-      <section className="container mx-auto px-4 py-16">
-        <div className="max-w-5xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 text-center">
-            Features
-          </h1>
-          <p className="text-gray-600 dark:text-gray-300 mb-10 text-center max-w-3xl mx-auto">
-            A modern, native-first Dolphin experience tailored for iPhone, iPad, and Apple TV. iCube pairs the latest
-            Dolphin core with a SwiftUI interface, robust controller support, and iOS/tvOS-specific performance
-            enhancements.
-          </p>
-
+      <header className="container mx-auto px-4 pt-12 md:pt-16">
+        <div className="mx-auto max-w-6xl">
+          <FeatureSpotlight
+            heading="h1"
+            view="play"
+            title="GameCube and Wii, with room to play"
+            description="Explore controller skins, display filters, and the performance settings you can adjust in iCube. The guide covers setup for both consoles."
+            href="/guide/"
+            linkLabel="Read the setup guide"
+          />
+        </div>
+      </header>
+      <section className="container mx-auto px-4 py-12 md:py-16" aria-labelledby="feature-list">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-7 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <h2 id="feature-list" className="text-2xl font-bold text-slate-950 dark:text-white">Feature list</h2>
+            <Link href="/#screenshots" className="inline-flex min-h-11 items-center gap-2 rounded-sm text-sm font-semibold underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 text-indigo-700 dark:text-indigo-300">
+              Browse device screenshots <span aria-hidden="true">→</span>
+            </Link>
+          </div>
           <Features />
 
           <div className="text-center mt-12">
