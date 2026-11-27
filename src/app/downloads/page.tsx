@@ -41,17 +41,35 @@ export default function DownloadsPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-blue-900">
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 text-center">
-            Downloads
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 text-center max-w-2xl mx-auto">
-            Download iCube for iOS or tvOS. For sideloading with AltStore or SideStore, add our source feed.
-          </p>
+          <header className="mb-10 grid items-center gap-6 border-b pb-9 md:grid-cols-[minmax(0,1.1fr)_minmax(0,.9fr)] md:gap-12 border-indigo-950/15 dark:border-white/15">
+            <div>
+              <h1 className="text-balance text-4xl font-bold tracking-tight md:text-5xl text-slate-950 dark:text-white">Download iCube</h1>
+              <p className="mt-4 max-w-md leading-relaxed text-slate-700 dark:text-gray-300">Add the sideload source for automatic updates, or choose a build for your device.</p>
+            </div>
+            <nav aria-label="Download options" className="rounded-xl border p-3 border-indigo-950/15 bg-white/60 dark:border-white/10 dark:bg-white/5">
+              <a href="#sources" className="flex min-h-14 items-center justify-between gap-3 border-b px-2 last:border-b-0 border-indigo-950/15 dark:border-white/15 hover:bg-indigo-600/5 dark:hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current">
+                <span><span className="block font-semibold text-slate-950 dark:text-white">AltStore and SideStore</span><span className="block text-sm text-slate-700 dark:text-gray-300">Add a source for updates</span></span>
+                <span aria-hidden="true" className="text-indigo-700 dark:text-indigo-300">↓</span>
+              </a>
+              <a href="#ios-builds" className="flex min-h-14 items-center justify-between gap-3 border-b px-2 last:border-b-0 border-indigo-950/15 dark:border-white/15 hover:bg-indigo-600/5 dark:hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current">
+                <span><span className="block font-semibold text-slate-950 dark:text-white">iPhone and iPad</span><span className="block text-sm text-slate-700 dark:text-gray-300">Get an iOS IPA</span></span>
+                <span aria-hidden="true" className="text-indigo-700 dark:text-indigo-300">↓</span>
+              </a>
+              <a href="#tvos-builds" className="flex min-h-14 items-center justify-between gap-3 border-b px-2 last:border-b-0 border-indigo-950/15 dark:border-white/15 hover:bg-indigo-600/5 dark:hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current">
+                <span><span className="block font-semibold text-slate-950 dark:text-white">Apple TV</span><span className="block text-sm text-slate-700 dark:text-gray-300">Get a tvOS IPA</span></span>
+                <span aria-hidden="true" className="text-indigo-700 dark:text-indigo-300">↓</span>
+              </a>
+              <a href="#instructions" className="flex min-h-14 items-center justify-between gap-3 border-b px-2 last:border-b-0 border-indigo-950/15 dark:border-white/15 hover:bg-indigo-600/5 dark:hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current">
+                <span><span className="block font-semibold text-slate-950 dark:text-white">Installation help</span><span className="block text-sm text-slate-700 dark:text-gray-300">Follow the setup steps</span></span>
+                <span aria-hidden="true" className="text-indigo-700 dark:text-indigo-300">↓</span>
+              </a>
+            </nav>
+          </header>
 
           {/* AltStore/SideStore Source */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+          <div id="sources" className="scroll-mt-24 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              📱 AltStore / SideStore Source
+              AltStore and SideStore
             </h2>
             <p className="text-gray-600 dark:text-gray-300 mb-4">
               Add our source to AltStore or SideStore for easy installation and automatic updates:
@@ -93,7 +111,7 @@ export default function DownloadsPage() {
           {/* External Download Sources */}
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              🌐 Other Download Sources
+              Other download sources
             </h2>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               You can also download iCube from these platforms. These may have different versions or additional release notes:
@@ -149,7 +167,7 @@ export default function DownloadsPage() {
           <ReleaseList releases={releases} />
 
           {/* iOS Downloads */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+          <div id="ios-builds" className="scroll-mt-24 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <span>📱</span> iOS Builds
             </h2>
@@ -194,7 +212,7 @@ export default function DownloadsPage() {
           </div>
 
           {/* tvOS Downloads */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+          <div id="tvos-builds" className="scroll-mt-24 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <span>📺</span> tvOS Builds
             </h2>
@@ -239,7 +257,7 @@ export default function DownloadsPage() {
           </div>
 
           {/* Installation Instructions */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+          <div id="instructions" className="scroll-mt-24 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               📖 Installation Instructions
             </h2>

@@ -74,22 +74,22 @@ export default function Home() {
       </section>
 
       {/* Community + Support Section */}
-      <section className="container mx-auto px-4 pb-8">
-        <div className="max-w-4xl mx-auto grid sm:grid-cols-2 gap-6">
-          <div className="text-center bg-white/60 dark:bg-gray-900/60 border border-gray-200 dark:border-gray-800 rounded-xl p-6">
+      <section className="container mx-auto px-4 py-12 md:py-16">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+          <div className="border-t pt-5 border-indigo-950/15 dark:border-white/15">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Community</h2>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Join our community for updates, tips, and support.
+              Ask for help or follow development.
             </p>
-            <div className="flex flex-col gap-3 items-center">
+            <div className="flex flex-wrap items-center gap-3">
               <SocialButton href="https://discord.com/invite/4TK7PU5" label="Join our Discord" leftIcon={<DiscordIcon className="w-5 h-5" />} variant="discord" />
               <SocialButton href="https://x.com/ProvenanceApp" label="Follow on X/Twitter" leftIcon={<XIcon className="w-5 h-5" />} variant="x" />
             </div>
           </div>
-          <div className="text-center bg-white/60 dark:bg-gray-900/60 border border-gray-200 dark:border-gray-800 rounded-xl p-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Support Development</h2>
+          <div className="border-t pt-5 border-indigo-950/15 dark:border-white/15">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Support development</h2>
             <p className="text-gray-600 dark:text-gray-300 mb-6">If you find iCube helpful, consider supporting the project.</p>
-            <div className="flex flex-col gap-3 items-center">
+            <div className="flex flex-wrap items-center gap-3">
               <SocialButton href="https://buymeacoffee.com/joemattiello" label="Buy Me a Coffee" leftIcon={<BmcIcon className="w-5 h-5" />} variant="bmc" />
               <SocialButton href="https://www.patreon.com/provenance" label="Support on Patreon" leftIcon={<PatreonIcon className="w-5 h-5" />} variant="patreon" />
             </div>
